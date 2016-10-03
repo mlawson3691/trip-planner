@@ -1,0 +1,120 @@
+<?php
+    /**
+    * @backupGlobals disabled
+    * @backupStaticAttributes disabled
+    */
+
+    require_once 'src/City.php';
+    require_once 'src/Review.php';
+
+    $server = 'mysql:host=localhost;dbname=trip_planner_test';
+    $username = 'root';
+    $password = 'root';
+    $DB = new PDO($server, $username, $password);
+
+    class CityTest extends PHPUnit_Framework_TestCase
+    {
+        protected function tearDown()
+        {
+            City::deleteAll();
+            Review::deleteAll();
+        }
+
+        function test_getId()
+        {
+            $name = "Portland";
+            $state = "Oregon";
+            $new_city = new City($name, $state);
+            $new_city->save();
+
+            $output = $new_city->getId();
+
+            $this->assertEquals(true, is_numeric($output));
+        }
+
+        function test_save()
+        {
+            $name = "Portland";
+            $state = "Oregon";
+            $new_city = new City($name, $state);
+            $new_city->save();
+
+            $output = City::getAll();
+
+            $this->assertEquals([$new_city], $output);
+        }
+
+        function test_getAll()
+        {
+            $name = "Portland";
+            $state = "Oregon";
+            $new_city = new City($name, $state);
+            $new_city->save();
+
+            $name2 = "Portland";
+            $state2 = "Oregon";
+            $new_city2 = new City($name2, $state2);
+            $new_city2->save();
+
+            $output = City::getAll();
+
+            $this->assertEquals([$new_city, $new_city2], $output);
+        }
+
+        function test_deleteAll()
+        {
+            $name = "Portland";
+            $state = "Oregon";
+            $new_city = new City($name, $state);
+            $new_city->save();
+
+            City::deleteAll();
+            $output = City::getAll();
+
+            $this->assertEquals([], $output);
+        }
+
+        function test_findById()
+        {
+            $name = "Portland";
+            $state = "Oregon";
+            $new_city = new City($name, $state);
+            $new_city->save();
+
+            $output = City::findById($new_city->getId());
+
+            $this->assertEquals($new_city, $output);
+        }
+
+        function test_update()
+        {
+            $name = "Portland";
+            $state = "Oregon";
+            $new_city = new City($name, $state);
+            $new_city->save();
+            $new_name = "Beaverton";
+
+            $new_city->update($new_name, $state);
+
+            $this->assertEquals('Beaverton', $new_city->getName());
+        }
+
+        function test_getAllReviews()
+        {
+            $name = "Portland";
+            $state = "Oregon";
+            $new_city = new City($name, $state);
+            $new_city->save();
+
+            $description = "Yay!";
+            $rating = 10;
+            $trip_id = 1;
+            $new_review = new Review($description, $rating, $trip_id);
+            $new_review->save();
+
+            $output = $new_city->getAllReviews();
+
+            $this->assertEquals([$new_review], $output);
+        }
+    }
+?>
