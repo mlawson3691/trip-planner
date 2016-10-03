@@ -123,6 +123,19 @@
             $GLOBALS['DB']->exec("DELETE FROM trips;");
         }
 
+        static function findById($search_id)
+        {
+            $returned_trips = Trip::getAll();
+            $trip = null;
+            foreach($returned_trips as $returned_trip) {
+                if ($returned_trip->getId() == $search_id) {
+                    $trip = $returned_trip;
+                    break;
+                }
+            }
+            return $trip;
+        }
+
     }
 
 ?>

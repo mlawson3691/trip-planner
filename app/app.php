@@ -40,10 +40,16 @@
         return $app['twig']->render('browse.html.twig', array('states' => $states, 'cities' => null));
     });
 
-    //appends all cities in selected state to right column
+    // appends all cities to right column when state is clicked
     $app->get('/citiesByState/{state}', function($state) use ($app) {
         $cities = City::citiesInState($state);
         return $app['twig']->render('browse.html.twig', array('states' => $states, 'cities' => $cities));
+    });
+
+    // from review title to trip page
+    $app->get('/trip/{id}', function($id) use ($app) {
+        $review = Review::findById($id);
+        return $app['twig']->render('trip.html.twig', array('review' => $review));
     });
 
     return $app;

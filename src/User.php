@@ -103,6 +103,19 @@
             $GLOBALS['DB']->exec("DELETE FROM users;");
         }
 
+        static function findById($search_id)
+        {
+            $returned_users = User::getAll();
+            $user = null;
+            foreach($returned_users as $returned_user) {
+                if ($returned_user->getId() == $search_id) {
+                    $user = $returned_user;
+                    break;
+                }
+            }
+            return $user;
+        }
+
     }
 
 ?>
