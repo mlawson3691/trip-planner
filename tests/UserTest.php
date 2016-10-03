@@ -5,6 +5,7 @@
     */
     require_once "src/User.php";
     require_once "src/Trip.php";
+    require_once "src/City.php";
 
     $server = 'mysql:host=localhost;dbname=trip_planner_test';
     $username = 'root';
@@ -17,6 +18,7 @@
         {
             User::deleteAll();
             Trip::deleteAll();
+            City::deleteAll();
         }
 
         function test_getUsername()
@@ -224,23 +226,21 @@
         {
             $username = "Honeymoon";
             $password = "Otgg354";
-            $id = null;
-            $new_user = new User($username, $password, $id);
+            $new_user = new User($username, $password);
             $new_user->save();
 
             $name = "Honeymoon";
             $description = "Our honeymoon trip";
             $user_id = $new_user->getId();
-            $review_id = 3;
-            $new_trip = new Trip($name, $user_id, $review_id, $description, $id);
+            $new_trip = new Trip($name, $user_id, $description);
             $new_trip->save();
 
             $name2 = "Honeymoon";
-            $description2 = "Our honeymoon trip";
+            $description2 = "Our beautiful trip";
             $user_id2 = $new_user->getId();
-            $review_id2 = 3;
-            $new_trip2 = new Trip($name2, $user_id2, $review_id2, $description2, $id);
+            $new_trip2 = new Trip($name2, $user_id2, $description2);
             $new_trip2->save();
+
 
             $result = $new_user->getTrips();
 

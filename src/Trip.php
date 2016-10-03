@@ -5,15 +5,13 @@
         private $description;
         private $id;
         private $user_id;
-        private $review_id;
 
-        function __construct($name, $user_id, $review_id, $description="", $id = null)
+        function __construct($name, $user_id, $description="", $id = null)
         {
             $this->name = $name;
             $this->id = $id;
             $this->description = $description;
             $this->user_id = $user_id;
-            $this->review_id = $review_id;
         }
 
         function setName($new_name)
@@ -44,11 +42,6 @@
         function getUserId()
         {
             return $this->user_id;
-        }
-
-        function getReviewId()
-        {
-            return $this->review_id;
         }
 
         function addCity($city)
@@ -106,7 +99,7 @@
 
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO trips (name, description, user_id, review_id) VALUES ('{$this->getName()}', '{$this->getDescription()}', {$this->getUserId()}, {$this->getReviewId()});");
+            $GLOBALS['DB']->exec("INSERT INTO trips (name, description, user_id) VALUES ('{$this->getName()}', '{$this->getDescription()}', {$this->getUserId()});");
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
@@ -119,8 +112,7 @@
                 $description = $trip['description'];
                 $id = $trip['id'];
                 $user_id = $trip['user_id'];
-                $review_id = $trip['review_id'];
-                $new_trip = new Trip($name, $user_id, $review_id, $description, $id);
+                $new_trip = new Trip($name, $user_id, $description, $id);
                 array_push($trips, $new_trip);
             }
             return $trips;
