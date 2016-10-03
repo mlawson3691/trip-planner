@@ -44,6 +44,19 @@
             $this->assertEquals([$new_city], $output);
         }
 
+        function test_saveDuplicates()
+        {
+            $name = "Portland";
+            $state = "Oregon";
+            $new_city = new City($name, $state);
+            $new_city->save();
+            $new_city->save();
+
+            $output = City::getAll();
+
+            $this->assertEquals([$new_city], $output);
+        }
+
         function test_getAll()
         {
             $name = "Portland";
@@ -51,8 +64,8 @@
             $new_city = new City($name, $state);
             $new_city->save();
 
-            $name2 = "Portland";
-            $state2 = "Oregon";
+            $name2 = "Seattle";
+            $state2 = "Washington";
             $new_city2 = new City($name2, $state2);
             $new_city2->save();
 
@@ -115,8 +128,7 @@
         //     $name = "Honeymoon";
         //     $description = "Our honeymoon trip";
         //     $user_id = 2;
-        //     $review_id = $new_review->getId();
-        //     $new_trip = new Trip($name, $user_id, $review_id, $description);
+        //     $new_trip = new Trip($name, $user_id, $description);
         //
         //     $output = $new_city->getReviews();
         //
