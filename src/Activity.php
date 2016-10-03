@@ -72,7 +72,6 @@ class Activity
         $GLOBALS['DB']->exec("DELETE FROM activities;");
     }
 
-
 // Setters and getters
     function getName()
     {
