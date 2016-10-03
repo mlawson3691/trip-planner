@@ -112,27 +112,29 @@
             $this->assertEquals('Beaverton', $new_city->getName());
         }
 
-        // function test_getReviews()
-        // {
-        //     $name = "Portland";
-        //     $state = "Oregon";
-        //     $new_city = new City($name, $state);
-        //     $new_city->save();
-        //
-        //     $description = "Yay!";
-        //     $rating = 10;
-        //     $trip_id = 1;
-        //     $new_review = new Review($description, $rating, $trip_id);
-        //     $new_review->save();
-        //
-        //     $name = "Honeymoon";
-        //     $description = "Our honeymoon trip";
-        //     $user_id = 2;
-        //     $new_trip = new Trip($name, $user_id, $description);
-        //
-        //     $output = $new_city->getReviews();
-        //
-        //     $this->assertEquals([$new_review], $output);
-        // }
+        function test_getReviews()
+        {
+            $name = "Portland";
+            $state = "Oregon";
+            $new_city = new City($name, $state);
+            $new_city->save();
+
+            $name = "Honeymoon";
+            $description = "Our honeymoon trip";
+            $user_id = 2;
+            $new_trip = new Trip($name, $user_id, $description);
+            $new_trip->save();
+            $new_trip->addCity($new_city);
+
+            $description = "Yay!";
+            $rating = 10;
+            $trip_id = $new_trip->getId();
+            $new_review = new Review($description, $rating, $trip_id);
+            $new_review->save();
+
+            $output = $new_city->getReviews();
+
+            $this->assertEquals([$new_review], $output);
+        }
     }
 ?>
