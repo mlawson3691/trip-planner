@@ -58,6 +58,37 @@ Class City
     }
 
 // static functions
+
+    static function getStates()
+    {
+        $cities = City::getAll();
+        $states = array();
+        foreach($cities as $city)
+        {
+            $state = $city->getState();
+            if(in_array($state, $states) === false) {
+                array_push($states, $state);
+            }
+        }
+        return $states;
+    }
+
+    static function citiesInState($state)
+    {
+        $cities = City::getAll();
+        $cities_in_state = array();
+        foreach ($cities as $city) {
+            $city_state = $city->getState();
+            if ($city_state == $state) {
+                $name = $city['name'];
+                $state = $city['state'];
+                $id = $city['id'];
+                $new_city = new City($name, $state, $id);
+                array_push($cities_in_state, $new_city);
+            }
+        }
+        return $cities_in_state;
+    }
     static function getAll()
     {
         $returned_cities = $GLOBALS['DB']->query("SELECT * FROM cities;");

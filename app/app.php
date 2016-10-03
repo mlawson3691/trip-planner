@@ -34,5 +34,17 @@
         return $app['twig']->render('city.html.twig', array('city' => $city));
     });
 
+    // leads to browse (by state) page
+    $app->get('/browse', function() use ($app) {
+        $states = City::getStates();
+        return $app['twig']->render('browse.html.twig', array('states' => $states, 'cities' => null));
+    });
+
+    //appends all cities in selected state to right column
+    $app->get('/citiesByState/{state}', function($state) use ($app) {
+        $cities = City::citiesInState($state);
+        return $app['twig']->render('browse.html.twig', array('states' => $states, 'cities' => $cities));
+    });
+
     return $app;
 ?>
