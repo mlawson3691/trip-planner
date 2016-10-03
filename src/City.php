@@ -41,8 +41,19 @@ Class City
 
     function save()
     {
-        $GLOBALS['DB']->exec("INSERT INTO cities (name, state) VALUES ('{$this->name}', '{$this->state}');");
-        $this->id = $GLOBALS['DB']->lastInsertId();
+        $all_cities = City::getAll();
+        $unique = true;
+        foreach ($all_cities as $city) {
+            if ($city->getName() == $this->getName()) {
+                $unique = false;
+                return false;
+            }
+        }
+        if ($unique == true) {
+            $GLOBALS['DB']->exec("INSERT INTO cities (name, state) VALUES ('{$this->name}', '{$this->state}');");
+            $this->id = $GLOBALS['DB']->lastInsertId();
+            return true;
+        }
     }
 
 // static functions
