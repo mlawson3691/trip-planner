@@ -4,6 +4,7 @@
     * @backupStaticAttributes disabled
     */
     require_once "src/Trip.php";
+    require_once "src/City.php";
 
     $server = 'mysql:host=localhost;dbname=trip_planner_test';
     $username = 'root';
@@ -15,6 +16,7 @@
         protected function tearDown()
         {
             Trip::deleteAll();
+            City::deleteAll();
         }
 
         function test_getName()
@@ -278,6 +280,34 @@
 
             //Assert
             $this->assertEquals([$new_trip2], $result);
+        }
+
+        function test_getCities()
+        {
+            $name = "Honeymoon";
+            $description = "Our honeymoon trip";
+            $id = null;
+            $user_id = 2;
+            $review_id = 3;
+            $new_trip = new Trip($name, $user_id, $review_id, $description, $id);
+            $new_trip->save();
+
+            $city_name = "Los Angeles";
+            $state = "California";
+            $new_city = new City($city_name, $state, $id);
+            $new_city->save();
+
+            $city_name2 = "New York City";
+            $state2 = "New York";
+            $new_city2 = new City($city_name2, $state2, $id);
+            $new_city2->save();
+
+            $new_trip->addCity($new_city);
+            $new_trip->addCity($new_city2);
+
+            $result = $new_trip->getCities();
+
+            $this->assertEquals([$new_city, $new_city2], $result);
         }
 
     }
