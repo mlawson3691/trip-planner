@@ -44,7 +44,7 @@ Class City
         $all_cities = City::getAll();
         $unique = true;
         foreach ($all_cities as $city) {
-            if ($city->getName() == $this->getName()) {
+            if (strtolower($city->getName()) == strtolower($this->getName())) {
                 $unique = false;
                 return false;
             }
@@ -87,6 +87,18 @@ Class City
     static function deleteAll()
     {
         $GLOBALS['DB']->exec("DELETE FROM cities");
+    }
+
+    static function search($search_input)
+    {
+        $all_cities = City::getAll();
+        $search_results = array();
+        foreach($all_cities as $city) {
+            if(stripos($city->getName(), $search_input) !== false) {
+                array_push($search_results, $city);
+            }
+        }
+        return $search_results;
     }
 
 // getters and Setters

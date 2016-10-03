@@ -136,5 +136,23 @@
 
             $this->assertEquals([$new_review], $output);
         }
+
+        function test_search()
+        {
+            $name = "Portland";
+            $state = "Oregon";
+            $new_city = new City($name, $state);
+            $new_city->save();
+
+            $name2 = "Seattle";
+            $state2 = "Washington";
+            $new_city2 = new City($name2, $state2);
+            $new_city2->save();
+            $search_input = 'port';
+
+            $output = City::search($search_input);
+
+            $this->assertEquals([$new_city], $output);
+        }
     }
 ?>

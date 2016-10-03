@@ -1,6 +1,14 @@
 <html>
 <body>
     <div class='container'>
+        {% if results is not empty %}
+            <h2>Your search results:</h2>
+            <ul>
+                {% for result in results %}
+                    <li><a href="">{{ result.getName }}, {{ result.getState }}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
     </div>
 </body>
 </html>
