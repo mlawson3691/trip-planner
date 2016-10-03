@@ -47,7 +47,7 @@
                 $id = $trip['id'];
                 $user_id = $trip['user_id'];
                 $review_id = $trip['review_id'];
-                $new_trip = new Trip($name, $user_id, $review_id, $description, $id);
+                $new_trip = new Trip($name, $user_id, $description, $id);
                 array_push($trips, $new_trip);
             }
             return $trips;
