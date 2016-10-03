@@ -26,8 +26,7 @@
             $description = "Our honeymoon trip";
             $id = 1;
             $user_id = 2;
-            $review_id = 3;
-            $new_trip = new Trip($name, $user_id, $review_id, $description, $id);
+            $new_trip = new Trip($name, $user_id, $description, $id);
 
             //Act
             $result = $new_trip->getName();
@@ -43,8 +42,7 @@
             $description = "Our honeymoon trip";
             $id = 1;
             $user_id = 2;
-            $review_id = 3;
-            $new_trip = new Trip($name, $user_id, $review_id, $description, $id);
+            $new_trip = new Trip($name, $user_id, $description, $id);
 
             //Act
             $result = $new_trip->getDescription();
@@ -60,8 +58,7 @@
             $description = "Our honeymoon trip";
             $id = 1;
             $user_id = 2;
-            $review_id = 3;
-            $new_trip = new Trip($name, $user_id, $review_id, $description, $id);
+            $new_trip = new Trip($name, $user_id, $description, $id);
 
             //Act
             $result = $new_trip->getId();
@@ -77,31 +74,13 @@
             $description = "Our honeymoon trip";
             $id = 1;
             $user_id = 2;
-            $review_id = 3;
-            $new_trip = new Trip($name, $user_id, $review_id, $description, $id);
+            $new_trip = new Trip($name, $user_id, $description, $id);
 
             //Act
             $result = $new_trip->getUserId();
 
             //Assert
             $this->assertEquals(2, $result);
-        }
-
-        function test_getReviewId()
-        {
-            //Arrange
-            $name = "Honeymoon";
-            $description = "Our honeymoon trip";
-            $id = 1;
-            $user_id = 2;
-            $review_id = 3;
-            $new_trip = new Trip($name, $user_id, $review_id, $description, $id);
-
-            //Act
-            $result = $new_trip->getReviewId();
-
-            //Assert
-            $this->assertEquals(3, $result);
         }
 
         function test_setName()
@@ -111,8 +90,7 @@
             $description = "Our honeymoon trip";
             $id = 1;
             $user_id = 2;
-            $review_id = 3;
-            $new_trip = new Trip($name, $user_id, $review_id, $description, $id);
+            $new_trip = new Trip($name, $user_id, $description, $id);
 
             //Act
             $new_name = "DivorceMoon";
@@ -130,8 +108,7 @@
             $description = "Our honeymoon trip";
             $id = 1;
             $user_id = 2;
-            $review_id = 3;
-            $new_trip = new Trip($name, $user_id, $review_id, $description, $id);
+            $new_trip = new Trip($name, $user_id, $description, $id);
 
             //Act
             $new_description = "DivorceMoon";
@@ -149,8 +126,7 @@
             $description = "Our honeymoon trip";
             $id = null;
             $user_id = 2;
-            $review_id = 3;
-            $new_trip = new Trip($name, $user_id, $review_id, $description, $id);
+            $new_trip = new Trip($name, $user_id, $description, $id);
             $new_trip->save();
 
             //Act
@@ -167,16 +143,14 @@
             $description = "Our honeymoon trip";
             $id = null;
             $user_id = 2;
-            $review_id = 3;
-            $new_trip = new Trip($name, $user_id, $review_id, $description, $id);
+            $new_trip = new Trip($name, $user_id, $description, $id);
             $new_trip->save();
 
             $name2 = "Honeymoon";
             $description2 = "Our honeymoon trip";
             $id2 = null;
             $user_id2 = 2;
-            $review_id2 = 3;
-            $new_trip2 = new Trip($name2, $user_id2, $review_id2, $description2, $id2);
+            $new_trip2 = new Trip($name2, $user_id2, $description2, $id2);
             $new_trip2->save();
 
             //Act
@@ -193,16 +167,14 @@
             $description = "Our honeymoon trip";
             $id = null;
             $user_id = 2;
-            $review_id = 3;
-            $new_trip = new Trip($name, $user_id, $review_id, $description, $id);
+            $new_trip = new Trip($name, $user_id, $description, $id);
             $new_trip->save();
 
             $name2 = "Honeymoon";
             $description2 = "Our honeymoon trip";
             $id2 = null;
             $user_id2 = 2;
-            $review_id2 = 3;
-            $new_trip2 = new Trip($name2, $user_id2, $review_id2, $description2, $id2);
+            $new_trip2 = new Trip($name2, $user_id2, $description2, $id2);
             $new_trip2->save();
 
             //Act
@@ -220,8 +192,7 @@
             $description = "Our honeymoon trip";
             $id = 1;
             $user_id = 2;
-            $review_id = 3;
-            $new_trip = new Trip($name, $user_id, $review_id, $description, $id);
+            $new_trip = new Trip($name, $user_id, $description, $id);
             $new_trip->save();
 
             //Act
@@ -241,8 +212,7 @@
             $description = "Our honeymoon trip";
             $id = 1;
             $user_id = 2;
-            $review_id = 3;
-            $new_trip = new Trip($name, $user_id, $review_id, $description, $id);
+            $new_trip = new Trip($name, $user_id, $description, $id);
             $new_trip->save();
 
             //Act
@@ -262,16 +232,14 @@
             $description = "Our honeymoon trip";
             $id = null;
             $user_id = 2;
-            $review_id = 3;
-            $new_trip = new Trip($name, $user_id, $review_id, $description, $id);
+            $new_trip = new Trip($name, $user_id, $description, $id);
             $new_trip->save();
 
             $name2 = "Honeymoon";
             $description2 = "Our honeymoon trip";
             $id2 = null;
             $user_id2 = 2;
-            $review_id2 = 3;
-            $new_trip2 = new Trip($name2, $user_id2, $review_id2, $description2, $id2);
+            $new_trip2 = new Trip($name2, $user_id2, $description2, $id2);
             $new_trip2->save();
 
             //Act
@@ -288,8 +256,7 @@
             $description = "Our honeymoon trip";
             $id = null;
             $user_id = 2;
-            $review_id = 3;
-            $new_trip = new Trip($name, $user_id, $review_id, $description, $id);
+            $new_trip = new Trip($name, $user_id, $description, $id);
             $new_trip->save();
 
             $city_name = "Los Angeles";
