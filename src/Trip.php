@@ -51,6 +51,21 @@
             return $this->review_id;
         }
 
+        function update($new_name, $new_description)
+        {
+            $GLOBALS['DB']->exec("UPDATE SET name = '{$new_name}' WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("UPDATE SET description = '{$new_description}' WHERE id = {$this->getId()};");
+            $this->setName($new_name);
+            $this->setDescription($new_description);
+        }
+
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM trips WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM cities_trips WHERE id = {$this->getId()};");
+
+        }
+        
         function save()
         {
             $GLOBALS['DB']->exec("INSERT INTO trips (name, description, user_id, review_id) VALUES ('{$this->getName()}', '{$this->getDescription()}', {$this->getUserId()}, {$this->getReviewId()});");
