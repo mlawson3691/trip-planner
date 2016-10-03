@@ -70,8 +70,19 @@
 
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO users (username, password) VALUES ('{$this->getUsername()}', '{$this->getPassword()}');");
-            $this->id = $GLOBALS['DB']->lastInsertId();
+            $all_users = User::getAll();
+            $unique = true;
+            foreach($all_users as $user) {
+                if ($user->getUsername() == $this->getUsername()) {
+                    $unique = false;
+                    return false;
+                }
+            }
+            if ($unique == true) {
+                $GLOBALS['DB']->exec("INSERT INTO users (username, password) VALUES ('{$this->getUsername()}', '{$this->getPassword()}');");
+                $this->id = $GLOBALS['DB']->lastInsertId();
+                return true;
+            }
         }
 
         static function getAll()

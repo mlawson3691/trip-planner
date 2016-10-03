@@ -116,6 +116,23 @@
             $this->assertEquals([$new_user], $result);
         }
 
+        function test_saveDuplicates()
+        {
+            //Arrange
+            $username = "Honeymoon";
+            $password = "Otgg354";
+            $id = null;
+            $new_user = new User($username, $password, $id);
+            $new_user->save();
+            $new_user->save();
+
+            //Act
+            $result = User::getAll();
+
+            //Assert
+            $this->assertEquals([$new_user], $result);
+        }
+
         function test_getAll()
         {
             //Arrange
