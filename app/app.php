@@ -55,7 +55,9 @@
 // from review title to trip page
     $app->get('/trip/{id}', function($id) use ($app) {
         $review = Review::findById($id);
-        return $app['twig']->render('trip.html.twig', array('review' => $review));
+        $trip = Trip::findById($review->getTripId());
+        $user = User::findById($trip->getUserId());
+        return $app['twig']->render('trip.html.twig', array('review' => $review, 'user' => $user));
     });
 
 // search results
