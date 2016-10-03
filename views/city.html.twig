@@ -5,10 +5,12 @@
         <h4>{{ city.getState }}</h4>
 
         <h2>Reviews for {{ city.getName }}</h2>
-        {% for review in city.getReviews %}
-            <h4><a href="#">{{ review.getTitle }}</a></h4>
-            <p>{{ review.getDescription }}</p>
-        {% endfor %}
+        {% if city.getReviews is not empty %}
+            {% for review in city.getReviews %}
+                <h4><a href="#">{{ review.getTitle }}</a></h4>
+                <p>{{ review.getDescription }}</p>
+            {% endfor %}
+        {% endif %}
     </div>
 </body>
 </html>

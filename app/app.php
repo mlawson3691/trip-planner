@@ -28,5 +28,11 @@
         return $app['twig']->render('index.html.twig');
     });
 
+    // leads to individual city page
+    $app->get('/city/{id}', function($id) use ($app) {
+        $city = City::findById($id);
+        return $app['twig']->render('city.html.twig', array('city' => $city));
+    });
+
     return $app;
 ?>
