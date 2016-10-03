@@ -6,6 +6,7 @@
 
     require_once 'src/City.php';
     require_once 'src/Review.php';
+    require_once 'src/Trip.php';
 
     $server = 'mysql:host=localhost;dbname=trip_planner_test';
     $username = 'root';
@@ -18,6 +19,7 @@
         {
             City::deleteAll();
             Review::deleteAll();
+            Trip::deleteAll();
         }
 
         function test_getId()
@@ -126,10 +128,11 @@
             $new_trip->save();
             $new_trip->addCity($new_city);
 
+            $title = "Best trip ever";
             $description = "Yay!";
             $rating = 10;
             $trip_id = $new_trip->getId();
-            $new_review = new Review($description, $rating, $trip_id);
+            $new_review = new Review($title, $description, $rating, $trip_id);
             $new_review->save();
 
             $output = $new_city->getReviews();

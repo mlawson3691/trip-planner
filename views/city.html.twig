@@ -1,6 +1,13 @@
 <html>
 <body>
     <div class='container'>
+        <h1>{{ city.getName }}</h1>
+        <h4>{{ city.getState }}</h4>
+
+        <h2>Reviews for {{ city.getName }}</h2>
+        {% for review in city.getReviews %}
+            
+        {% endfor %}
     </div>
 </body>
 </html>

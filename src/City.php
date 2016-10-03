@@ -22,11 +22,12 @@ Class City
 
         $reviews = array();
         foreach ($returned_reviews as $review) {
+            $title = $review['title'];
             $description = $review['description'];
             $rating = $review['rating'];
             $trip_id = $review['trip_id'];
             $id = $review['id'];
-            $new_review = new Review($description, $rating, $trip_id, $id);
+            $new_review = new Review($title, $description, $rating, $trip_id, $id);
             array_push($reviews, $new_review);
         }
         return $reviews;

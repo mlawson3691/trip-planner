@@ -1,13 +1,15 @@
 <?php
 class Review
 {
+    private $title;
     private $description;
     private $rating;
     private $trip_id;
     private $id;
 
-    function __construct($description, $rating, $trip_id, $id = null)
+    function __construct($title, $description, $rating, $trip_id, $id = null)
     {
+        $this->title = $title;
         $this->description = $description;
         $this->rating = $rating;
         $this->trip_id = $trip_id;
@@ -17,13 +19,14 @@ class Review
 // Standard Functions
     function save()
     {
-        $GLOBALS['DB']->exec("INSERT INTO reviews (description, rating, trip_id) VALUES ('{$this->description}', {$this->rating}, {$this->trip_id});");
+        $GLOBALS['DB']->exec("INSERT INTO reviews (title, description, rating, trip_id) VALUES ('{$this->title}', '{$this->description}', {$this->rating}, {$this->trip_id});");
         $this->id = $GLOBALS['DB']->lastInsertId();
     }
 
-    function update($new_description, $new_rating)
+    function update($new_title, $new_description, $new_rating)
     {
-        $GLOBALS['DB']->exec("UPDATE reviews SET description = '{$new_description}', rating = {$new_rating} WHERE id = {$this->getId()};");
+        $GLOBALS['DB']->exec("UPDATE reviews SET title = '{$new_title}', description = '{$new_description}', rating = {$new_rating} WHERE id = {$this->getId()};");
+        $this->setTitle($new_title);
         $this->setDescription($new_description);
         $this->setRating($new_rating);
     }
@@ -52,11 +55,12 @@ class Review
         $returned_reviews = $GLOBALS['DB']->query("SELECT * FROM reviews;");
         $reviews = array();
         foreach($returned_reviews as $review) {
+            $title = $review['title'];
             $description = $review['description'];
             $rating = $review['rating'];
             $trip_id = $review['trip_id'];
             $id = $review['id'];
-            $new_review = new Review($description, $rating, $trip_id, $id);
+            $new_review = new Review($title, $description, $rating, $trip_id, $id);
             array_push($reviews, $new_review);
         }
         return $reviews;
@@ -71,6 +75,16 @@ class Review
     function getId()
     {
         return $this->id;
+    }
+
+    function setTitle($new_title)
+    {
+        $this->title = $new_title;
+    }
+
+    function getTitle()
+    {
+        return $this->title;
     }
 
     function getDescription()
