@@ -12,12 +12,12 @@ Class City
         $this->id = $id;
     }
 // standard Functions
-    function getAllReviews()
+    function getReviews()
     {
         $returned_reviews = $GLOBALS['DB']->query("SELECT reviews.* FROM cities
         JOIN cities_trips ON (cities_trips.city_id = cities.id)
         JOIN trips ON (trips.id = cities_trips.trip_id)
-        JOIN reviews ON (reviews.id = trips.review_id)
+        JOIN reviews ON (reviews.trip_id = trips.id)
         WHERE cities.id = {$this->getId()};");
 
         $reviews = array();

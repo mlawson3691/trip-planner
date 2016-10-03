@@ -99,7 +99,7 @@
             $this->assertEquals('Beaverton', $new_city->getName());
         }
 
-        // function test_getAllReviews()
+        // function test_getReviews()
         // {
         //     $name = "Portland";
         //     $state = "Oregon";
@@ -118,7 +118,7 @@
         //     $review_id = $new_review->getId();
         //     $new_trip = new Trip($name, $user_id, $review_id, $description);
         //
-        //     $output = $new_city->getAllReviews();
+        //     $output = $new_city->getReviews();
         //
         //     $this->assertEquals([$new_review], $output);
         // }
