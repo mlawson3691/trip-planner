@@ -25,7 +25,7 @@
             $id = 1;
             $user_id = 2;
             $review_id = 3;
-            $new_trip = new Trip($name, $description, $id, $user_id, $review_id);
+            $new_trip = new Trip($name, $user_id, $review_id, $description, $id);
 
             //Act
             $result = $new_trip->getName();
@@ -42,7 +42,7 @@
             $id = 1;
             $user_id = 2;
             $review_id = 3;
-            $new_trip = new Trip($name, $description, $id, $user_id, $review_id);
+            $new_trip = new Trip($name, $user_id, $review_id, $description, $id);
 
             //Act
             $result = $new_trip->getDescription();
@@ -59,7 +59,7 @@
             $id = 1;
             $user_id = 2;
             $review_id = 3;
-            $new_trip = new Trip($name, $description, $id, $user_id, $review_id);
+            $new_trip = new Trip($name, $user_id, $review_id, $description, $id);
 
             //Act
             $result = $new_trip->getId();
@@ -76,7 +76,7 @@
             $id = 1;
             $user_id = 2;
             $review_id = 3;
-            $new_trip = new Trip($name, $description, $id, $user_id, $review_id);
+            $new_trip = new Trip($name, $user_id, $review_id, $description, $id);
 
             //Act
             $result = $new_trip->getUserId();
@@ -93,7 +93,7 @@
             $id = 1;
             $user_id = 2;
             $review_id = 3;
-            $new_trip = new Trip($name, $description, $id, $user_id, $review_id);
+            $new_trip = new Trip($name, $user_id, $review_id, $description, $id);
 
             //Act
             $result = $new_trip->getReviewId();
@@ -110,7 +110,7 @@
             $id = 1;
             $user_id = 2;
             $review_id = 3;
-            $new_trip = new Trip($name, $description, $id, $user_id, $review_id);
+            $new_trip = new Trip($name, $user_id, $review_id, $description, $id);
 
             //Act
             $new_name = "DivorceMoon";
@@ -129,7 +129,7 @@
             $id = 1;
             $user_id = 2;
             $review_id = 3;
-            $new_trip = new Trip($name, $description, $id, $user_id, $review_id);
+            $new_trip = new Trip($name, $user_id, $review_id, $description, $id);
 
             //Act
             $new_description = "DivorceMoon";
@@ -148,7 +148,7 @@
             $id = null;
             $user_id = 2;
             $review_id = 3;
-            $new_trip = new Trip($name, $description, $id, $user_id, $review_id);
+            $new_trip = new Trip($name, $user_id, $review_id, $description, $id);
             $new_trip->save();
 
             //Act
@@ -166,7 +166,7 @@
             $id = null;
             $user_id = 2;
             $review_id = 3;
-            $new_trip = new Trip($name, $description, $id, $user_id, $review_id);
+            $new_trip = new Trip($name, $user_id, $review_id, $description, $id);
             $new_trip->save();
 
             $name2 = "Honeymoon";
@@ -174,7 +174,7 @@
             $id2 = null;
             $user_id2 = 2;
             $review_id2 = 3;
-            $new_trip2 = new Trip($name2, $description2, $id2, $user_id2, $review_id2);
+            $new_trip2 = new Trip($name2, $user_id2, $review_id2, $description2, $id2);
             $new_trip2->save();
 
             //Act
@@ -192,7 +192,7 @@
             $id = null;
             $user_id = 2;
             $review_id = 3;
-            $new_trip = new Trip($name, $description, $id, $user_id, $review_id);
+            $new_trip = new Trip($name, $user_id, $review_id, $description, $id);
             $new_trip->save();
 
             $name2 = "Honeymoon";
@@ -200,7 +200,7 @@
             $id2 = null;
             $user_id2 = 2;
             $review_id2 = 3;
-            $new_trip2 = new Trip($name2, $description2, $id2, $user_id2, $review_id2);
+            $new_trip2 = new Trip($name2, $user_id2, $review_id2, $description2, $id2);
             $new_trip2->save();
 
             //Act
@@ -219,7 +219,7 @@
             $id = 1;
             $user_id = 2;
             $review_id = 3;
-            $new_trip = new Trip($name, $description, $id, $user_id, $review_id);
+            $new_trip = new Trip($name, $user_id, $review_id, $description, $id);
             $new_trip->save();
 
             //Act
@@ -240,7 +240,7 @@
             $id = 1;
             $user_id = 2;
             $review_id = 3;
-            $new_trip = new Trip($name, $description, $id, $user_id, $review_id);
+            $new_trip = new Trip($name, $user_id, $review_id, $description, $id);
             $new_trip->save();
 
             //Act
@@ -261,7 +261,7 @@
             $id = null;
             $user_id = 2;
             $review_id = 3;
-            $new_trip = new Trip($name, $description, $id, $user_id, $review_id);
+            $new_trip = new Trip($name, $user_id, $review_id, $description, $id);
             $new_trip->save();
 
             $name2 = "Honeymoon";
@@ -269,7 +269,7 @@
             $id2 = null;
             $user_id2 = 2;
             $review_id2 = 3;
-            $new_trip2 = new Trip($name2, $description2, $id2, $user_id2, $review_id2);
+            $new_trip2 = new Trip($name2, $user_id2, $review_id2, $description2, $id2);
             $new_trip2->save();
 
             //Act
