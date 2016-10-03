@@ -72,7 +72,7 @@
             $all_users = User::getAll();
             $unique = true;
             foreach($all_users as $user) {
-                if ($user->getUsername() == $this->getUsername()) {
+                if (strtolower($user->getUsername()) == strtolower($this->getUsername())) {
                     $unique = false;
                     return false;
                 }
@@ -81,6 +81,24 @@
                 $GLOBALS['DB']->exec("INSERT INTO users (username, password) VALUES ('{$this->getUsername()}', '{$this->getPassword()}');");
                 $this->id = $GLOBALS['DB']->lastInsertId();
                 return true;
+            }
+        }
+
+        static function verifyLogin($username, $password)
+        {
+            $all_users = User::getAll();
+            $found_user = null;
+            foreach($all_users as $user) {
+                if ($user->getUsername() === $username && $user->getPassword() === $password) {
+                    $found_user = $user;
+                    break;
+                }
+            }
+            if ($found_user !== null) {
+                $_SESSION['current_user'] = $found_user;
+                return $found_user;
+            } else {
+                return false;
             }
         }
 
@@ -115,7 +133,6 @@
             }
             return $user;
         }
-
     }
 
 ?>

@@ -10,6 +10,11 @@
     use Symfony\Component\Debug\Debug;
     Debug::enable();
 
+    session_start();
+    if (empty($_SESSION['current_user'])) {
+        $_SESSION['current_user'] = null;
+    }
+
     $app = new Silex\Application();
 
     $app['debug'] = true;
@@ -24,33 +29,71 @@
     use Symfony\Component\HttpFoundation\Request;
     Request::enableHttpMethodParameterOverride();
 
+// home page
     $app->get('/', function() use ($app) {
         return $app['twig']->render('index.html.twig');
     });
 
-    // leads to individual city page
+// leads to individual city page
     $app->get('/city/{id}', function($id) use ($app) {
         $city = City::findById($id);
         return $app['twig']->render('city.html.twig', array('city' => $city));
     });
 
-    // leads to browse (by state) page
+// leads to browse (by state) page
     $app->get('/browse', function() use ($app) {
         $states = City::getStates();
         return $app['twig']->render('browse.html.twig', array('states' => $states, 'cities' => null));
     });
 
-    // appends all cities to right column when state is clicked
+// appends all cities to right column when state is clicked
     $app->get('/citiesByState/{state}', function($state) use ($app) {
         $cities = City::citiesInState($state);
         return $app['twig']->render('browse.html.twig', array('states' => $states, 'cities' => $cities));
     });
 
-    // from review title to trip page
+// from review title to trip page
     $app->get('/trip/{id}', function($id) use ($app) {
         $review = Review::findById($id);
         return $app['twig']->render('trip.html.twig', array('review' => $review));
     });
 
+// search results
+    $app->post('/search_results', function() use ($app) {
+        $search_results = City::search($_POST['search_input']);
+        return $app['twig']->render('search_results.html.twig', array('results' => $search_results));
+    });
+
+// signup page
+    $app->get('/sign_up', function() use ($app) {
+        return $app['twig']->render('sign_up.html.twig');
+    });
+
+// submit sign up form
+    $app->post('/sign_up', function() use ($app) {
+        $username = $_POST['username'];
+        $password = sha1($_POST['password']);
+        $new_user = new User($username, $password);
+        $new_user->save();
+        $_SESSION['current_user'] = $new_user;
+        return $app['twig']->render('user.html.twig', array('user' => $new_user));
+    });
+
+// submit login form
+    $app->post('/login', function() use ($app) {
+        $username = $_POST['username'];
+        $password = sha1($_POST['password']);
+        $valid = User::verifyLogin($username, $password);
+        if ($valid == false) {
+            return $app->redirect('/');
+        }
+        return $app['twig']->render('user.html.twig', array('user' => $_SESSION['current_user']));
+    });
+
+// log out
+    $app->get('/logout', function() use ($app) {
+        $_SESSION['current_user'] = null;
+        return $app->redirect('/');
+    });
     return $app;
 ?>
