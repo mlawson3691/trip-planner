@@ -168,11 +168,11 @@
 // pending user trips
     $app->get('/pending_trips/{id}', function($id) use ($app) {
     $user = User::findById($id);
-    $trips = $user->getTrips();
+    $trips = $user->getPendingTrips($user->getTrips());
     return $app['twig']->render('pending_trips.html.twig', array('user' => $user, 'trips' => $trips));
     });
 
-// new trip
+// new trip page
     $app->get('/new_trip/{id}', function($id) use ($app) {
     $user = User::findById($id);
     return $app['twig']->render('new_trip.html.twig', array('user' => $user));
@@ -188,6 +188,7 @@
     $new_trip->save();
     return $app->redirect('/pending_trips/' . $id);
     });
+
 
     return $app;
 
