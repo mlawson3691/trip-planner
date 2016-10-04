@@ -30,7 +30,7 @@
                         <h4>{{ activity.getName }}</h4>
                         <p class='pull-right'>{{ activity.getDate }}</p>
                         <p>{{ activity.getDescription }}</p>
-                        {% if $_SESSION['current_user'] == user  %}
+                        {% if current_user == user  %}
                             <button type='button' id='edit'>Edit this Activity</button>
                             <form action='/trip/{{ trip.getId }}' method='post'>
                                 <input type="hidden" name="_method" value="delete">
@@ -55,7 +55,7 @@
                     {% endfor %}
                 {% endif %}
 
-                {% if $_SESSION['current_user'] == user  %}
+                {% if current_user == user  %}
                     <form method='post' action='/trip/{{ trip.getId }}'>
                         <h3>Add an activity to this trip</h3>
                         <label for='name'>Activity Name</label>
@@ -79,7 +79,7 @@
                     </ul>
                 {% endif %}
 
-                {% if $_SESSION['current_user'] == user  %}
+                {% if current_user == user  %}
                     <form method='post' action='/trip/city/{{ trip.getId }}'>
                         <h3>Add a city to this trip</h3>
                         {% if all_cities is not empty %}
@@ -111,27 +111,28 @@
 
 
             <!-- beginning of trip review section- still needs more work in routing -->
+                {% if review  is not empty %}
+                    <h2>{{ review.getTitle }}</h2>
+                    <h3>{{ review.getRating }}</h3>
+                    <h4>{{ user.getUsername }}</h4>
+                    <p>
+                        {{ review.getDescription }}
+                    </p>
 
-                <h2>{{ review.getTitle }}</h2>
-                <h3>{{ review.getRating }}</h3>
-                <h4>{{ user.getUsername }}</h4>
-                <p>
-                    {{ review.getDescription }}
-                </p>
-
-                {% if $_SESSION['current_user'] == user  %}
-                <div class='hidden-form'>
-                    <hr>
-                    <form action='/trip/{{ trip.getId }}' method='post'>
-                        <input type='hidden' name='_method' value='patch'>
-                        <h3>Edit this review</h3>
-                        <label for='title'>Review Title</label>
-                        <input type='text' name='title' class='form-control' value='{{ review.getTitle }}'>
-                        <label for='description'>Description</label>
-                        <textarea name='description' class='form-control' value='{{ review.getDescription }}'></textarea>
-                        <button class='btn btn-info' type='submit'>Edit</button>
-                    </form>
-                </div>
+                    {% if current_user == user  %}
+                    <div class='hidden-form'>
+                        <hr>
+                        <form action='/trip/{{ trip.getId }}' method='post'>
+                            <input type='hidden' name='_method' value='patch'>
+                            <h3>Edit this review</h3>
+                            <label for='title'>Review Title</label>
+                            <input type='text' name='title' class='form-control' value='{{ review.getTitle }}'>
+                            <label for='description'>Description</label>
+                            <textarea name='description' class='form-control' value='{{ review.getDescription }}'></textarea>
+                            <button class='btn btn-info' type='submit'>Edit</button>
+                        </form>
+                    </div>
+                    {% endif %}
                 {% endif %}
             </div>
         </div>

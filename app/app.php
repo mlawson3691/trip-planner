@@ -59,7 +59,7 @@
         $user = User::findById($trip->getUserId());
         $activities = $trip->getActivities();
         $cities = $trip->getCities();
-        return $app['twig']->render('trip.html.twig', array('review' => $review, 'user' => $user, 'activities' => $activities, 'trip_cities' => $cities, 'alert' => null, 'all_cities' => City::getAll()));
+        return $app['twig']->render('trip.html.twig', array('trip' => $trip, 'review' => $review, 'user' => $user, 'activities' => $activities, 'trip_cities' => $cities, 'alert' => null, 'current_user' => $_SESSION['current_user'], 'all_cities' => City::getAll()));
     });
 
 // add activity to trip
@@ -76,7 +76,7 @@
         $activities = $trip->getActivities();
         $cities = $trip->getCities();
 
-        return $app['twig']->render('trip.html.twig', array('review' => $review, 'user' => $user, 'activities' => $activities, 'cities' => $cities, 'alert' => 'add_activity', 'all_cities' => City::getAll()));
+        return $app['twig']->render('trip.html.twig', array('trip' => $trip, 'review' => $review, 'user' => $user, 'activities' => $activities, 'cities' => $cities, 'alert' => 'add_activity', 'current_user' => $_SESSION['current_user'], 'all_cities' => City::getAll()));
     });
 
 // update activity for trip
@@ -92,7 +92,7 @@
         $activities = $trip->getActivities();
         $cities = $trip->getCities();
 
-        return $app['twig']->render('trip.html.twig', array('review' => $review, 'user' => $user, 'activities' => $activities, 'cities' => $cities, 'alert' => 'update_activity', 'all_cities' => City::getAll()));
+        return $app['twig']->render('trip.html.twig', array('trip' => $trip, 'review' => $review, 'user' => $user, 'activities' => $activities, 'cities' => $cities, 'alert' => 'update_activity', 'current_user' => $_SESSION['current_user'], 'all_cities' => City::getAll()));
     });
 
 // delete activity for trip
@@ -105,14 +105,14 @@
         $activities = $trip->getActivities();
         $cities = $trip->getCities();
 
-        return $app['twig']->render('trip.html.twig', array('review' => $review, 'user' => $user, 'activities' => $activities, 'cities' => $cities, 'alert' => 'delete_activity', 'all_cities' => City::getAll()));
+        return $app['twig']->render('trip.html.twig', array('trip' => $trip, 'review' => $review, 'user' => $user, 'activities' => $activities, 'cities' => $cities, 'alert' => 'delete_activity', 'current_user' => $_SESSION['current_user'], 'all_cities' => City::getAll()));
     });
 
     $app->post('/trip/city/{id}', function($id) use ($app) {
         $trip = Trip::findById($id);
         $trip->addCity($_POST['city_id']);
 
-        return $app['twig']->render('trip.html.twig', array('review' => $review, 'user' => $user, 'activities' => $activities, 'cities' => $cities, 'alert' => 'add_city', 'all_cities' => City::getAll()));
+        return $app['twig']->render('trip.html.twig', array('trip' => $trip, 'review' => $review, 'user' => $user, 'activities' => $activities, 'cities' => $cities, 'alert' => 'add_city', 'current_user' => $_SESSION['current_user'], 'all_cities' => City::getAll()));
     });
 // search results
     $app->post('/search_results', function() use ($app) {
@@ -186,7 +186,7 @@
     $description = $_POST['description'];
     $new_trip = new Trip($name, $user_id, 0, $description);
     $new_trip->save();
-    return $app->redirect('/pending_trips/' . $id);
+    return $app['twig']->render('trip.html.twig', array('trip' => $new_trip, 'review' => null, 'user' => $user, 'activities' => null, 'trip_cities' => null, 'alert' => null, 'current_user' => $_SESSION['current_user'], 'all_cities' => City::getAll()));
     });
 
     return $app;
