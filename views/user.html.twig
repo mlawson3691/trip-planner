@@ -1,7 +1,11 @@
 <html>
 <body>
     <div class='container'>
-        {{ user.getUsername }}
+        {% if alert == 'login-success' %}
+            <div class="alert alert-success text-center">
+                <p><strong>Success!</strong> Welcome, {{ user.getUsername }}. You have successfully signed in.</p>
+            </div>
+        {% endif %}
     </div>
 </body>
 </html>

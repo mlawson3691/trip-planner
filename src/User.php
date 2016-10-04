@@ -89,7 +89,7 @@
             $all_users = User::getAll();
             $found_user = null;
             foreach($all_users as $user) {
-                if ($user->getUsername() === $username && $user->getPassword() === $password) {
+                if ($user->getUsername() === $username && password_verify($password, $user->getPassword())) {
                     $found_user = $user;
                     break;
                 }

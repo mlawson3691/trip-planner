@@ -31,7 +31,7 @@
 
 // home page
     $app->get('/', function() use ($app) {
-        return $app['twig']->render('index.html.twig');
+        return $app['twig']->render('index.html.twig', array('alert' => null));
     });
 
 // leads to individual city page
@@ -68,34 +68,38 @@
 
 // signup page
     $app->get('/sign_up', function() use ($app) {
-        return $app['twig']->render('sign_up.html.twig');
+        return $app['twig']->render('sign_up.html.twig', array('alert' => null));
     });
 
 // submit sign up form
     $app->post('/sign_up', function() use ($app) {
         $username = $_POST['username'];
-        $password = sha1($_POST['password']);
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $new_user = new User($username, $password);
-        $new_user->save();
-        $_SESSION['current_user'] = $new_user;
-        return $app['twig']->render('user.html.twig', array('user' => $new_user));
+        $valid = $new_user->save();
+        if ($valid == true) {
+            $_SESSION['current_user'] = $new_user;
+            return $app['twig']->render('user.html.twig', array('user' => $new_user, 'alert' => 'login-success'));
+        } else {
+            return $app['twig']->render('sign_up.html.twig', array('alert' => 'signup'));
+        }
     });
 
 // submit login form
     $app->post('/login', function() use ($app) {
         $username = $_POST['username'];
-        $password = sha1($_POST['password']);
+        $password = $_POST['password'];
         $valid = User::verifyLogin($username, $password);
         if ($valid == false) {
-            return $app->redirect('/');
+            return $app['twig']->render('index.html.twig', array('alert' => 'login'));
         }
-        return $app['twig']->render('user.html.twig', array('user' => $_SESSION['current_user']));
+        return $app['twig']->render('user.html.twig', array('user' => $_SESSION['current_user'], 'alert' => 'login-success'));
     });
 
 // log out
     $app->get('/logout', function() use ($app) {
         $_SESSION['current_user'] = null;
-        return $app->redirect('/');
+        return $app['twig']->render('index.html.twig', array('alert' => 'logout'));
     });
     return $app;
 ?>
