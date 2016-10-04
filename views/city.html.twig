@@ -8,7 +8,7 @@
         <h2>Reviews for {{ city.getName }}</h2>
         {% if city.getReviews is not empty %}
             {% for review in city.getReviews %}
-                <h4><a href="/trip/{{ review.getId }}">{{ review.getTitle }}</a></h4>
+                <h4><a href="/trip/{{ review.getTripId }}">{{ review.getTitle }}</a></h4>
                 <p>{{ review.getDescription }}</p>
             {% endfor %}
         {% endif %}

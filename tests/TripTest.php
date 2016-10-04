@@ -287,5 +287,27 @@
             $this->assertEquals([$new_city, $new_city2], $result);
         }
 
+        function test_getReview()
+        {
+            $name = "Honeymoon";
+            $user_id = 2;
+            $complete = 0;
+            $description = "Our honeymoon trip";
+            $id = 1;
+            $new_trip = new Trip($name, $user_id, $complete, $description, $id);
+            $new_trip->save();
+
+            $title = "Best trip";
+            $description = "Yay!";
+            $rating = 10;
+            $trip_id = $new_trip->getId();
+            $new_review = new Review($title, $description, $rating, $trip_id);
+            $new_review->save();
+
+            $output = $new_trip->getReview();
+
+            $this->assertEquals($new_review, $output);
+        }
+
     }
 ?>
