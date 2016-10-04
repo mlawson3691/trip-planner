@@ -1,14 +1,7 @@
 {%  include 'inc/navbar.html.twig' %}
 <html>
 <body>
-    <div class="navbar_dashboard col-md-3">
-        <ul class="nav nav-pills nav-stacked">
-            <li role="presentation"><a href="/dashboard/{{user.getId}}">Home</a></li>
-            <li role="presentation"><a href="/pending_trips/{{user.getId}}">Pending Trips</a></li>
-            <li role="presentation" class="active"><a href="/past_trips/{{user.getId}}">Past Trips</a></li>
-            <li role="presentation"><a href="/new_trip/{{user.getId}}">New Trip!</a></li>
-        </ul>
-    </div>
+    <div class="container">
         {% if alert == 'add_activity' %}
             <div class="alert alert-success">
                 <strong>Success!</strong> Your activity has been added.
@@ -76,152 +69,151 @@
                     <button class='btn btn-info' type='submit'>Add</button>
                 </form>
             {% endif %}
-
-        </div>
-        <div class='col-md-6'>
-            <h3>Cities</h3>
-            {% if trip_cities is not empty %}
-                <ul>
-                {% for city in trip_cities %}
-                    <li class='spaced-list'>
-                        {{ city.getName }}, {{ city.getState }}
-                        <form class='inline' action='/trip/remove_city/{{ trip.getId }}' method='post'>
-                            <input type="hidden" name="_method" value="delete">
-                            <input type="hidden" name="city_id" value="{{ city.getId }}">
-                            <button class='trash' type='submit'><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                        </form>
-                    </li>
-                {% endfor %}
-                </ul>
-            {% endif %}
-
-            {% if current_user == user  %}
-                {% if all_cities is not empty %}
-                    <form method='post' action='/trip/city/{{ trip.getId }}'>
-                        <h3>Add a city to this trip</h3>
-                        <select name='city_id' class='form-control'>
-                            {% for city in all_cities %}
-                                <option value='{{ city.getId }}'>{{ city.getName }}</option>
-                            {% endfor %}
-                        </select>
-                        <button class='btn btn-info' type='submit'>Add</button>
-                    </form>
+            </div>
+            <div class='col-md-6'>
+                <h3>Cities</h3>
+                {% if trip_cities is not empty %}
+                    <ul>
+                    {% for city in trip_cities %}
+                        <li class='spaced-list'>
+                            {{ city.getName }}, {{ city.getState }}
+                            <form class='inline' action='/trip/remove_city/{{ trip.getId }}' method='post'>
+                                <input type="hidden" name="_method" value="delete">
+                                <input type="hidden" name="city_id" value="{{ city.getId }}">
+                                <button class='trash' type='submit'><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                            </form>
+                        </li>
+                    {% endfor %}
+                    </ul>
                 {% endif %}
 
-                <button class='btn btn-info show-review-form'>Review this trip</button>
-                <button class='btn btn-info show'>Add a New City</button>
-                <div class='hidden-form'>
-                    <form method='post' action='/trip/new_city/{{ trip.getId }}'>
-                        <h3>Add a new city</h3>
-                        <label for ='name'>City</label>
-                        <input name='name' type='text' class='form-control'>
-                        <label for ='state'>State</label>
-                        <select class='form-control' name="state">
-                            <option value="Alabama">Alabama</option>
-                            <option value="Alaska">Alaska</option>
-                            <option value="Arizona">Arizona</option>
-                            <option value="Arkansas">Arkansas</option>
-                            <option value="California">California</option>
-                            <option value="Colorado">Colorado</option>
-                            <option value="Connecticut">Connecticut</option>
-                            <option value="Delaware">Delaware</option>
-                            <option value="District of Columbia">District of Columbia</option>
-                            <option value="Florida">Florida</option>
-                            <option value="Georgia">Georgia</option>
-                            <option value="Hawaii">Hawaii</option>
-                            <option value="Idaho">Idaho</option>
-                            <option value="Illinois">Illinois</option>
-                            <option value="Indiana">Indiana</option>
-                            <option value="Iowa">Iowa</option>
-                            <option value="Kansas">Kansas</option>
-                            <option value="Kentucky">Kentucky</option>
-                            <option value="Louisiana">Louisiana</option>
-                            <option value="Maine">Maine</option>
-                            <option value="Maryland">Maryland</option>
-                            <option value="Massachusetts">Massachusetts</option>
-                            <option value="Michigan">Michigan</option>
-                            <option value="Minnesota">Minnesota</option>
-                            <option value="Mississippi">Mississippi</option>
-                            <option value="Missouri">Missouri</option>
-                            <option value="Montana">Montana</option>
-                            <option value="Nebraska">Nebraska</option>
-                            <option value="Nevada">Nevada</option>
-                            <option value="New Hampshire">New Hampshire</option>
-                            <option value="New Jersey">New Jersey</option>
-                            <option value="New Mexico">New Mexico</option>
-                            <option value="New York">New York</option>
-                            <option value="North Carolina">North Carolina</option>
-                            <option value="North Dakota">North Dakota</option>
-                            <option value="Ohio">Ohio</option>
-                            <option value="Oklahoma">Oklahoma</option>
-                            <option value="Oregon">Oregon</option>
-                            <option value="Pennsylvania">Pennsylvania</option>
-                            <option value="Rhode Island">Rhode Island</option>
-                            <option value="South Carolina">South Carolina</option>
-                            <option value="South Dakota">South Dakota</option>
-                            <option value="Tennessee">Tennessee</option>
-                            <option value="Texas">Texas</option>
-                            <option value="Utah">Utah</option>
-                            <option value="Vermont">Vermont</option>
-                            <option value="Virginia">Virginia</option>
-                            <option value="Washington">Washington</option>
-                            <option value="West Virginia">West Virginia</option>
-                            <option value="Wisconsin">Wisconsin</option>
-                            <option value="Wyoming">Wyoming</option>
-                            <option value="Other">Other</option>
-                        </select>
-                        <button class='btn btn-info' type='submit'>Add</button>
-                    </form>
-                </div>
-
-            {% endif %}
-
-
-        <!-- beginning of trip review section- still needs more work in routing -->
-
-            <!-- Add a review form -->
-            <div class="well review_form">
-                <form action='/review_form/{{ trip.getId }}' method='post'>
-                    <i class="fa fa-times" aria-hidden="true"></i>
-                    <h3>Review this trip:</h3>
-                    <label for='title'>Title</label>
-                    <input type='text' name='title' class='form-control' required>
-                    <label for='title'>Overall rating</label>
-                    <input type='number' min="1" max="5" name='rating' class='form-control' placeholder="1-5" required>
-                    <label for='description'>Description</label>
-                    <textarea name='description' class='form-control' required></textarea>
-                    <button class='btn btn-info' type='submit'>Submit</button>
-                </form>
-            </div>
-            <!-- end of add a review form -->
-            <!-- start of show/edit reviews -->
-            {% if review  is not empty %}
                 {% if current_user == user  %}
-                    <div class="well reviews">
-                        <h4>Your review:</h4>
-                        <h5>{{ review.getTitle }} - <span>{{ review.getRating }} stars</span></h5>
-                        <p>{{ review.getDescription }}</p>
-                    </div>
+                    {% if all_cities is not empty %}
+                        <form method='post' action='/trip/city/{{ trip.getId }}'>
+                            <h3>Add a city to this trip</h3>
+                            <select name='city_id' class='form-control'>
+                                {% for city in all_cities %}
+                                    <option value='{{ city.getId }}'>{{ city.getName }}</option>
+                                {% endfor %}
+                            </select>
+                            <button class='btn btn-info' type='submit'>Add</button>
+                        </form>
+                    {% endif %}
+
+                    <!-- form for adding cities - not done -->
+                    <button class='btn btn-info show-review-form'>Review this trip</button>
+                    <button class='btn btn-info show'>Add a New City</button>
                     <div class='hidden-form'>
-                        <hr>
-                        <form action='/trip/{{ trip.getId }}' method='post'>
-                            <input type='hidden' name='_method' value='patch'>
-                            <h3>Edit this review</h3>
-                            <label for='title'>Review Title</label>
-                            <input type='text' name='title' class='form-control' value='{{ review.getTitle }}'>
-                            <label for='description'>Description</label>
-                            <textarea name='description' class='form-control' value='{{ review.getDescription }}'></textarea>
-                            <button class='btn btn-info' type='submit'>Edit</button>
+                        <form method='post' action='/trip/new_city/{{ trip.getId }}'>
+                            <h3>Add a new city</h3>
+                            <label for ='name'>City</label>
+                            <input name='name' type='text' class='form-control'>
+                            <label for ='state'>State</label>
+                            <select class='form-control' name="state">
+                                <option value="Alabama">Alabama</option>
+                                <option value="Alaska">Alaska</option>
+                                <option value="Arizona">Arizona</option>
+                                <option value="Arkansas">Arkansas</option>
+                                <option value="California">California</option>
+                                <option value="Colorado">Colorado</option>
+                                <option value="Connecticut">Connecticut</option>
+                                <option value="Delaware">Delaware</option>
+                                <option value="District of Columbia">District of Columbia</option>
+                                <option value="Florida">Florida</option>
+                                <option value="Georgia">Georgia</option>
+                                <option value="Hawaii">Hawaii</option>
+                                <option value="Idaho">Idaho</option>
+                                <option value="Illinois">Illinois</option>
+                                <option value="Indiana">Indiana</option>
+                                <option value="Iowa">Iowa</option>
+                                <option value="Kansas">Kansas</option>
+                                <option value="Kentucky">Kentucky</option>
+                                <option value="Louisiana">Louisiana</option>
+                                <option value="Maine">Maine</option>
+                                <option value="Maryland">Maryland</option>
+                                <option value="Massachusetts">Massachusetts</option>
+                                <option value="Michigan">Michigan</option>
+                                <option value="Minnesota">Minnesota</option>
+                                <option value="Mississippi">Mississippi</option>
+                                <option value="Missouri">Missouri</option>
+                                <option value="Montana">Montana</option>
+                                <option value="Nebraska">Nebraska</option>
+                                <option value="Nevada">Nevada</option>
+                                <option value="New Hampshire">New Hampshire</option>
+                                <option value="New Jersey">New Jersey</option>
+                                <option value="New Mexico">New Mexico</option>
+                                <option value="New York">New York</option>
+                                <option value="North Carolina">North Carolina</option>
+                                <option value="North Dakota">North Dakota</option>
+                                <option value="Ohio">Ohio</option>
+                                <option value="Oklahoma">Oklahoma</option>
+                                <option value="Oregon">Oregon</option>
+                                <option value="Pennsylvania">Pennsylvania</option>
+                                <option value="Rhode Island">Rhode Island</option>
+                                <option value="South Carolina">South Carolina</option>
+                                <option value="South Dakota">South Dakota</option>
+                                <option value="Tennessee">Tennessee</option>
+                                <option value="Texas">Texas</option>
+                                <option value="Utah">Utah</option>
+                                <option value="Vermont">Vermont</option>
+                                <option value="Virginia">Virginia</option>
+                                <option value="Washington">Washington</option>
+                                <option value="West Virginia">West Virginia</option>
+                                <option value="Wisconsin">Wisconsin</option>
+                                <option value="Wyoming">Wyoming</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <button class='btn btn-info' type='submit'>Add</button>
                         </form>
                     </div>
-                    {% else %}
+                {% endif %}
+
+            <!-- beginning of trip review section- still needs more work in routing -->
+
+                <!-- Add a review form -->
+                <div class="well review_form">
+                    <form action='/review_form/{{ trip.getId }}' method='post'>
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                        <h3>Review this trip:</h3>
+                        <label for='title'>Title</label>
+                        <input type='text' name='title' class='form-control' required>
+                        <label for='title'>Overall rating</label>
+                        <input type='number' min="1" max="5" name='rating' class='form-control' placeholder="1-5" required>
+                        <label for='description'>Description</label>
+                        <textarea name='description' class='form-control' required></textarea>
+                        <button class='btn btn-info' type='submit'>Submit</button>
+                    </form>
+                </div>
+                <!-- end of add a review form -->
+                <!-- start of show/edit reviews -->
+                {% if review  is not empty %}
+                    {% if current_user == user  %}
                         <div class="well reviews">
-                            <h4>{{ user.getUsername }}'s review:</h4>
+                            <h4>Your review:</h4>
                             <h5>{{ review.getTitle }} - <span>{{ review.getRating }} stars</span></h5>
                             <p>{{ review.getDescription }}</p>
                         </div>
+                        <div class='hidden-form'>
+                            <hr>
+                            <form action='/trip/{{ trip.getId }}' method='post'>
+                                <input type='hidden' name='_method' value='patch'>
+                                <h3>Edit this review</h3>
+                                <label for='title'>Review Title</label>
+                                <input type='text' name='title' class='form-control' value='{{ review.getTitle }}'>
+                                <label for='description'>Description</label>
+                                <textarea name='description' class='form-control' value='{{ review.getDescription }}'></textarea>
+                                <button class='btn btn-info' type='submit'>Edit</button>
+                            </form>
+                        </div>
+                        {% else %}
+                            <div class="well reviews">
+                                <h4>{{ user.getUsername }}'s review:</h4>
+                                <h5>{{ review.getTitle }} - <span>{{ review.getRating }} stars</span></h5>
+                                <p>{{ review.getDescription }}</p>
+                            </div>
+                    {% endif %}
                 {% endif %}
-            {% endif %}
+            </div>
         </div>
     </div>
 </body>

@@ -1,9 +1,24 @@
+html {
+  box-sizing: border-box;
+}
+
+* {
+	padding:0;
+	margin:0;
+}
+
+img {
+	width:100%;
+	/* We want the width to be 100% of the element its inside */
+	margin: 0 auto;
+	/*We set margin 0 auto on it, to always center it*/
+}
+
 .hero_dashboard img {
     object-fit: cover;
     width: 100%;
     height: 45%;
 }
-
 .navbar_dashboard {
     margin-top: 0px;
 }
@@ -106,3 +121,59 @@
 .btn {
     margin-top: 5px;
 }
+
+/* ---------- ads -------------- */
+.grid {
+	margin-top:0px;
+	display:;
+}
+
+
+.cover-image{
+	margin-top:0px;
+	width:50%;
+	height:35vh;
+	position: ;
+	display:flex;
+	background:rgba(0, 0, 0, 0.4);
+	cursor: pointer;
+}
+
+.cover-image:hover {
+	background:rgba(0, 0, 0, 0);
+}
+
+
+.cover-image:nth-child(1),
+.cover-image:nth-child(3){
+	float:left;
+}
+.cover-image:nth-child(2),
+.cover-image:nth-child(4){
+	float:right;
+}
+
+.cover-image img{
+	position:;
+	display:flex;
+	object-fit:cover;
+	z-index:-1;
+}
+
+.cover_image h3 {
+    font-family: 'Playfair Display', serif;
+	font-weight: 900;
+	color: #ecf0f1;
+	font-size: 35px;
+}
+/*.cover-image h3 {
+	margin-left: 0;
+	position:absolute;
+	font-family: 'Playfair Display', serif;
+	font-weight: 900;
+	color:#ecf0f1;
+	font-size:45px;
+	margin-top:22%;
+	margin-left:25px;
+
+}*/
