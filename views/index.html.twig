@@ -1,4 +1,4 @@
-{%  include 'navbar.html' %}
+{%  include 'inc/navbar.html' %}
 <html>
 <body>
     <div class='container'>
@@ -11,24 +11,13 @@
                 <p><strong>Success!</strong> You have logged out.</p>
             </div>
         {% endif %}
-        <div class='jumbotron text-center'>
-            <h1>Trip Planner</h1>
-            <p>Plan your dream vacation today!</p>
-        </div>
         <div class='row text-center'>
-            <div class="col-sm-4">
+            <div class="col-sm-6">
                 <h3>Plan a Trip</h3>
                 <p>Sign up or Log in Now</p>
                 <a href='/sign_up' class='btn btn-info'>Plan</a>
             </div>
-            <div class="col-sm-4">
-                <h3>Search by City</h3>
-                <form action='/search_results' method='post'>
-                    <input type='text' class='form-control' name='search_input' placeholder='Search'>
-                    <button type='submit' class='btn btn-info'>Search</button>
-                </form>
-            </div>
-            <div class="col-sm-4">
+            <div class="col-sm-6">
                 <h3>Browse Cities by State</h3>
                 <p>See what's out there!</p>
                 <a href='/browse' class='btn btn-info'>Browse</a>
