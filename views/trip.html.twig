@@ -78,11 +78,12 @@
                 {% if trip_cities is not empty %}
                     <ul>
                     {% for city in trip_cities %}
-                        <li>
+                        <li class='spaced-list'>
                             {{ city.getName }}, {{ city.getState }}
-                            <form action='trip/remove_city/{{ trip.getId }}' method='post'>
+                            <form class='inline' action='/trip/remove_city/{{ trip.getId }}' method='post'>
                                 <input type="hidden" name="_method" value="delete">
-                                <button type='submit'><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                <input type="hidden" name="city_id" value="{{ city.getId }}">
+                                <button class='trash' type='submit'><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                             </form>
                         </li>
                     {% endfor %}

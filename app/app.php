@@ -122,6 +122,7 @@
         return $app['twig']->render('trip.html.twig', array('trip' => $trip, 'review' => $review, 'user' => $user, 'activities' => $activities, 'trip_cities' => $cities, 'alert' => 'add_city', 'current_user' => $_SESSION['current_user'], 'all_cities' => City::getAll()));
     });
 
+// create and add city to trip
     $app->post('/trip/new_city/{id}', function($id) use ($app) {
         $name = $_POST['name'];
         $state = $_POST['state'];
@@ -136,6 +137,14 @@
 
         return $app['twig']->render('trip.html.twig', array('trip' => $trip, 'review' => $review, 'user' => $user, 'activities' => $activities, 'trip_cities' => $cities, 'alert' => 'add_city', 'current_user' => $_SESSION['current_user'], 'all_cities' => City::getAll()));
     });
+
+// remove city from trip
+    $app->delete('/trip/remove_city/{id}', function($id) use ($app) {
+        $trip = Trip::findById($id);
+        $trip->removeCity($_POST['city_id']);
+        return $app->redirect('/trip/' . $id);
+    });
+
 // search results
     $app->post('/search_results', function() use ($app) {
         $search_results = City::search($_POST['search_input']);

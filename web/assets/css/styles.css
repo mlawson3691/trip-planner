@@ -20,3 +20,26 @@
 .well {
     overflow: hidden;
 }
+
+.inline {
+    display: inline;
+}
+
+.trash {
+    border: none;
+    background: transparent;
+    margin-left: 5px;
+    font-size: 16px;
+}
+
+.trash:hover {
+    color: red;
+}
+
+.spaced-list {
+    margin-bottom: 10px;
+}
+
+.btn {
+    margin-top: 5px;
+}

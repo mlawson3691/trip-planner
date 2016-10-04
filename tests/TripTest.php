@@ -326,5 +326,33 @@
             $this->assertEquals(1, $result);
         }
 
+        function test_removeCity()
+        {
+            $name = "Honeymoon";
+            $user_id = 2;
+            $complete = 0;
+            $description = "Our honeymoon trip";
+            $id = 1;
+            $new_trip = new Trip($name, $user_id, $complete, $description, $id);
+            $new_trip->save();
+
+            $city_name = "Los Angeles";
+            $state = "California";
+            $new_city = new City($city_name, $state, $id);
+            $new_city->save();
+
+            $city_name2 = "New York City";
+            $state2 = "New York";
+            $new_city2 = new City($city_name2, $state2, $id);
+            $new_city2->save();
+
+            $new_trip->addCity($new_city->getId());
+            $new_trip->addCity($new_city2->getId());
+
+            $new_trip->removeCity($new_city->getId());
+            $result = $new_trip->getCities();
+
+            $this->assertEquals([$new_city2], $result);
+        }
     }
 ?>

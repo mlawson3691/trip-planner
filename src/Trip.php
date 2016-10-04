@@ -56,6 +56,11 @@
             $GLOBALS['DB']->exec("INSERT INTO cities_trips (city_id, trip_id) VALUES ({$city_id}, {$this->getId()});");
         }
 
+        function removeCity($city_id)
+        {
+            $GLOBALS['DB']->exec("DELETE FROM cities_trips WHERE city_id = {$city_id} AND trip_id = {$this->getId()}");
+        }
+
         function completeTrip()
         {
             $GLOBALS['DB']->exec("UPDATE trips SET complete = 1 WHERE id = {$this->getId()};");
