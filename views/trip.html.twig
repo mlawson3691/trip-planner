@@ -1,4 +1,4 @@
-{%  include 'inc/navbar.html' %}
+{%  include 'inc/navbar.html.twig' %}
 <html>
 <body>
     <div class='container'>
@@ -33,7 +33,7 @@
                             <p class='pull-right'>{{ activity.getDate }}</p>
                             <p>{{ activity.getDescription }}</p>
                             {% if current_user == user  %}
-                                <button type='button' class='btn btn-info show'>Edit this Activity</button>
+                                <button type='button' class='btn btn-info show-form'>Edit this Activity</button>
 
                                 <div class='hidden-form'>
                                     <hr>
@@ -96,7 +96,7 @@
                             <h3>Add a city to this trip</h3>
                             <select name='city_id' class='form-control'>
                                 {% for city in all_cities %}
-                                    <option value='{{ city.getId }}'>{{ city.getName }}</option>
+                                    <option value='{{ city.getId }}'>{{ city.getName }}, {{ city.getState }}</option>
                                 {% endfor %}
                             </select>
                             <button class='btn btn-info' type='submit'>Add</button>
@@ -104,7 +104,7 @@
                     {% endif %}
 
                     <!-- form for adding cities - not done -->
-                    <button class='btn btn-info show'>Add a New City</button>
+                    <button class='btn btn-info show-form'>Add a New City</button>
                     <div class='hidden-form'>
                         <form method='post' action='/trip/new_city/{{ trip.getId }}'>
                             <h3>Add a new city</h3>
