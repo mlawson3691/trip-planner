@@ -126,7 +126,7 @@
             $user_id = 2;
             $new_trip = new Trip($name, $user_id, $description);
             $new_trip->save();
-            $new_trip->addCity($new_city);
+            $new_trip->addCity($new_city->getId());
 
             $title = "Best trip ever";
             $description = "Yay!";

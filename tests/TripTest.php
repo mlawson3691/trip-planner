@@ -34,7 +34,7 @@
             //Assert
             $this->assertEquals($name, $result);
         }
-        
+
         function test_getDescription()
         {
             //Arrange
@@ -269,8 +269,8 @@
             $new_city2 = new City($city_name2, $state2, $id);
             $new_city2->save();
 
-            $new_trip->addCity($new_city);
-            $new_trip->addCity($new_city2);
+            $new_trip->addCity($new_city->getId());
+            $new_trip->addCity($new_city2->getId());
 
             $result = $new_trip->getCities();
 

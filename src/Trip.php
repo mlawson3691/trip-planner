@@ -44,9 +44,9 @@
             return $this->user_id;
         }
 
-        function addCity($city)
+        function addCity($city_id)
         {
-            $GLOBALS['DB']->exec("INSERT INTO cities_trips (city_id, trip_id) VALUES ({$city->getId()}, {$this->getId()});");
+            $GLOBALS['DB']->exec("INSERT INTO cities_trips (city_id, trip_id) VALUES ({$city_id}, {$this->getId()});");
         }
 
         function getCities()

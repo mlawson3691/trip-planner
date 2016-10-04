@@ -6,13 +6,17 @@
             <div class="alert alert-success">
                 <strong>Success!</strong> Your activity has been added.
             </div>
-        {% if alert == 'update_activity' %}
+        {% elseif alert == 'update_activity' %}
             <div class="alert alert-success">
                 <strong>Success!</strong> Your activity has been updated.
             </div>
-        {% if alert == 'delete_activity' %}
+        {% elseif alert == 'delete_activity' %}
             <div class="alert alert-success">
                 <strong>Success!</strong> Your activity has been deleted.
+            </div>
+        {% elseif alert == 'add_city' %}
+            <div class="alert alert-success">
+                <strong>Success!</strong> Your city has been added.
             </div>
         {% endif %}
 
@@ -65,8 +69,49 @@
                 {% endif %}
 
             </div>
-            <!-- beginning of trip review section- still needs more work in routing -->
             <div class='col-md-6'>
+                <h3>Cities</h3>
+                {% if trip_cities is not empty %}
+                    <ul>
+                    {% for city in trip_cities %}
+                        <li>{{ city.getName }}, {{ city.getState }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+
+                {% if $_SESSION['current_user'] == user  %}
+                    <form method='post' action='/trip/city/{{ trip.getId }}'>
+                        <h3>Add a city to this trip</h3>
+                        {% if all_cities is not empty %}
+                            <select name='city_id' class='form-control'>
+                                {% for city in all_cities %}
+                                    <option value='{{ city.getId }}'>{{ city.getName }}</option>
+                                {% endfor %}
+                            </select>
+                        {% endif %}
+                        <button class='btn btn-info' type='submit'>Add</button>
+                    </form>
+
+                    <!-- form for adding cities - not done -->
+                    <div class='hidden-form'>
+                        <form method='post' action='/trip/{{ trip.getId }}'>
+                            <h3>Add a city to this trip</h3>
+                            {% if all_cities is not empty %}
+                                <select name='city_id' class='form-control'>
+                                    {% for city in all_cities %}
+                                        <option value='{{ city.getId }}'>{{ city.getName }}</option>
+                                    {% endfor %}
+                                </select>
+                            {% endif %}
+                            <button class='btn btn-info' type='submit'>Add</button>
+                        </form>
+                    </div>
+                {% endif %}
+
+
+
+            <!-- beginning of trip review section- still needs more work in routing -->
+
                 <h2>{{ review.getTitle }}</h2>
                 <h3>{{ review.getRating }}</h3>
                 <h4>{{ user.getUsername }}</h4>
