@@ -165,6 +165,12 @@
         return $app['twig']->render('index.html.twig', array('alert' => 'logout'));
     });
 
+// to city page
+    $app->get('/city/{id}', function($id) use ($app) {
+        $city = City::findById($id);
+        return $app['twig']->render('city.html.twig', array('city' => $city));
+    });
+
 // past trips in dashboard
     $app->get('/past_trips/{id}', function($id) use ($app) {
         $user = User::findById($id);
@@ -196,10 +202,15 @@
         return $app['twig']->render('trip.html.twig', array('trip' => $new_trip, 'review' => null, 'user' => $user, 'activities' => null, 'trip_cities' => null, 'alert' => null, 'current_user' => $_SESSION['current_user'], 'all_cities' => City::getAll()));
     });
 
-// to city page
-    $app->get('/city/{id}', function($id) use ($app) {
-        $city = City::findById($id);
-        return $app['twig']->render('city.html.twig', array('city' => $city));
+// review trip
+    $app->post('/review_form/{id}', function($id) use ($app) {
+        $trip_id = $id;
+        $title = $_POST['title'];
+        $description = $_POST['description'];
+        $rating = $_POST['rating'];
+        $new_review = new Review($title, $description, $rating, $trip_id);
+        $new_review->save();
+        return $app->redirect('/trip/' . $id);
     });
 
 
