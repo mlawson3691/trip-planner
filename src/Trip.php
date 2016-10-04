@@ -56,6 +56,12 @@
             $GLOBALS['DB']->exec("INSERT INTO cities_trips (city_id, trip_id) VALUES ({$city->getId()}, {$this->getId()});");
         }
 
+        function completeTrip()
+        {
+            $GLOBALS['DB']->exec("UPDATE trips SET complete = 1 WHERE id = {$this->getId()};");
+            $this->complete = 1;
+        }
+
         function getCities()
         {
             $returned_cities = $GLOBALS['DB']->query ("SELECT cities.* FROM trips
