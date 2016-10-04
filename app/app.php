@@ -57,7 +57,55 @@
         $review = Review::findById($id);
         $trip = Trip::findById($review->getTripId());
         $user = User::findById($trip->getUserId());
-        return $app['twig']->render('trip.html.twig', array('review' => $review, 'user' => $user));
+        $activities = $trip->getActivities();
+        $cities = $trip->getCities();
+        return $app['twig']->render('trip.html.twig', array('review' => $review, 'user' => $user, 'activities' => $activities, 'cities' => $cities, 'alert' => null));
+    });
+
+// add activity to trip
+    $app->post('/trip/{id}', function($id) use ($app) {
+        $name = $_POST['name'];
+        $date = $_POST['date'];
+        $description = $_POST['description'];
+        $trip_id = $id;
+        $new_activity = new Activity($name, $date, $description, $trip_id);
+        $new_activity->save();
+        $review = Review::findById($id);
+        $trip = Trip::findById($review->getTripId());
+        $user = User::findById($trip->getUserId());
+        $activities = $trip->getActivities();
+        $cities = $trip->getCities();
+
+        return $app['twig']->render('trip.html.twig', array('review' => $review, 'user' => $user, 'activities' => $activities, 'cities' => $cities, 'alert' => 'add_activity'));
+    });
+
+// update activity for trip
+    $app->patch('/trip/{id}', function($id) use ($app) {
+        $name = $_POST['name'];
+        $date = $_POST['date'];
+        $description = $_POST['description'];
+        $trip_id = $id;
+        $new_activity->update($name, $date, $description);
+        $review = Review::findById($id);
+        $trip = Trip::findById($review->getTripId());
+        $user = User::findById($trip->getUserId());
+        $activities = $trip->getActivities();
+        $cities = $trip->getCities();
+
+        return $app['twig']->render('trip.html.twig', array('review' => $review, 'user' => $user, 'activities' => $activities, 'cities' => $cities, 'alert' => 'update_activity'));
+    });
+
+// delete activity for trip
+    $app->delete('/trip/{id}', function($id) use ($app) {
+        $found_activity = Activity::findById($_POST['activity_id']);
+        $found_activity->delete();
+        $review = Review::findById($id);
+        $trip = Trip::findById($review->getTripId());
+        $user = User::findById($trip->getUserId());
+        $activities = $trip->getActivities();
+        $cities = $trip->getCities();
+
+        return $app['twig']->render('trip.html.twig', array('review' => $review, 'user' => $user, 'activities' => $activities, 'cities' => $cities, 'alert' => 'delete_activity'));
     });
 
 // search results

@@ -69,7 +69,7 @@
         function getActivities()
         {
             $returned_activities = $GLOBALS['DB']->query ("SELECT * FROM trips
-                WHERE trip_id = {$this->getId()};");
+                WHERE trip_id = {$this->getId()} ORDER BY date ASC;");
             $activities = array();
             foreach($returned_activities as $activity) {
                 $name = $activity['name'];
