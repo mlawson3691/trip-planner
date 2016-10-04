@@ -65,6 +65,7 @@
                 {% endif %}
 
             </div>
+            <!-- beginning of trip review section- still needs more work in routing -->
             <div class='col-md-6'>
                 <h2>{{ review.getTitle }}</h2>
                 <h3>{{ review.getRating }}</h3>
@@ -72,6 +73,21 @@
                 <p>
                     {{ review.getDescription }}
                 </p>
+
+                {% if $_SESSION['current_user'] == user  %}
+                <div class='hidden-form'>
+                    <hr>
+                    <form action='/trip/{{ trip.getId }}' method='post'>
+                        <input type='hidden' name='_method' value='patch'>
+                        <h3>Edit this review</h3>
+                        <label for='title'>Review Title</label>
+                        <input type='text' name='title' class='form-control' value='{{ review.getTitle }}'>
+                        <label for='description'>Description</label>
+                        <textarea name='description' class='form-control' value='{{ review.getDescription }}'></textarea>
+                        <button class='btn btn-info' type='submit'>Edit</button>
+                    </form>
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>
