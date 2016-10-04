@@ -1,13 +1,13 @@
-{%  include 'inc/navbar.html' %}
+{%  include 'inc/navbar.html.twig' %}
 <html>
 <body>
     <div class="well col-sm-3">
         <div class="navbar_dashboard">
             <ul class="nav nav-pills nav-stacked">
-                <li role="presentation" class="active"><a href="/dashboard/{{user.getId}}">Home</a></li>
-                <li role="presentation"><a href="/pending_trips/{{user.getId}}">Pending Trips</a></li>
-                <li role="presentation"><a href="/past_trips/{{user.getId}}">Past Trips</a></li>
-                <li role="presentation"><a href="/new_trip/{{user.getId}}">New Trip!</a></li>
+                <li role="presentation" class="active"><a href="/dashboard/{{current_user.getId}}">Home</a></li>
+                <li role="presentation"><a href="/pending_trips/{{current_user.getId}}">Pending Trips</a></li>
+                <li role="presentation"><a href="/past_trips/{{current_user.getId}}">Past Trips</a></li>
+                <li role="presentation"><a href="/new_trip/{{current_user.getId}}">New Trip!</a></li>
             </ul>
         </div>
         <div class="container">

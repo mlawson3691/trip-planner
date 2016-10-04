@@ -1,15 +1,22 @@
-{%  include 'inc/navbar.html' %}
+{%  include 'inc/navbar.html.twig' %}
 <html>
 <body>
     <div class='container'>
-        {% if results is not empty %}
-            <h2>Your search results:</h2>
-            <ul>
-                {% for result in results %}
-                    <li><a href="/city/{{result.getId}}">{{ result.getName }}, {{ result.getState }}</a></li>
-                {% endfor %}
-            </ul>
-        {% endif %}
+        <div class='row'>
+            <div class='col-sm-3'>
+                <!-- display all states here -->
+            </div>
+            <div class='col-sm-9'>
+                <!-- display search or browse results -->
+                {% if results is not empty %}
+                    <h2>Your search results:</h2>
+                    <ul>
+                        {% for result in results %}
+                            <li><a href="/city/{{result.getId}}">{{ result.getName }}, {{ result.getState }}</a></li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
     </div>
 </body>
 </html>

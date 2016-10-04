@@ -45,7 +45,7 @@ Class City
         $all_cities = City::getAll();
         $unique = true;
         foreach ($all_cities as $city) {
-            if (strtolower($city->getName()) == strtolower($this->getName())) {
+            if (strtolower($city->getName()) == strtolower($this->getName()) && $city->getState() == $this->getState()) {
                 $unique = false;
                 return false;
             }

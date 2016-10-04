@@ -8,9 +8,40 @@
     margin-top: 0px;
 }
 
-.search .fa-search {
-    font-size: 20px;
-    padding-left: 5px;
+.hidden-form {
+    display: none;
+}
+
+.title {
+    font-size: 25px;
+}
+
+.search-bar {
+    border: none;
+    background: transparent;
+    box-shadow: none;
+}
+
+.search-bar:focus {
+    outline: 0px !important;
+}
+
+.magnifying {
+    margin-top: 2px;
+}
+
+.magnifying button {
+    border: none;
+    background: transparent;
+    font-size: 18px;
+}
+
+.magnifying:hover {
+    color: #428bca;
+}
+
+.fa-plus {
+    font-size: 18px;
 }
 
 .review_form {
