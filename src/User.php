@@ -43,10 +43,11 @@
             $trips = array();
             foreach($returned_trips as $trip) {
                 $name = $trip['name'];
+                $user_id = $trip['user_id'];
+                $complete = $trip['complete'];
                 $description = $trip['description'];
                 $id = $trip['id'];
-                $user_id = $trip['user_id'];
-                $new_trip = new Trip($name, $user_id, $description, $id);
+                $new_trip = new Trip($name, $user_id, $complete, $description, $id);
                 array_push($trips, $new_trip);
             }
             return $trips;

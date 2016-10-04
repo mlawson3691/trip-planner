@@ -1,0 +1,9 @@
+.hero_dashboard img {
+    object-fit: cover;
+    width: 100%;
+    height: 40%;
+}
+
+.navbar_dashboard {
+    margin-top: 0px;
+}

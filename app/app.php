@@ -78,7 +78,7 @@
         $new_user = new User($username, $password);
         $new_user->save();
         $_SESSION['current_user'] = $new_user;
-        return $app['twig']->render('user.html.twig', array('user' => $new_user));
+        return $app['twig']->render('user_dashboard.html.twig', array('user' => $new_user));
     });
 
 // submit login form
@@ -89,7 +89,7 @@
         if ($valid == false) {
             return $app->redirect('/');
         }
-        return $app['twig']->render('user.html.twig', array('user' => $_SESSION['current_user']));
+        return $app['twig']->render('user_dashboard.html.twig', array('user' => $_SESSION['current_user']));
     });
 
 // log out
@@ -97,5 +97,38 @@
         $_SESSION['current_user'] = null;
         return $app->redirect('/');
     });
+
+// past trips in dashboard
+    $app->get('/past_trips/{id}', function($id) use ($app) {
+        $user = User::findById($id);
+        $trips = $user->getTrips();
+        return $app['twig']->render('past_trips.html.twig', array('user' => $user, 'trips' => $trips));
+    });
+
+// pending user trips
+    $app->get('/pending_trips/{id}', function($id) use ($app) {
+    $user = User::findById($id);
+    $trips = $user->getTrips();
+    return $app['twig']->render('pending_trips.html.twig', array('user' => $user, 'trips' => $trips));
+    });
+
+// new trip
+    $app->get('/new_trip/{id}', function($id) use ($app) {
+    $user = User::findById($id);
+    return $app['twig']->render('new_trip.html.twig', array('user' => $user));
+    });
+
+// add new trip
+    $app->post('/new_trip/{id}', function($id) use ($app) {
+    $user = User::findById($id);
+    $name = $_POST['purpose'];
+    $user_id = $user->getId();
+    $description = $_POST['description'];
+    $new_trip = new Trip($name, $user_id, 0, $description);
+    $new_trip->save();
+    return $app->redirect('/pending_trips/' . $id);
+    });
+
     return $app;
+
 ?>

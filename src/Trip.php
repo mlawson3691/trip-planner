@@ -2,16 +2,18 @@
     class Trip
     {
         private $name;
+        private $user_id;
+        private $complete;
         private $description;
         private $id;
-        private $user_id;
 
-        function __construct($name, $user_id, $description="", $id = null)
+        function __construct($name, $user_id, $complete = 0, $description="", $id = null)
         {
             $this->name = $name;
-            $this->id = $id;
-            $this->description = $description;
             $this->user_id = $user_id;
+            $this->complete = $complete;
+            $this->description = $description;
+            $this->id = $id;
         }
 
         function setName($new_name)
@@ -42,6 +44,11 @@
         function getUserId()
         {
             return $this->user_id;
+        }
+
+        function getComplete()
+        {
+            return $this->complete;
         }
 
         function addCity($city)
@@ -109,10 +116,11 @@
             $trips = array();
             foreach($returned_trips as $trip) {
                 $name = $trip['name'];
+                $user_id = $trip['user_id'];
+                $complete = $trip['complete'];
                 $description = $trip['description'];
                 $id = $trip['id'];
-                $user_id = $trip['user_id'];
-                $new_trip = new Trip($name, $user_id, $description, $id);
+                $new_trip = new Trip($name, $user_id, $complete, $description, $id);
                 array_push($trips, $new_trip);
             }
             return $trips;

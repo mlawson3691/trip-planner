@@ -122,9 +122,10 @@
             $new_city->save();
 
             $name = "Honeymoon";
-            $description = "Our honeymoon trip";
             $user_id = 2;
-            $new_trip = new Trip($name, $user_id, $description);
+            $complete = 0;
+            $description = "Our honeymoon trip";
+            $new_trip = new Trip($name, $user_id, $complete, $description);
             $new_trip->save();
             $new_trip->addCity($new_city);
 

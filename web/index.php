@@ -12,6 +12,7 @@
     <link href='/assets/css/styles.css' rel='stylesheet' type='text/css'>
     <script src='/assets/js/jquery-3.1.1.min.js'></script>
     <script src='/assets/js/bootstrap.min.js'></script>
+    <script src="/assets/js/scripts.js">
     <title>Trip Planner</title>
 </head>
 </html>

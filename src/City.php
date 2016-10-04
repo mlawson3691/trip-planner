@@ -58,7 +58,6 @@ Class City
     }
 
 // static functions
-
     static function getStates()
     {
         $cities = City::getAll();

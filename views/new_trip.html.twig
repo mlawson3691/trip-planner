@@ -1,0 +1,27 @@
+<html>
+<body>
+    <div class="hero_dashboard">
+        <img src="/assets/img/treasure.jpeg">
+    </div>
+    <div class="navbar_dashboard">
+        <ul class="nav nav-pills nav-stacked col-md-3">
+            <li role="presentation"><a href="/past_trips/{{user.getId}}">Past Trips</a></li>
+            <li role="presentation"><a href="/pending_trips/{{user.getId}}">Pending Trips</a></li>
+            <li role="presentation" class="active"><a href="/new_trip/{{user.getId}}">New Trip!</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="col-md-6 col-md-6-offset-3 well">
+            <h2>Begin a New Journey!</h2>
+            <form action="/new_trip/{{user.getId}}" method="post">
+                <br>
+                <input class="form-control" name="purpose" placeholder="What is this trip for?" type="text">
+                <br>
+                <input class="form-control" name="description" placeholder="Trip description" type="text">
+                <br>
+                <button type="submit" class="btn btn-classic center-block">Add Trip</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

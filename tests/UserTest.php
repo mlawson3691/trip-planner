@@ -247,15 +247,17 @@
             $new_user->save();
 
             $name = "Honeymoon";
-            $description = "Our honeymoon trip";
             $user_id = $new_user->getId();
-            $new_trip = new Trip($name, $user_id, $description);
+            $complete = 0;
+            $description = "Our honeymoon trip";
+            $new_trip = new Trip($name, $user_id, $complete, $description);
             $new_trip->save();
 
             $name2 = "Honeymoon";
-            $description2 = "Our beautiful trip";
             $user_id2 = $new_user->getId();
-            $new_trip2 = new Trip($name2, $user_id2, $description2);
+            $complete = 0;
+            $description2 = "Our beautiful trip";
+            $new_trip2 = new Trip($name2, $user_id2, $complete, $description2);
             $new_trip2->save();
 
 
