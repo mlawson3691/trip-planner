@@ -287,5 +287,36 @@
             $this->assertEquals([$new_city, $new_city2], $result);
         }
 
+        function test_getComplete()
+        {
+            $name = "Honeymoon";
+            $user_id = 2;
+            $complete = 0;
+            $description = "Our honeymoon trip";
+            $id = 1;
+            $new_trip = new Trip($name, $user_id, $complete, $description, $id);
+            $new_trip->save();
+
+            $result = $new_trip->getComplete();
+
+            $this->assertEquals(0, $result);
+        }
+
+        function test_completeTrip()
+        {
+            $name = "Honeymoon";
+            $user_id = 2;
+            $complete = 0;
+            $description = "Our honeymoon trip";
+            $id = 1;
+            $new_trip = new Trip($name, $user_id, $complete, $description, $id);
+            $new_trip->save();
+
+            $new_trip->completeTrip();
+            $result = $new_trip->getComplete();
+
+            $this->assertEquals(1, $result);
+        }
+
     }
 ?>

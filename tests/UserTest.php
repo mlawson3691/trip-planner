@@ -266,5 +266,74 @@
             $this->assertEquals([$new_trip, $new_trip2], $result);
         }
 
+        function test_getPendingTrips()
+        {
+            $username = "Honeymoon";
+            $password = "Otgg354";
+            $new_user = new User($username, $password);
+            $new_user->save();
+
+            $name = "Honeymoon";
+            $user_id = $new_user->getId();
+            $complete = 0;
+            $description = "Our honeymoon trip";
+            $new_trip = new Trip($name, $user_id, $complete, $description);
+            $new_trip->save();
+
+            $name2 = "Honeymoon";
+            $user_id2 = $new_user->getId();
+            $complete2 = 0;
+            $description2 = "Our beautiful trip";
+            $new_trip2 = new Trip($name2, $user_id2, $complete2, $description2);
+            $new_trip2->save();
+
+            $name3 = "Honeymoon";
+            $user_id3 = $new_user->getId();
+            $complete3 = 1;
+            $description3 = "Our beautiful trip";
+            $new_trip3 = new Trip($name3, $user_id3, $complete3, $description3);
+            $new_trip3->save();
+
+            $all_trips = $new_user->getTrips();
+            $result = $new_user->getPendingTrips($all_trips);
+
+            $this->assertEquals([$new_trip, $new_trip2], $result);
+        }
+
+        function test_getPastTrips()
+        {
+            $username = "Honeymoon";
+            $password = "Otgg354";
+            $new_user = new User($username, $password);
+            $new_user->save();
+
+            $name = "Honeymoon";
+            $user_id = $new_user->getId();
+            $complete = 1;
+            $description = "Our honeymoon trip";
+            $new_trip = new Trip($name, $user_id, $complete, $description);
+            $new_trip->save();
+
+            $name2 = "Honeymoon";
+            $user_id2 = $new_user->getId();
+            $complete2 = 0;
+            $description2 = "Our beautiful trip";
+            $new_trip2 = new Trip($name2, $user_id2, $complete2, $description2);
+            $new_trip2->save();
+
+            $name3 = "Honeymoon";
+            $user_id3 = $new_user->getId();
+            $complete3 = 1;
+            $description3 = "Our beautiful trip";
+            $new_trip3 = new Trip($name3, $user_id3, $complete3, $description3);
+            $new_trip3->save();
+
+            $all_trips = $new_user->getTrips();
+            $result = $new_user->getPastTrips($all_trips);
+
+            $this->assertEquals([$new_trip, $new_trip3], $result);
+        }
+
+
     }
 ?>

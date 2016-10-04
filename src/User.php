@@ -57,9 +57,9 @@
         {
             $trips = array();
             foreach($all_trips as $trip) {
-                if($trip->getComplete == 0) {
+                if($trip->getComplete() == 0) {
                     array_push($trips, $trip);
-                }
+                } 
             }
             return $trips;
         }
@@ -68,7 +68,7 @@
         {
             $trips = array();
             foreach($all_trips as $trip) {
-                if($trip->getComplete == 1) {
+                if($trip->getComplete() == 1) {
                     array_push($trips, $trip);
                 }
             }

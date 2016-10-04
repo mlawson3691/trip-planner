@@ -130,8 +130,6 @@
         $username = $_POST['username'];
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $new_user = new User($username, $password);
-        $new_user->save();
-        $_SESSION['current_user'] = $new_user;
         $valid = $new_user->save();
         if ($valid == true) {
             $_SESSION['current_user'] = $new_user;

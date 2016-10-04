@@ -112,7 +112,7 @@
 
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO trips (name, description, user_id) VALUES ('{$this->getName()}', '{$this->getDescription()}', {$this->getUserId()});");
+            $GLOBALS['DB']->exec("INSERT INTO trips (name, description, user_id, complete) VALUES ('{$this->getName()}', '{$this->getDescription()}', {$this->getUserId()}, {$this->getComplete()});");
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
