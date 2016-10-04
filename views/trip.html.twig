@@ -28,31 +28,33 @@
                 <p>{{ trip.getDescription }}</p>
                 {% if activities is not empty %}
                     {% for activity in activities %}
-                        <h4>{{ activity.getName }}</h4>
-                        <p class='pull-right'>{{ activity.getDate }}</p>
-                        <p>{{ activity.getDescription }}</p>
-                        {% if current_user == user  %}
-                            <button type='button' id='edit'>Edit this Activity</button>
-                            <form action='/trip/{{ trip.getId }}' method='post'>
-                                <input type="hidden" name="_method" value="delete">
-                                <input type='hidden' name='activity_id' value='{{ activity.getId }}'
-                                <button type='submit'>Delete this Activity</button>
-                            </form>
-                            <div class='hidden-form'>
-                                <hr>
+                        <div class='well'
+                            <h4>{{ activity.getName }}</h4>
+                            <p class='pull-right'>{{ activity.getDate }}</p>
+                            <p>{{ activity.getDescription }}</p>
+                            {% if current_user == user  %}
+                                <button type='button' class='btn btn-info' id='edit'>Edit this Activity</button>
                                 <form action='/trip/{{ trip.getId }}' method='post'>
-                                    <input type='hidden' name='_method' value='patch'>
-                                    <h3>Edit this activity</h3>
-                                    <label for='name'>Activity Name</label>
-                                    <input type='text' name='name' class='form-control' value='{{ activity.getName }}'>
-                                    <label for='date'>Date</label>
-                                    <input type='datetime' name='date' class='form-control' value='{{ activity.getDate }}'>
-                                    <label for='description'>Description</label>
-                                    <textarea name='description' class='form-control' value='{{ activity.getDescription }}'></textarea>
-                                    <button class='btn btn-info' type='submit'>Edit</button>
+                                    <input type="hidden" name="_method" value="delete">
+                                    <input type='hidden' name='activity_id' value='{{ activity.getId }}'>
+                                    <button type='submit' class='btn btn-danger'>Delete this Activity</button>
                                 </form>
-                            </div>
-                        {% endif %}
+                                <div class='hidden-form'>
+                                    <hr>
+                                    <form action='/trip/{{ trip.getId }}' method='post'>
+                                        <input type='hidden' name='_method' value='patch'>
+                                        <h3>Edit this activity</h3>
+                                        <label for='name'>Activity Name</label>
+                                        <input type='text' name='name' class='form-control' value='{{ activity.getName }}'>
+                                        <label for='date'>Date</label>
+                                        <input type='datetime' name='date' class='form-control' value='{{ activity.getDate }}'>
+                                        <label for='description'>Description</label>
+                                        <textarea name='description' class='form-control' value='{{ activity.getDescription }}'></textarea>
+                                        <button class='btn btn-info' type='submit'>Edit</button>
+                                    </form>
+                                </div>
+                            {% endif %}
+                        </div>
                     {% endfor %}
                 {% endif %}
 
@@ -62,7 +64,7 @@
                         <label for='name'>Activity Name</label>
                         <input type='text' name='name' class='form-control'>
                         <label for='date'>Date</label>
-                        <input type='datetime' name='date' class='form-control'>
+                        <input type='date' name='date' class='form-control'>
                         <label for='description'>Description</label>
                         <textarea name='description' class='form-control'></textarea>
                         <button class='btn btn-info' type='submit'>Add</button>

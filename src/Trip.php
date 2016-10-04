@@ -81,7 +81,7 @@
 
         function getActivities()
         {
-            $returned_activities = $GLOBALS['DB']->query ("SELECT * FROM trips
+            $returned_activities = $GLOBALS['DB']->query("SELECT * FROM activities
                 WHERE trip_id = {$this->getId()} ORDER BY date ASC;");
             $activities = array();
             foreach($returned_activities as $activity) {
@@ -93,6 +93,19 @@
                 array_push($activities, $new_activity);
             }
             return $activities;
+        }
+
+        function getReview()
+        {
+            $returned_reviews = Review::getAll();
+            $review = null;
+            foreach($returned_reviews as $returned_review) {
+                if ($returned_review->getTripId() == $this->getId()) {
+                    $review = $returned_review;
+                    break;
+                }
+            }
+            return $review;
         }
 
         function update($new_name, $new_description)

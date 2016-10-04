@@ -52,10 +52,10 @@
         return $app['twig']->render('browse.html.twig', array('states' => $states, 'cities' => $cities));
     });
 
-// from review title to trip page
+// view trip page
     $app->get('/trip/{id}', function($id) use ($app) {
-        $review = Review::findById($id);
-        $trip = Trip::findById($review->getTripId());
+        $trip = Trip::findById($id);
+        $review = $trip->getReview();
         $user = User::findById($trip->getUserId());
         $activities = $trip->getActivities();
         $cities = $trip->getCities();
@@ -64,19 +64,20 @@
 
 // add activity to trip
     $app->post('/trip/{id}', function($id) use ($app) {
+        $trip = Trip::findById($id);
         $name = $_POST['name'];
         $date = $_POST['date'];
         $description = $_POST['description'];
-        $trip_id = $id;
-        $new_activity = new Activity($name, $date, $description, $trip_id);
+        $trip_id = $trip->getId();
+        $new_activity = new Activity($name, $date, $trip_id, $description);
         $new_activity->save();
-        $review = Review::findById($id);
-        $trip = Trip::findById($review->getTripId());
+
+        $review = $trip->getReview();
         $user = User::findById($trip->getUserId());
         $activities = $trip->getActivities();
         $cities = $trip->getCities();
 
-        return $app['twig']->render('trip.html.twig', array('trip' => $trip, 'review' => $review, 'user' => $user, 'activities' => $activities, 'cities' => $cities, 'alert' => 'add_activity', 'current_user' => $_SESSION['current_user'], 'all_cities' => City::getAll()));
+        return $app['twig']->render('trip.html.twig', array('trip' => $trip, 'review' => $review, 'user' => $user, 'activities' => $activities, 'trip_cities' => $cities, 'alert' => 'add_activity', 'current_user' => $_SESSION['current_user'], 'all_cities' => City::getAll()));
     });
 
 // update activity for trip
@@ -86,33 +87,38 @@
         $description = $_POST['description'];
         $trip_id = $id;
         $new_activity->update($name, $date, $description);
-        $review = Review::findById($id);
-        $trip = Trip::findById($review->getTripId());
+        $trip = Trip::findById($id);
+        $review = $trip->getReview();
         $user = User::findById($trip->getUserId());
         $activities = $trip->getActivities();
         $cities = $trip->getCities();
 
-        return $app['twig']->render('trip.html.twig', array('trip' => $trip, 'review' => $review, 'user' => $user, 'activities' => $activities, 'cities' => $cities, 'alert' => 'update_activity', 'current_user' => $_SESSION['current_user'], 'all_cities' => City::getAll()));
+        return $app['twig']->render('trip.html.twig', array('trip' => $trip, 'review' => $review, 'user' => $user, 'activities' => $activities, 'trip_cities' => $cities, 'alert' => 'update_activity', 'current_user' => $_SESSION['current_user'], 'all_cities' => City::getAll()));
     });
 
 // delete activity for trip
     $app->delete('/trip/{id}', function($id) use ($app) {
         $found_activity = Activity::findById($_POST['activity_id']);
         $found_activity->delete();
-        $review = Review::findById($id);
-        $trip = Trip::findById($review->getTripId());
+        $trip = Trip::findById($id);
+        $review = $trip->getReview();
         $user = User::findById($trip->getUserId());
         $activities = $trip->getActivities();
         $cities = $trip->getCities();
 
-        return $app['twig']->render('trip.html.twig', array('trip' => $trip, 'review' => $review, 'user' => $user, 'activities' => $activities, 'cities' => $cities, 'alert' => 'delete_activity', 'current_user' => $_SESSION['current_user'], 'all_cities' => City::getAll()));
+        return $app['twig']->render('trip.html.twig', array('trip' => $trip, 'review' => $review, 'user' => $user, 'activities' => $activities, 'trip_cities' => $cities, 'alert' => 'delete_activity', 'current_user' => $_SESSION['current_user'], 'all_cities' => City::getAll()));
     });
 
+// add city to trip
     $app->post('/trip/city/{id}', function($id) use ($app) {
         $trip = Trip::findById($id);
         $trip->addCity($_POST['city_id']);
+        $review = $trip->getReview();
+        $user = User::findById($trip->getUserId());
+        $activities = $trip->getActivities();
+        $cities = $trip->getCities();
 
-        return $app['twig']->render('trip.html.twig', array('trip' => $trip, 'review' => $review, 'user' => $user, 'activities' => $activities, 'cities' => $cities, 'alert' => 'add_city', 'current_user' => $_SESSION['current_user'], 'all_cities' => City::getAll()));
+        return $app['twig']->render('trip.html.twig', array('trip' => $trip, 'review' => $review, 'user' => $user, 'activities' => $activities, 'trip_cities' => $cities, 'alert' => 'add_city', 'current_user' => $_SESSION['current_user'], 'all_cities' => City::getAll()));
     });
 // search results
     $app->post('/search_results', function() use ($app) {
