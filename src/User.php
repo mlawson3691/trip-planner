@@ -64,6 +64,17 @@
             return $trips;
         }
 
+        function getPastTrips($all_trips)
+        {
+            $trips = array();
+            foreach($all_trips as $trip) {
+                if($trip->getComplete == 1) {
+                    array_push($trips, $trip);
+                }
+            }
+            return $trips;
+        }
+
         function update($new_username, $new_password)
         {
             $GLOBALS['DB']->exec("UPDATE SET username = '{$new_username}' WHERE id = {$this->getId()};");
