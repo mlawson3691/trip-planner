@@ -1,6 +1,6 @@
 $(function() {
-    $('#edit').click(function() {
-        $('.hidden-form').slideDown();
+    $('.show').click(function() {
+        $(this).next().slideDown();
         $(this).hide();
     });
 });

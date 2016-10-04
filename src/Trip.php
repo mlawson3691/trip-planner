@@ -87,9 +87,10 @@
             foreach($returned_activities as $activity) {
                 $name = $activity['name'];
                 $date = $activity['date'];
+                $trip_id = $activity['trip_id'];
                 $description = $activity['description'];
                 $id = $activity['id'];
-                $new_activity = new Activity($name, $date, $description, $id);
+                $new_activity = new Activity($name, $date, $trip_id, $description, $id);
                 array_push($activities, $new_activity);
             }
             return $activities;

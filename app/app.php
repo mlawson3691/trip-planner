@@ -81,11 +81,12 @@
     });
 
 // update activity for trip
-    $app->patch('/trip/{id}', function($id) use ($app) {
+    $app->patch('/trip/{id}/{activity_id}', function($id, $activity_id) use ($app) {
         $name = $_POST['name'];
         $date = $_POST['date'];
         $description = $_POST['description'];
         $trip_id = $id;
+        $new_activity = Activity::findById($activity_id);
         $new_activity->update($name, $date, $description);
         $trip = Trip::findById($id);
         $review = $trip->getReview();
@@ -113,6 +114,21 @@
     $app->post('/trip/city/{id}', function($id) use ($app) {
         $trip = Trip::findById($id);
         $trip->addCity($_POST['city_id']);
+        $review = $trip->getReview();
+        $user = User::findById($trip->getUserId());
+        $activities = $trip->getActivities();
+        $cities = $trip->getCities();
+
+        return $app['twig']->render('trip.html.twig', array('trip' => $trip, 'review' => $review, 'user' => $user, 'activities' => $activities, 'trip_cities' => $cities, 'alert' => 'add_city', 'current_user' => $_SESSION['current_user'], 'all_cities' => City::getAll()));
+    });
+
+    $app->post('/trip/new_city/{id}', function($id) use ($app) {
+        $name = $_POST['name'];
+        $state = $_POST['state'];
+        $new_city = new City($name, $state);
+        $new_city->save();
+        $trip = Trip::findById($id);
+        $trip->addCity($new_city->getId());
         $review = $trip->getReview();
         $user = User::findById($trip->getUserId());
         $activities = $trip->getActivities();

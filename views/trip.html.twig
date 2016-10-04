@@ -23,34 +23,35 @@
 
         <div class='row'>
             <h1> {{ trip.getName }}</h1>
+            <h5>{{ trip.getDescription }}</h5>
             <div class='col-md-6'>
-                <h3>Trip Description</h3>
-                <p>{{ trip.getDescription }}</p>
+                <h3>Trip Itinerary</h3>
                 {% if activities is not empty %}
                     {% for activity in activities %}
-                        <div class='well'
+                        <div class='well'>
                             <h4>{{ activity.getName }}</h4>
                             <p class='pull-right'>{{ activity.getDate }}</p>
                             <p>{{ activity.getDescription }}</p>
                             {% if current_user == user  %}
-                                <button type='button' class='btn btn-info' id='edit'>Edit this Activity</button>
-                                <form action='/trip/{{ trip.getId }}' method='post'>
-                                    <input type="hidden" name="_method" value="delete">
-                                    <input type='hidden' name='activity_id' value='{{ activity.getId }}'>
-                                    <button type='submit' class='btn btn-danger'>Delete this Activity</button>
-                                </form>
+                                <button type='button' class='btn btn-info show'>Edit this Activity</button>
+
                                 <div class='hidden-form'>
                                     <hr>
-                                    <form action='/trip/{{ trip.getId }}' method='post'>
+                                    <form action='/trip/{{ trip.getId }}/{{activity.getId}}' method='post'>
                                         <input type='hidden' name='_method' value='patch'>
                                         <h3>Edit this activity</h3>
                                         <label for='name'>Activity Name</label>
                                         <input type='text' name='name' class='form-control' value='{{ activity.getName }}'>
                                         <label for='date'>Date</label>
-                                        <input type='datetime' name='date' class='form-control' value='{{ activity.getDate }}'>
+                                        <input type='datetime-local' name='date' class='form-control' value='{{ activity.getDate }}'>
                                         <label for='description'>Description</label>
-                                        <textarea name='description' class='form-control' value='{{ activity.getDescription }}'></textarea>
+                                        <textarea name='description' class='form-control'>{{ activity.getDescription }}</textarea>
                                         <button class='btn btn-info' type='submit'>Edit</button>
+                                    </form>
+                                    <form action='/trip/{{ trip.getId }}' method='post'>
+                                        <input type="hidden" name="_method" value="delete">
+                                        <input type='hidden' name='activity_id' value='{{ activity.getId }}'>
+                                        <button type='submit' class='btn btn-danger pull-right'>Delete this Activity</button>
                                     </form>
                                 </div>
                             {% endif %}
@@ -64,7 +65,7 @@
                         <label for='name'>Activity Name</label>
                         <input type='text' name='name' class='form-control'>
                         <label for='date'>Date</label>
-                        <input type='date' name='date' class='form-control'>
+                        <input type='datetime-local' name='date' class='form-control'>
                         <label for='description'>Description</label>
                         <textarea name='description' class='form-control'></textarea>
                         <button class='btn btn-info' type='submit'>Add</button>
@@ -83,29 +84,80 @@
                 {% endif %}
 
                 {% if current_user == user  %}
-                    <form method='post' action='/trip/city/{{ trip.getId }}'>
-                        <h3>Add a city to this trip</h3>
-                        {% if all_cities is not empty %}
+                    {% if all_cities is not empty %}
+                        <form method='post' action='/trip/city/{{ trip.getId }}'>
+                            <h3>Add a city to this trip</h3>
                             <select name='city_id' class='form-control'>
                                 {% for city in all_cities %}
                                     <option value='{{ city.getId }}'>{{ city.getName }}</option>
                                 {% endfor %}
                             </select>
-                        {% endif %}
-                        <button class='btn btn-info' type='submit'>Add</button>
-                    </form>
+                            <button class='btn btn-info' type='submit'>Add</button>
+                        </form>
+                    {% endif %}
 
                     <!-- form for adding cities - not done -->
+                    <button class='btn btn-info show'>Add a New City</button>
                     <div class='hidden-form'>
-                        <form method='post' action='/trip/{{ trip.getId }}'>
-                            <h3>Add a city to this trip</h3>
-                            {% if all_cities is not empty %}
-                                <select name='city_id' class='form-control'>
-                                    {% for city in all_cities %}
-                                        <option value='{{ city.getId }}'>{{ city.getName }}</option>
-                                    {% endfor %}
-                                </select>
-                            {% endif %}
+                        <form method='post' action='/trip/new_city/{{ trip.getId }}'>
+                            <h3>Add a new city</h3>
+                            <label for ='name'>City</label>
+                            <input name='name' type='text' class='form-control'>
+                            <label for ='state'>State</label>
+                            <select class='form-control' name="state">
+                                <option value="Alabama">Alabama</option>
+                                <option value="Alaska">Alaska</option>
+                                <option value="Arizona">Arizona</option>
+                                <option value="Arkansas">Arkansas</option>
+                                <option value="California">California</option>
+                                <option value="Colorado">Colorado</option>
+                                <option value="Connecticut">Connecticut</option>
+                                <option value="Delaware">Delaware</option>
+                                <option value="District of Columbia">District of Columbia</option>
+                                <option value="Florida">Florida</option>
+                                <option value="Georgia">Georgia</option>
+                                <option value="Hawaii">Hawaii</option>
+                                <option value="Idaho">Idaho</option>
+                                <option value="Illinois">Illinois</option>
+                                <option value="Indiana">Indiana</option>
+                                <option value="Iowa">Iowa</option>
+                                <option value="Kansas">Kansas</option>
+                                <option value="Kentucky">Kentucky</option>
+                                <option value="Louisiana">Louisiana</option>
+                                <option value="Maine">Maine</option>
+                                <option value="Maryland">Maryland</option>
+                                <option value="Massachusetts">Massachusetts</option>
+                                <option value="Michigan">Michigan</option>
+                                <option value="Minnesota">Minnesota</option>
+                                <option value="Mississippi">Mississippi</option>
+                                <option value="Missouri">Missouri</option>
+                                <option value="Montana">Montana</option>
+                                <option value="Nebraska">Nebraska</option>
+                                <option value="Nevada">Nevada</option>
+                                <option value="New Hampshire">New Hampshire</option>
+                                <option value="New Jersey">New Jersey</option>
+                                <option value="New Mexico">New Mexico</option>
+                                <option value="New York">New York</option>
+                                <option value="North Carolina">North Carolina</option>
+                                <option value="North Dakota">North Dakota</option>
+                                <option value="Ohio">Ohio</option>
+                                <option value="Oklahoma">Oklahoma</option>
+                                <option value="Oregon">Oregon</option>
+                                <option value="Pennsylvania">Pennsylvania</option>
+                                <option value="Rhode Island">Rhode Island</option>
+                                <option value="South Carolina">South Carolina</option>
+                                <option value="South Dakota">South Dakota</option>
+                                <option value="Tennessee">Tennessee</option>
+                                <option value="Texas">Texas</option>
+                                <option value="Utah">Utah</option>
+                                <option value="Vermont">Vermont</option>
+                                <option value="Virginia">Virginia</option>
+                                <option value="Washington">Washington</option>
+                                <option value="West Virginia">West Virginia</option>
+                                <option value="Wisconsin">Wisconsin</option>
+                                <option value="Wyoming">Wyoming</option>
+                                <option value="Other">Other</option>
+                            </select>
                             <button class='btn btn-info' type='submit'>Add</button>
                         </form>
                     </div>
