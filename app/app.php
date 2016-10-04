@@ -145,6 +145,12 @@
         }
     });
 
+// to dashboard
+    $app->get('/dashboard/{id}', function($id) use ($app) {
+        $user = User::findById($id);
+        return $app['twig']->render('user_dashboard.html.twig', array('user' => $user));
+    });
+
 // submit login form
     $app->post('/login', function() use ($app) {
         $username = $_POST['username'];
@@ -191,6 +197,12 @@
         $new_trip = new Trip($name, $user_id, 0, $description);
         $new_trip->save();
         return $app['twig']->render('trip.html.twig', array('trip' => $new_trip, 'review' => null, 'user' => $user, 'activities' => null, 'trip_cities' => null, 'alert' => null, 'current_user' => $_SESSION['current_user'], 'all_cities' => City::getAll()));
+    });
+
+// to city page
+    $app->get('/city/{id}', function($id) use ($app) {
+        $city = City::findById($id);
+        return $app['twig']->render('city.html.twig', array('city' => $city));
     });
 
 
