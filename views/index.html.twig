@@ -38,6 +38,15 @@
                 </div>
             </div>
         </nav>
+        {% if alert == 'login' %}
+            <div class="alert alert-danger text-center">
+                <p><strong>Error!</strong> That username and/or password is not correct. Please try again.</p>
+            </div>
+        {% elseif alert == 'logout' %}
+            <div class="alert alert-success text-center">
+                <p><strong>Success!</strong> You have logged out.</p>
+            </div>
+        {% endif %}
         <div class='jumbotron text-center'>
             <h1>Trip Planner</h1>
             <p>Plan your dream vacation today!</p>

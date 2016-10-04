@@ -1,12 +1,95 @@
 <html>
 <body>
     <div class='container'>
-        <h1>{{ review.getTitle }}</h1>
-        <h2>{{ review.getRating }}</h2>
-        <h3>{{ user.getUsername }}</h3>
-        <p>
-            {{ review.getDescription }}
-        </p>
+
+        {% if alert == 'add_activity' %}
+            <div class="alert alert-success">
+                <strong>Success!</strong> Your activity has been added.
+            </div>
+        {% if alert == 'update_activity' %}
+            <div class="alert alert-success">
+                <strong>Success!</strong> Your activity has been updated.
+            </div>
+        {% if alert == 'delete_activity' %}
+            <div class="alert alert-success">
+                <strong>Success!</strong> Your activity has been deleted.
+            </div>
+        {% endif %}
+
+        <div class='row'>
+            <h1> {{ trip.getName }}</h1>
+            <div class='col-md-6'>
+                <h3>Trip Description</h3>
+                <p>{{ trip.getDescription }}</p>
+                {% if activities is not empty %}
+                    {% for activity in activities %}
+                        <h4>{{ activity.getName }}</h4>
+                        <p class='pull-right'>{{ activity.getDate }}</p>
+                        <p>{{ activity.getDescription }}</p>
+                        {% if $_SESSION['current_user'] == user  %}
+                            <button type='button' id='edit'>Edit this Activity</button>
+                            <form action='/trip/{{ trip.getId }}' method='post'>
+                                <input type="hidden" name="_method" value="delete">
+                                <input type='hidden' name='activity_id' value='{{ activity.getId }}'
+                                <button type='submit'>Delete this Activity</button>
+                            </form>
+                            <div class='hidden-form'>
+                                <hr>
+                                <form action='/trip/{{ trip.getId }}' method='post'>
+                                    <input type='hidden' name='_method' value='patch'>
+                                    <h3>Edit this activity</h3>
+                                    <label for='name'>Activity Name</label>
+                                    <input type='text' name='name' class='form-control' value='{{ activity.getName }}'>
+                                    <label for='date'>Date</label>
+                                    <input type='datetime' name='date' class='form-control' value='{{ activity.getDate }}'>
+                                    <label for='description'>Description</label>
+                                    <textarea name='description' class='form-control' value='{{ activity.getDescription }}'></textarea>
+                                    <button class='btn btn-info' type='submit'>Edit</button>
+                                </form>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+
+                {% if $_SESSION['current_user'] == user  %}
+                    <form method='post' action='/trip/{{ trip.getId }}'>
+                        <h3>Add an activity to this trip</h3>
+                        <label for='name'>Activity Name</label>
+                        <input type='text' name='name' class='form-control'>
+                        <label for='date'>Date</label>
+                        <input type='datetime' name='date' class='form-control'>
+                        <label for='description'>Description</label>
+                        <textarea name='description' class='form-control'></textarea>
+                        <button class='btn btn-info' type='submit'>Add</button>
+                    </form>
+                {% endif %}
+
+            </div>
+            <!-- beginning of trip review section- still needs more work in routing -->
+            <div class='col-md-6'>
+                <h2>{{ review.getTitle }}</h2>
+                <h3>{{ review.getRating }}</h3>
+                <h4>{{ user.getUsername }}</h4>
+                <p>
+                    {{ review.getDescription }}
+                </p>
+
+                {% if $_SESSION['current_user'] == user  %}
+                <div class='hidden-form'>
+                    <hr>
+                    <form action='/trip/{{ trip.getId }}' method='post'>
+                        <input type='hidden' name='_method' value='patch'>
+                        <h3>Edit this review</h3>
+                        <label for='title'>Review Title</label>
+                        <input type='text' name='title' class='form-control' value='{{ review.getTitle }}'>
+                        <label for='description'>Description</label>
+                        <textarea name='description' class='form-control' value='{{ review.getDescription }}'></textarea>
+                        <button class='btn btn-info' type='submit'>Edit</button>
+                    </form>
+                </div>
+                {% endif %}
+            </div>
+        </div>
     </div>
 </body>
 </html>

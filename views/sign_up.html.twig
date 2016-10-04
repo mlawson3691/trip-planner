@@ -2,6 +2,11 @@
 <body>
     <div class='container'>
         <h1>Sign up now!</h1>
+        {% if alert == 'signup' %}
+            <div class="alert alert-danger text-center">
+                <p><strong>Error!</strong> That username is already taken. Please try again.</p>
+            </div>
+        {% endif %}
         <form action="/sign_up" method="post">
             <div class="form-group">
                 <label for username="username">Username</label>

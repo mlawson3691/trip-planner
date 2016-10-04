@@ -31,7 +31,7 @@
 
 // home page
     $app->get('/', function() use ($app) {
-        return $app['twig']->render('index.html.twig');
+        return $app['twig']->render('index.html.twig', array('alert' => null));
     });
 
 // leads to individual city page
@@ -57,7 +57,55 @@
         $review = Review::findById($id);
         $trip = Trip::findById($review->getTripId());
         $user = User::findById($trip->getUserId());
-        return $app['twig']->render('trip.html.twig', array('review' => $review, 'user' => $user));
+        $activities = $trip->getActivities();
+        $cities = $trip->getCities();
+        return $app['twig']->render('trip.html.twig', array('review' => $review, 'user' => $user, 'activities' => $activities, 'cities' => $cities, 'alert' => null));
+    });
+
+// add activity to trip
+    $app->post('/trip/{id}', function($id) use ($app) {
+        $name = $_POST['name'];
+        $date = $_POST['date'];
+        $description = $_POST['description'];
+        $trip_id = $id;
+        $new_activity = new Activity($name, $date, $description, $trip_id);
+        $new_activity->save();
+        $review = Review::findById($id);
+        $trip = Trip::findById($review->getTripId());
+        $user = User::findById($trip->getUserId());
+        $activities = $trip->getActivities();
+        $cities = $trip->getCities();
+
+        return $app['twig']->render('trip.html.twig', array('review' => $review, 'user' => $user, 'activities' => $activities, 'cities' => $cities, 'alert' => 'add_activity'));
+    });
+
+// update activity for trip
+    $app->patch('/trip/{id}', function($id) use ($app) {
+        $name = $_POST['name'];
+        $date = $_POST['date'];
+        $description = $_POST['description'];
+        $trip_id = $id;
+        $new_activity->update($name, $date, $description);
+        $review = Review::findById($id);
+        $trip = Trip::findById($review->getTripId());
+        $user = User::findById($trip->getUserId());
+        $activities = $trip->getActivities();
+        $cities = $trip->getCities();
+
+        return $app['twig']->render('trip.html.twig', array('review' => $review, 'user' => $user, 'activities' => $activities, 'cities' => $cities, 'alert' => 'update_activity'));
+    });
+
+// delete activity for trip
+    $app->delete('/trip/{id}', function($id) use ($app) {
+        $found_activity = Activity::findById($_POST['activity_id']);
+        $found_activity->delete();
+        $review = Review::findById($id);
+        $trip = Trip::findById($review->getTripId());
+        $user = User::findById($trip->getUserId());
+        $activities = $trip->getActivities();
+        $cities = $trip->getCities();
+
+        return $app['twig']->render('trip.html.twig', array('review' => $review, 'user' => $user, 'activities' => $activities, 'cities' => $cities, 'alert' => 'delete_activity'));
     });
 
 // search results
@@ -68,34 +116,40 @@
 
 // signup page
     $app->get('/sign_up', function() use ($app) {
-        return $app['twig']->render('sign_up.html.twig');
+        return $app['twig']->render('sign_up.html.twig', array('alert' => null));
     });
 
 // submit sign up form
     $app->post('/sign_up', function() use ($app) {
         $username = $_POST['username'];
-        $password = sha1($_POST['password']);
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $new_user = new User($username, $password);
         $new_user->save();
         $_SESSION['current_user'] = $new_user;
-        return $app['twig']->render('user_dashboard.html.twig', array('user' => $new_user));
+        $valid = $new_user->save();
+        if ($valid == true) {
+            $_SESSION['current_user'] = $new_user;
+            return $app['twig']->render('user_dashboard.html.twig', array('user' => $new_user, 'alert' => 'login-success'));
+        } else {
+            return $app['twig']->render('sign_up.html.twig', array('alert' => 'signup'));
+        }
     });
 
 // submit login form
     $app->post('/login', function() use ($app) {
         $username = $_POST['username'];
-        $password = sha1($_POST['password']);
+        $password = $_POST['password'];
         $valid = User::verifyLogin($username, $password);
         if ($valid == false) {
-            return $app->redirect('/');
+            return $app['twig']->render('index.html.twig', array('alert' => 'login'));
         }
-        return $app['twig']->render('user_dashboard.html.twig', array('user' => $_SESSION['current_user']));
+        return $app['twig']->render('user_dashboard.html.twig', array('user' => $_SESSION['current_user'], 'alert' => 'login-success'));
     });
 
 // log out
     $app->get('/logout', function() use ($app) {
         $_SESSION['current_user'] = null;
-        return $app->redirect('/');
+        return $app['twig']->render('index.html.twig', array('alert' => 'logout'));
     });
 
 // past trips in dashboard
