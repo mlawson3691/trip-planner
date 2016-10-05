@@ -113,11 +113,11 @@
             return $trips;
         }
 
-        function update($new_name, $new_location, $new_bio)
+        function update($new_name, $new_bio, $new_location)
         {
-            $GLOBALS['DB']->exec("UPDATE SET name = '{$new_name}' WHERE id = {$this->getId()};");
-            $GLOBALS['DB']->exec("UPDATE SET location = '{$new_location}' WHERE id = {$this->getId()};");
-            $GLOBALS['DB']->exec("UPDATE SET bio = '{$new_bio}' WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("UPDATE users SET name = '{$new_name}' WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("UPDATE users SET location = '{$new_location}' WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("UPDATE users SET bio = '{$new_bio}' WHERE id = {$this->getId()};");
             $this->setName($new_name);
             $this->setLocation($new_location);
             $this->setBio($new_bio);
@@ -126,7 +126,7 @@
         // function updatePassword ($old_password, $new_password)
         // {
         //     if(password_verify($old_password, $this->getPassword())) {
-        //         $GLOBALS['DB']->exec("UPDATE SET password = '{$new_password}' WHERE id = {$this->getId()};");
+        //         $GLOBALS['DB']->exec("UPDATE users SET password = '{$new_password}' WHERE id = {$this->getId()};");
         //         $this->setPassword(password_hash($new_password, PASSWORD_DEFAULT));
         //     }
         // }

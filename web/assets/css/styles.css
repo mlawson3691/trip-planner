@@ -249,6 +249,11 @@ img {
     border-radius: 5px;
 }
 
+.user-edit-button {
+    width: 18px;
+    margin-top: -5px;
+}
+
 /* ---- index.html.twig initial links (plan a trip, browse)  */
 .index-links {
     width: 100%;

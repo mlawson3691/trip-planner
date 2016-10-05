@@ -6,27 +6,43 @@
         <div class="row">
             <div class="col-sm-2">
                 <ul class="nav nav-pills nav-stacked">
-                    <li role="presentation"><a href="/dashboard/{{ user.getId }}"><span class='sidebar-active'>Home</span></a></li>
-                    <li role="presentation"><a href="/pending_trips/{{ user.getId }}"><span class="sidebar">Pending Trips</span></a></li>
-                    <li role="presentation"><a href="/past_trips/{{ user.getId }}"><span class='sidebar'>Past Trips</span></a></li>
-                    <li role="presentation"><a href="/new_trip/{{ user.getId }}"><span class='sidebar'>New Trip</span></a></li>
+                    <li role="presentation"><a href="/dashboard/{{ current_user.getId }}"><span class='sidebar-active'>Home</span></a></li>
+                    <li role="presentation"><a href="/pending_trips/{{ current_user.getId }}"><span class="sidebar">Pending Trips</span></a></li>
+                    <li role="presentation"><a href="/past_trips/{{ current_user.getId }}"><span class='sidebar'>Past Trips</span></a></li>
+                    <li role="presentation"><a href="/new_trip/{{ current_user.getId }}"><span class='sidebar'>New Trip</span></a></li>
                 </ul>
             </div>
             <div class="col-sm-10">
-                <h3>My Account</h3>
+                <h3>My Account <a href='#'><img class='user-edit-button' src='/assets/img/edit.svg'></a></h3>
                 <br>
                 <div class="row">
                     <div class="col-sm-3 text-center">
                         <img class="user-pic" src="/assets/img/user.svg">
                         <h5 class=>{{ user.getUsername }}</h5>
                     </div>
-                    <div class="col-sm-7">
-                        <h5>Name: Mark Hansen</h5>
-                        <h5>Location: Portland, OR</h5>
+                    <div class="col-sm-7 user-info-to-hide">
+                        <h5>Name: {{ user.getName }}</h5>
+                        <h5>Location: {{ user.getLocation }}</h5>
                         <h5>Bio:</h5>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
+                        <p>{{ user.getBio }}</p>
+                    </div>
+                    <div class='col-sm-7 hidden-form'>
+                        <form action="/dashboard/{{ current_user.getId }}" method="post">
+                            <input type="hidden" name="_method" value="patch">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" placeholder="name" name="name" value='{{ user.getName }}' required>
+                            </div>
+                            <div class="form-group">
+                                <label for="location">Location</label>
+                                <input type="text" class="form-control" placeholder="location" name="location" value='{{ user.getLocation }}' required>
+                            </div>
+                            <div class="form-group">
+                                <label for="bio">Bio</label>
+                                <textarea type="text" class="form-control" placeholder="a little about yourself" name="bio" rows='4' required>{{ user.getBio }}</textarea>
+                            </div>
+                            <button type='submit' class='btn btn-default'>Edit</button>
+                        </form>
                     </div>
                 </div>
             </div>

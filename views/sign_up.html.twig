@@ -11,15 +11,28 @@
         {% endif %}
         <form action="/sign_up" method="post">
             <div class="form-group">
-                <label for username="username">Username</label>
-                <input type="text" class="form-control" placeholder="username" name="username">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" placeholder="username" name="username" required>
             </div>
             <div class="form-group">
-                <label for password="password">Password</label>
-                <input type="password" class="form-control" placeholder="password" name="password">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" placeholder="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" placeholder="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" class="form-control" placeholder="location" name="location" required>
+            </div>
+            <div class="form-group">
+                <label for="bio">Bio</label>
+                <textarea type="text" class="form-control" placeholder="a little about yourself" name="bio" rows='4' required></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Sign up</button>
         </form>
+        <br>
         <p>Already a Member? <a href='/log_in'>Log In!</a></p>
     </div>
     {% include 'inc/footer.html' %}
