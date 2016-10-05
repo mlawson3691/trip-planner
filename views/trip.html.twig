@@ -30,7 +30,7 @@
                     {% for activity in activities %}
                         <div class='well'>
                             <h4>{{ activity.getName }}</h4>
-                            <p class='pull-right'>{{ activity.getDate|date('m/d/Y @ h:m A') }}</p>
+                            <p class='pull-right'>{{ activity.getDate }}</p>
                             <p>{{ activity.getDescription }}</p>
                             {% if current_user == user  %}
                                 <button type='button' class='btn btn-info show-form'>Edit this Activity</button>
@@ -64,7 +64,7 @@
                     <label for='name'>Activity Name</label>
                     <input type='text' name='name' class='form-control'>
                     <label for='date'>Date</label>
-                    <input type='datetime-local' name='date' class='form-control' value='2016-01-01T12:00:00'>
+                    <input type='datetime-local' name='date' class='form-control'>
                     <label for='description'>Description</label>
                     <textarea name='description' class='form-control'></textarea>
                     <button class='btn btn-info' type='submit'>Add</button>
@@ -78,13 +78,11 @@
                     {% for city in trip_cities %}
                         <li class='spaced-list'>
                             {{ city.getName }}, {{ city.getState }}
-                            {% if current_user == user %}
-                                <form class='inline' action='/trip/remove_city/{{ trip.getId }}' method='post'>
-                                    <input type="hidden" name="_method" value="delete">
-                                    <input type="hidden" name="city_id" value="{{ city.getId }}">
-                                    <button class='trash' type='submit'><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                </form>
-                            {% endif %}
+                            <form class='inline' action='/trip/remove_city/{{ trip.getId }}' method='post'>
+                                <input type="hidden" name="_method" value="delete">
+                                <input type="hidden" name="city_id" value="{{ city.getId }}">
+                                <button class='trash' type='submit'><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                            </form>
                         </li>
                     {% endfor %}
                     </ul>
@@ -105,7 +103,7 @@
 
                     <!-- form for adding cities - not done -->
                     <button class='btn btn-info show-review-form'>Review this trip</button>
-                    <button class='btn btn-info show-form'>Add a New City</button>
+                    <button class='btn btn-info show'>Add a New City</button>
                     <div class='hidden-form'>
                         <form method='post' action='/trip/new_city/{{ trip.getId }}'>
                             <h3>Add a new city</h3>
@@ -217,12 +215,11 @@
                     {% endif %}
                 {% endif %}
             </div>
-            <form action='/pending_trips/{{ current_user.getId }}' method='post'>
-                <input type="hidden" name="_method" value="delete">
-                <input type='hidden' name='trip_id' value='{{ trip.getId }}'>
-                <button type='submit' class='btn btn-danger pull-right'>Delete this Trip</button>
-            </form>
         </div>
+        <form action='/trip/delete/{{trip.getId}}' method='post'>
+            <input type="hidden" name="_method" value="delete">
+            <button type='submit' class='btn btn-danger pull-right'>Delete this Trip</button>
+        </form>
     </div>
 </body>
 </html>
