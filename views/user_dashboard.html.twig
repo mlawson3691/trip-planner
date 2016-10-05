@@ -18,28 +18,28 @@
                 <div class="row">
                     <div class="col-sm-3 text-center">
                         <img class="user-pic" src="/assets/img/user.svg">
-                        <h5 class=>{{ user.getUsername }}</h5>
+                        <h5 class=>{{ current_user.getUsername }}</h5>
                     </div>
                     <div class="col-sm-7 user-info-to-hide">
-                        <h5>Name: {{ user.getName }}</h5>
-                        <h5>Location: {{ user.getLocation }}</h5>
+                        <h5>Name: {{ current_user.getName }}</h5>
+                        <h5>Location: {{ current_user.getLocation }}</h5>
                         <h5>Bio:</h5>
-                        <p>{{ user.getBio }}</p>
+                        <p>{{ current_user.getBio }}</p>
                     </div>
                     <div class='col-sm-7 hidden-form'>
                         <form action="/dashboard/{{ current_user.getId }}" method="post">
                             <input type="hidden" name="_method" value="patch">
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <input type="text" class="form-control" placeholder="name" name="name" value='{{ user.getName }}' required>
+                                <input type="text" class="form-control" placeholder="name" name="name" value='{{ current_user.getName }}' required>
                             </div>
                             <div class="form-group">
                                 <label for="location">Location</label>
-                                <input type="text" class="form-control" placeholder="location" name="location" value='{{ user.getLocation }}' required>
+                                <input type="text" class="form-control" placeholder="location" name="location" value='{{ current_user.getLocation }}' required>
                             </div>
                             <div class="form-group">
                                 <label for="bio">Bio</label>
-                                <textarea type="text" class="form-control" placeholder="a little about yourself" name="bio" rows='4' required>{{ user.getBio }}</textarea>
+                                <textarea type="text" class="form-control" placeholder="a little about yourself" name="bio" rows='4' required>{{ current_user.getBio }}</textarea>
                             </div>
                             <button type='submit' class='btn btn-default'>Edit</button>
                         </form>

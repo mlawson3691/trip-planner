@@ -122,6 +122,7 @@
 // edit profile
     $app->patch('/dashboard/{id}', function($id) use ($app) {
         $user = User::findById($id);
+        $_SESSION['current_user'] = $user;
         $user->update($_POST['name'], $_POST['bio'], $_POST['location']);
         return $app->redirect('/dashboard/' . $id);
     });
