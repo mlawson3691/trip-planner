@@ -14,21 +14,178 @@ img {
 	/*We set margin 0 auto on it, to always center it*/
 }
 
-.hero_dashboard img {
-    object-fit: cover;
-    width: 100%;
-    height: 45%;
-}
-.navbar_dashboard {
-    margin-top: 0px;
+/* ---- introduction animated page -- */
+.hidden-homepage {
+    display: none;
 }
 
-.hidden-form {
-    display: none;
+.intro-paragraph {
+    height: 250px;
+    border-bottom: 2px solid #d9d9d9;
+}
+
+.intro-paragraph p {
+    padding-top: 5%;
+    font-family: 'Arapey', serif;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 400;
+    color: #484848;
 }
 
 .title {
     font-size: 25px;
+}
+
+#wrapper {
+    width: 100%;
+    height: 800px;
+ }
+
+.background_image {
+    display: none;
+    width: 100%;
+    max-height: 800px;
+    position: absolute;
+}
+
+.background_image img {
+    object-fit: cover;
+    -webkit-filter: blur(3px);
+    height: 800px;
+    z-index: -1;
+}
+
+.overlay {
+    position: absolute;
+    width:1 00%;
+    height: 800px;
+    background-color: black;
+    opacity: 0.4 ;
+    z-index: 1;
+    display: none;
+}
+
+.intro {
+    width: 160px;
+    height: 80px;
+    margin-top: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    display: none;
+}
+
+#pop-up {
+    display: flex;
+    z-index: 5;
+    margin-left: 500px;
+    background-color: #FFFFFF;
+    height: 1px;
+    width: 450px;
+    display: none;
+    bottom: 300px;
+    position: absolute;
+    z-index: 10; 
+
+}
+
+#pop-up h1 {
+    position: absolute;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    color: #202020;
+    font-size: 15px;
+    letter-spacing: 3px;
+    z-index: 5;
+    display: flex;
+    width:0px;
+    margin-left: 31px;
+    margin-top: 0px;
+    cursor: pointer;
+    transition: 0.5s ease;
+    border-bottom-style: solid;
+    border-bottom-width: 1.5px;
+    border-bottom-color: transparent;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 1.3s ease-out;
+    -o-transition: all 1.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+#pop-up h1:hover {
+    width:98px;
+    border-bottom-color: #404040;
+    border-bottom-width: 1.5px;
+    border-bottom-style: solid;
+    transition: all 0.3s ease-out;
+}
+
+#pop-up h2 {
+    height: 50px;
+    margin-top: 20px;
+    margin-left: 7.5px;
+}
+
+#pop-up h3 {
+    margin-top: 43px;
+    margin-left: 3px;
+}
+
+.subtitle {
+    position: absolute;
+    font-family: 'Slabo 27px', serif;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: #707070;
+    font-size: 15px;
+    transition: all 6000 ease-in-out;
+    display: flex;
+    z-index: 5;
+    padding-top: 15px;
+    margin-left: 6px;
+}
+
+.intro_2 {
+    display: none;
+}
+
+.intro_2 h1 {
+    display: flex;
+    position: absolute;
+    width: 10%;
+    margin-left: 46%;
+    margin-top: 350px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 100;
+    color: white;
+    font-size: 18px;
+    letter-spacing: 4px;
+    z-index: 10;   
+}
+
+.intro_2 h2 {
+    display: flex;
+    position: absolute;
+    width: 30%;
+    margin-left: 38%;
+    margin-top: 385px;
+    font-family: 'Josefin Slab', serif;
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: #D0D0D0;
+    font-size: 15px;
+    z-index: 10;
+}
+
+/* --------main topbar with image and navigation--------- */
+.hero_dashboard img {
+    object-fit: cover;
+    width: 100%;
+    height: 48%;
+}
+
+.navbar_dashboard {
+    margin-top: 0px;
 }
 
 .search-bar {
@@ -59,50 +216,75 @@ img {
     font-size: 18px;
 }
 
-.review_form {
-    display: none;
+/* ---- index.html.twig initial links (plan a trip, browse)  */
+.index-links {
+    width: 100%;
+    height: 250px;
+    border-bottom: 2px solid #d9d9d9;
 }
 
-.reviews {
-    width: 70%;
-    margin-left: 15%;
-}
-.reviews h4 {
-    font-style: italic;
-    border-bottom: solid 1px #cccccc;
-    width: 90%;
-    padding-bottom: 3px;
-    margin-left: 2%;
+.index-links .links {
+    padding-top: 5%;
 }
 
-.reviews h5 {
-    padding-left: 20px;
-    padding-top: 5px;
+/* ---------- ads (inc/ads.html) -------------- */
+.ads {
+    padding-bottom: 70px;
+    border-bottom: 2px solid #d9d9d9;
+    padding-top: 5%;
 }
 
-.reviews p {
-    font-style: italic;
-    padding-left: 20px;
+.ads h1 {
+    font-family: 'Montserrat', sans-serif;
+    padding-bottom: 40px;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 25px;
 }
 
-.fa-times {
-    font-size: 15px;
-    float: right;
+.cover-image {
+    margin-top: 0px;
+    width: 33.33%;
+    height: 30vh;
+    display: flex;
+    background: rgba(0, 0, 0, 0.3);
     cursor: pointer;
 }
 
-.hidden-form {
-    display: none;
+.cover-image:hover {
+    background: rgba(0, 0, 0, 0);
 }
 
-.well {
-    overflow: hidden;
+.cover-image:nth-child(1),
+.cover-image:nth-child(3) {
+    float: left;
 }
 
-.inline {
-    display: inline;
+.cover-image:nth-child(2),
+.cover-image:nth-child(4){
+    float: right;
 }
 
+.cover-image img {
+    display: flex;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.cover-image h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    color: #ecf0f1;
+    font-size: 30px;
+    position: absolute;
+    z-index: 4;
+    margin-top: 23vh;
+    padding-left: 20px;
+}
+
+/* ------ Browse destination block ------- */
+
+/* ------- Delete city buttons (cities class)------ */
 .trash {
     border: none;
     background: transparent;
@@ -122,59 +304,82 @@ img {
     margin-top: 5px;
 }
 
-/* ---------- ads -------------- */
-.grid {
-	margin-top:0px;
+.well {
+    overflow: hidden;
 }
 
-.grid h1 {
+.inline {
+    display: inline;
+}
+
+/* --------- review form and see reviews (trip.html.twig) ----------- */
+.review_form {
+    display: none;
+}
+
+.fa-times {
+    font-size: 15px;
+    float: right;
+    cursor: pointer;
+}
+
+.reviews {
+    width: 70%;
+    margin-left: 15%;
+}
+
+.reviews h4 {
     font-style: italic;
-    padding-top: 50px;
-    padding-bottom: 40px;
+    border-bottom: solid 1px #cccccc;
+    width: 90%;
+    padding-bottom: 3px;
+    margin-left: 2%;
 }
 
-.cover-image{
-	margin-top:0px;
-	width:33.33%;
-	height:30vh;
-	position: ;
-	display:flex;
-	background:rgba(0, 0, 0, 0.4);
-	cursor: pointer;
+.reviews h5 {
+    padding-left: 20px;
+    padding-top: 5px;
 }
 
-.cover-image:hover {
-	background:rgba(0, 0, 0, 0);
-}
-
-
-.cover-image:nth-child(1),
-.cover-image:nth-child(3){
-	float:left;
-}
-.cover-image:nth-child(2),
-.cover-image:nth-child(4){
-	float:right;
-}
-
-.cover-image img{
-	position:;
-	display:flex;
-	object-fit:cover;
-	z-index:-1;
-}
-
-.cover-image h3 {
-    font-family: 'Playfair Display', serif;
-	font-weight: 900;
-	color: #ecf0f1;
-	font-size: 35px;
-    position: absolute;
-    z-index: 4;
-    margin-top: 23vh;
+.reviews p {
+    font-style: italic;
     padding-left: 20px;
 }
 
-.ads {
-    padding-bottom: 70px;
+/* --------- edit review form (edit-review class) ---------------- */
+.hidden-form {
+    display: none;
 }
+
+/* -------add/show classese ---------- */
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+
+.hidden-form {
+    display: none;
+}
+
+/* ------------ slideshow -------- */
+/*.intro_slides{
+    display:none;
+    overflow:hidden;
+}
+
+.intro_slides .my_slides {
+    object-fit:cover;
+    height: 45%;
+    z-index:-1;
+}
+
+.intro_slides img {
+    width:100%;
+    height:45%;
+    object-fit: cover;
+}
+*/
