@@ -69,6 +69,7 @@ Class City
                 array_push($states, $state);
             }
         }
+        sort($states);
         return $states;
     }
 
@@ -82,11 +83,12 @@ Class City
                 array_push($cities_in_state, $city);
             }
         }
+        sort($cities_in_state);
         return $cities_in_state;
     }
     static function getAll()
     {
-        $returned_cities = $GLOBALS['DB']->query("SELECT * FROM cities;");
+        $returned_cities = $GLOBALS['DB']->query("SELECT * FROM cities ORDER BY name ASC;");
         $cities = array();
         foreach($returned_cities as $city) {
             $name = $city['name'];
@@ -125,6 +127,7 @@ Class City
                 array_push($search_results, $city);
             }
         }
+        sort($search_results);
         return $search_results;
     }
 

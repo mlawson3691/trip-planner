@@ -119,14 +119,14 @@
 // past trips in dashboard
     $app->get('/past_trips/{id}', function($id) use ($app) {
         $user = User::findById($id);
-        $trips = $user->getPastTrips($user->getTrips());
+        $trips = $user->getPastTrips();
         return $app['twig']->render('past_trips.html.twig', array('user' => $user, 'trips' => $trips, 'current_user' => $_SESSION['current_user']));
     });
 
 // pending user trips
     $app->get('/pending_trips/{id}', function($id) use ($app) {
         $user = User::findById($id);
-        $trips = $user->getPendingTrips($user->getTrips());
+        $trips = $user->getPendingTrips();
         return $app['twig']->render('pending_trips.html.twig', array('user' => $user, 'trips' => $trips, 'current_user' => $_SESSION['current_user']));
     });
 

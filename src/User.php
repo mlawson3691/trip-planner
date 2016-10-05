@@ -39,7 +39,7 @@
 
         function getTrips()
         {
-            $returned_trips = $GLOBALS['DB']->query ("SELECT * FROM trips WHERE user_id = {$this->getId()};");
+            $returned_trips = $GLOBALS['DB']->query ("SELECT * FROM trips WHERE user_id = {$this->getId()} ORDER BY id DESC;");
             $trips = array();
             foreach($returned_trips as $trip) {
                 $name = $trip['name'];
@@ -53,19 +53,21 @@
             return $trips;
         }
 
-        function getPendingTrips($all_trips)
+        function getPendingTrips()
         {
+            $all_trips = $this->getTrips();
             $trips = array();
             foreach($all_trips as $trip) {
                 if($trip->getComplete() == 0) {
                     array_push($trips, $trip);
-                } 
+                }
             }
             return $trips;
         }
 
-        function getPastTrips($all_trips)
+        function getPastTrips()
         {
+            $all_trips = $this->getTrips();
             $trips = array();
             foreach($all_trips as $trip) {
                 if($trip->getComplete() == 1) {
