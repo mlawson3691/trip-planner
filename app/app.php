@@ -34,17 +34,17 @@
         return $app['twig']->render('index.html.twig', array('alert' => null, 'current_user' => $_SESSION['current_user']));
     });
 
-// leads to browse (by state) page
-    $app->get('/browse', function() use ($app) {
-        $states = City::getStates();
-        return $app['twig']->render('browse.html.twig', array('states' => $states, 'cities' => null, 'current_user' => $_SESSION['current_user']));
-    });
-
 // show cities of a state
     $app->get('/search_results/{state}', function($state) use ($app) {
         $states = City::getStates();
         $cities = City::citiesInState($state);
         return $app['twig']->render('search_results.html.twig', array('states' => $states, 'results' => $cities, 'current_user' => $_SESSION['current_user']));
+    });
+
+// to search results
+    $app->get('/search_results', function() use ($app) {
+        $states = City::getStates();
+        return $app['twig']->render('search_results.html.twig', array('states' => $states, 'results' => null, 'current_user' => $_SESSION['current_user']));
     });
 
 // search results
@@ -140,7 +140,7 @@
         return $app['twig']->render('trip.html.twig', array('trip' => $trip, 'review' => $review, 'user' => $user, 'activities' => $activities, 'trip_cities' => $cities, 'alert' => null, 'current_user' => $_SESSION['current_user'], 'all_cities' => City::getAll()));
     });
 
-// delete trip 
+// delete trip
     $app->delete('/trip/delete/{id}', function($id) use ($app) {
         $found_trip = Trip::findById($id);
         $user_id = $found_trip->getUserId();
@@ -204,8 +204,6 @@
         $trip->removeCity($_POST['city_id']);
         return $app->redirect('/trip/' . $id);
     });
-
-
 
 // to city page
     $app->get('/city/{id}', function($id) use ($app) {
