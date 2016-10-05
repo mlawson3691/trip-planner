@@ -19,7 +19,7 @@
 
     $app['debug'] = true;
 
-    $server = 'mysql:host=localhost:8889    ;dbname=trip_planner';
+    $server = 'mysql:host=localhost;dbname=trip_planner';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
@@ -61,6 +61,9 @@
         $cities = $trip->getCities();
         return $app['twig']->render('trip.html.twig', array('trip' => $trip, 'review' => $review, 'user' => $user, 'activities' => $activities, 'trip_cities' => $cities, 'alert' => null, 'current_user' => $_SESSION['current_user'], 'all_cities' => City::getAll()));
     });
+
+// delete trip
+
 
 // add activity to trip
     $app->post('/trip/{id}', function($id) use ($app) {

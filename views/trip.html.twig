@@ -215,6 +215,11 @@
                     {% endif %}
                 {% endif %}
             </div>
+            <form action='/pending_trips/{{ current_user.getId }}' method='post'>
+                <input type="hidden" name="_method" value="delete">
+                <input type='hidden' name='trip_id' value='{{ trip.getId }}'>
+                <button type='submit' class='btn btn-danger pull-right'>Delete this Trip</button>
+            </form>
         </div>
     </div>
 </body>

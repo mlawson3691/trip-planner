@@ -10,9 +10,9 @@
                     <span class="icon-bar"></span>
                 </button>
                 {% if current_user == null %}
-                    <a class="navbar-brand title" href="/">Trip Planner</a>
+                    <a class="navbar-brand" href="/">Trip Planner</a>
                 {% else %}
-                    <a class="navbar-brand title" href="/dashboard/{{ current_user.getId }}">Trip Planner</a>
+                    <a class="navbar-brand" href="/dashboard/{{ current_user.getId }}">Trip Planner</a>
                 {% endif %}
             </div>
             <div class="collapse navbar-collapse" id="nav">
@@ -66,7 +66,7 @@
             </div>
         </div>
         <div class="hero_dashboard">
-            <img src="/assets/img/pic1.jpeg">
+            <img src="/assets/img/pic.jpeg">
         </div>
 
        {#   <div class="intro_slides hero_dashboard">
