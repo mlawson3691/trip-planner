@@ -27,47 +27,7 @@ $(function() {
         $(this).parent().next().next().next().toggle();
         // $('.a-tag').hide();
     });
-
-
-
-/* ------- Introduction page -------- */
-
-  $(".background_image").fadeIn(3000);
-
-  setTimeout(function(){
-    $("#pop-up").fadeIn("fast");
-    $("#pop-up").animate({
-      "width": "450px",
-      "height":"200px",
-  },700);
-  },900);
-
-  setTimeout(function(){
-   $(".intro").fadeIn("slow");
- },1800);
-
-  setTimeout(function(){
-    $(".title").fadeOut("200");
-    $( ".subtitle" ).slideUp("slow");
-  },3600);
-
-  setTimeout(function(){
-    $("#pop-up").animate({
-        "height":"0px",
-        "border-style":"none",
-        "transition":"0.5s ease"});
-    $(".background_image").fadeOut(900);
-    },4200);
-
-  setTimeout(function(){
-    $('#wrapper').addClass('hide');
-    $('.hidden-homepage').fadeIn('800');
-  },5100);
-
-  setTimeout(function(){
-    $(".intro_slides, .overlay").fadeIn(1500);
-  },6100);
-
+    
 /* ------ slideshow ----- */
   // var index=0;
   // setTimeout(function mySlideshow(event){
@@ -82,4 +42,10 @@ $(function() {
   //     setTimeout(mySlideshow,5000)
   //
   //   },6100);
+
+  /* ------- user dashboard ------- */
+  $('.user-edit-button').click(function(){
+      $('.user-info-to-hide').toggle();
+      $('.hidden-form').toggle();
+  });
 });

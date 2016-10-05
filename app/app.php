@@ -75,7 +75,10 @@
     $app->post('/sign_up', function() use ($app) {
         $username = $_POST['username'];
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        $new_user = new User($username, $password);
+        $name = $_POST['name'];
+        $bio = $_POST['bio'];
+        $location = $_POST['location'];
+        $new_user = new User($username, $password, $name, $bio, $location);
         $valid = $new_user->save();
         if ($valid == true) {
             $_SESSION['current_user'] = $new_user;
@@ -114,6 +117,13 @@
     $app->get('/dashboard/{id}', function($id) use ($app) {
         $user = User::findById($id);
         return $app['twig']->render('user_dashboard.html.twig', array('user' => $user, 'current_user' => $_SESSION['current_user']));
+    });
+
+// edit profile
+    $app->patch('/dashboard/{id}', function($id) use ($app) {
+        $user = User::findById($id);
+        $user->update($_POST['name'], $_POST['bio'], $_POST['location']);
+        return $app->redirect('/dashboard/' . $id);
     });
 
 // list of past trips

@@ -24,10 +24,13 @@
         function test_getUsername()
         {
             //Arrange
-            $username = "Honeymoon";
-            $password = "Otgg354";
+            $username = "OttisG7778";
+            $password = "afdewr3233";
+            $name = "Ottis Grand";
+            $bio = "Lorem ipsum dolor sit amet, consectetur adipisicing elit.";
+            $location = "Pittsburgh";
             $id = 1;
-            $new_user = new User($username, $password, $id);
+            $new_user = new User($username, $password, $name, $bio,  $location, $id);
 
             //Act
             $result = $new_user->getUsername();
@@ -39,10 +42,13 @@
         function test_getPassword()
         {
             //Arrange
-            $username = "Honeymoon";
-            $password = "Otgg354";
+            $username = "OttisG7778";
+            $password = "afdewr3233";
+            $name = "Ottis Grand";
+            $bio = "Lorem ipsum dolor sit amet, consectetur adipisicing elit.";
+            $location = "Pittsburgh";
             $id = 1;
-            $new_user = new User($username, $password, $id);
+            $new_user = new User($username, $password, $name, $bio,  $location, $id);
 
             //Act
             $result = $new_user->getPassword();
@@ -54,10 +60,13 @@
         function test_getId()
         {
             //Arrange
-            $username = "Honeymoon";
-            $password = "Otgg354";
+            $username = "OttisG7778";
+            $password = "afdewr3233";
+            $name = "Ottis Grand";
+            $bio = "Lorem ipsum dolor sit amet, consectetur adipisicing elit.";
+            $location = "Pittsburgh";
             $id = 1;
-            $new_user = new User($username, $password, $id);
+            $new_user = new User($username, $password, $name, $bio,  $location, $id);
 
             //Act
             $result = $new_user->getId();
@@ -69,10 +78,13 @@
         function test_setUsername()
         {
             //Arrange
-            $username = "Honeymoon";
-            $password = "Otgg354";
+            $username = "OttisG7778";
+            $password = "afdewr3233";
+            $name = "Ottis Grand";
+            $bio = "Lorem ipsum dolor sit amet, consectetur adipisicing elit.";
+            $location = "Pittsburgh";
             $id = 1;
-            $new_user = new User($username, $password, $id);
+            $new_user = new User($username, $password, $name, $bio,  $location, $id);
 
             //Act
             $new_username = "AK";
@@ -86,10 +98,13 @@
         function test_setPassword()
         {
             //Arrange
-            $username = "Honeymoon";
-            $password = "Otgg354";
+            $username = "OttisG7778";
+            $password = "afdewr3233";
+            $name = "Ottis Grand";
+            $bio = "Lorem ipsum dolor sit amet, consectetur adipisicing elit.";
+            $location = "Pittsburgh";
             $id = 1;
-            $new_user = new User($username, $password, $id);
+            $new_user = new User($username, $password, $name, $bio,  $location, $id);
 
             //Act
             $new_password = "Khuy343";
@@ -103,10 +118,13 @@
         function test_save()
         {
             //Arrange
-            $username = "Honeymoon";
-            $password = "Otgg354";
-            $id = null;
-            $new_user = new User($username, $password, $id);
+            $username = "OttisG7778";
+            $password = "afdewr3233";
+            $name = "Ottis Grand";
+            $bio = "Lorem ipsum dolor sit amet, consectetur adipisicing elit.";
+            $location = "Pittsburgh";
+            $id = 1;
+            $new_user = new User($username, $password, $name, $bio,  $location, $id);
             $new_user->save();
 
             //Act
@@ -119,10 +137,13 @@
         function test_saveDuplicates()
         {
             //Arrange
-            $username = "Honeymoon";
-            $password = "Otgg354";
-            $id = null;
-            $new_user = new User($username, $password, $id);
+            $username = "OttisG7778";
+            $password = "afdewr3233";
+            $name = "Ottis Grand";
+            $bio = "Lorem ipsum dolor sit amet, consectetur adipisicing elit.";
+            $location = "Pittsburgh";
+            $id = 1;
+            $new_user = new User($username, $password, $name, $bio,  $location, $id);
             $new_user->save();
             $new_user->save();
 
@@ -136,16 +157,22 @@
         function test_getAll()
         {
             //Arrange
-            $username = "Honeymoon";
-            $password = "Otgg354";
-            $id = null;
-            $new_user = new User($username, $password, $id);
+            $username = "OttisG7778";
+            $password = "afdewr3233";
+            $name = "Ottis Grand";
+            $bio = "Lorem ipsum dolor sit amet, consectetur adipisicing elit.";
+            $location = "Pittsburgh";
+            $id = 1;
+            $new_user = new User($username, $password, $name, $bio,  $location, $id);
             $new_user->save();
 
-            $username2 = "fhhsdfkweh";
-            $password2 = "vndsjkahfkl";
-            $id2 = null;
-            $new_user2 = new User($username2, $password2, $id2);
+            $username2 = "dgretre";
+            $password2 = "afderrrr33";
+            $name2 = "Otgdfd";
+            $bio2 = "Lorem ipdctetur adipisicing elit.";
+            $location2 = "Pidfsrgh";
+            $id2 = 2;
+            $new_user2 = new User($username2, $password2, $name2, $bio2,  $location2, $id2);
             $new_user2->save();
 
             //Act
@@ -158,16 +185,22 @@
         function test_deleteAll()
         {
             //Arrange
-            $username = "Honeymoon";
-            $password = "Otgg354";
-            $id = null;
-            $new_user = new User($username, $password, $id);
+            $username = "OttisG7778";
+            $password = "afdewr3233";
+            $name = "Ottis Grand";
+            $bio = "Lorem ipsum dolor sit amet, consectetur adipisicing elit.";
+            $location = "Pittsburgh";
+            $id = 1;
+            $new_user = new User($username, $password, $name, $bio,  $location, $id);
             $new_user->save();
 
-            $username2 = "fhhsdfkweh";
-            $password2 = "vndsjkahfkl";
-            $id2 = null;
-            $new_user2 = new User($username2, $password2, $id2);
+            $username2 = "OttisG7778";
+            $password2 = "afdewr3233";
+            $name2 = "Ottis Grand";
+            $bio2 = "Lorem ipsum dolor sit amet, consectetur adipisicing elit.";
+            $location2 = "Pittsburgh";
+            $id2 = 2;
+            $new_user2 = new User($username2, $password2, $name2, $bio2,  $location2, $id2);
             $new_user2->save();
 
             //Act
@@ -178,57 +211,67 @@
             $this->assertEquals([], $result);
         }
 
-        function test_update_username()
+        function test_update_name()
         {
             //Arrange
-            $username = "Honeymoon";
-            $password = "Otgg354";
-            $id = null;
-            $new_user = new User($username, $password, $id);
+            $username = "OttisG7778";
+            $password = "afdewr3233";
+            $name = "Ottis Grand";
+            $bio = "Lorem ipsum dolor sit amet, consectetur adipisicing elit.";
+            $location = "Pittsburgh";
+            $id = 1;
+            $new_user = new User($username, $password, $name, $bio,  $location, $id);
             $new_user->save();
 
             //Act
-            $new_username = "sfsdfdsfd";
-            $new_password = "sfsdefdsxcfd";
-            $new_user->update($new_username, $new_password);
-            $result = $new_user->getUsername();
+            $new_name = "sfsdfdsfd";
+            $new_user->update($new_name, $bio, $location);
+            $result = $new_user->getName();
 
             //Assert
-            $this->assertEquals($new_username, $result);
+            $this->assertEquals($new_name, $result);
         }
 
-        function test_update_password()
-        {
-            //Arrange
-            $username = "Honeymoon";
-            $password = "Otgg354";
-            $id = null;
-            $new_user = new User($username, $password, $id);
-            $new_user->save();
-
-            //Act
-            $new_username = "sfsdfdsfd";
-            $new_password = "sfsdefdsxcfd";
-            $new_user->update($new_username, $new_password);
-            $result = $new_user->getPassword();
-
-            //Assert
-            $this->assertEquals($new_password, $result);
-        }
+        // function test_update_password()
+        // {
+        //     //Arrange
+        //     $username = "OttisG7778";
+        //     $password = "afdewr3233";
+        //     $name = "Ottis Grand";
+        //     $bio = "Lorem ipsum dolor sit amet, consectetur adipisicing elit.";
+        //     $location = "Pittsburgh";
+        //     $id = 1;
+        //     $new_user = new User($username, $password, $name, $bio,  $location, $id);
+        //     $new_user->save();
+        //
+        //     //Act
+        //     $new_password = "sfsdefdsxcfd";
+        //     $new_user->updatePassword($password, $new_password);
+        //     $result = $new_user->getPassword();
+        //
+        //     //Assert
+        //     $this->assertEquals($new_password, $result);
+        // }
 
         function test_delete()
         {
             //Arrange
-            $username = "Honeymoon";
-            $password = "Otgg354";
-            $id = null;
-            $new_user = new User($username, $password, $id);
+            $username = "OttisG7778";
+            $password = "afdewr3233";
+            $name = "Ottis Grand";
+            $bio = "Lorem ipsum dolor sit amet, consectetur adipisicing elit.";
+            $location = "Pittsburgh";
+            $id = 1;
+            $new_user = new User($username, $password, $name, $bio,  $location, $id);
             $new_user->save();
 
-            $username2 = "fhhsdfkweh";
-            $password2 = "vndsjkahfkl";
-            $id2 = null;
-            $new_user2 = new User($username2, $password2, $id2);
+            $username2 = ";lkajsd;flkajsdf";
+            $password2 = "afdewr3233";
+            $name2 = "Ottis Grand";
+            $bio2 = "Lorem ipsum dolor sit amet, consectetur adipisicing elit.";
+            $location2 = "Pittsburgh";
+            $id2 = 2;
+            $new_user2 = new User($username2, $password2, $name2, $bio2,  $location2, $id2);
             $new_user2->save();
 
             //Act
@@ -241,9 +284,13 @@
 
         function test_getTrips()
         {
-            $username = "Honeymoon";
-            $password = "Otgg354";
-            $new_user = new User($username, $password);
+            $username = "OttisG7778";
+            $password = "afdewr3233";
+            $name = "Ottis Grand";
+            $bio = "Lorem ipsum dolor sit amet, consectetur adipisicing elit.";
+            $location = "Pittsburgh";
+            $id = 1;
+            $new_user = new User($username, $password, $name, $bio,  $location, $id);
             $new_user->save();
 
             $name = "Honeymoon";
@@ -263,14 +310,18 @@
 
             $result = $new_user->getTrips();
 
-            $this->assertEquals([$new_trip, $new_trip2], $result);
+            $this->assertEquals([$new_trip2, $new_trip], $result);
         }
 
         function test_getPendingTrips()
         {
-            $username = "Honeymoon";
-            $password = "Otgg354";
-            $new_user = new User($username, $password);
+            $username = "OttisG7778";
+            $password = "afdewr3233";
+            $name = "Ottis Grand";
+            $bio = "Lorem ipsum dolor sit amet, consectetur adipisicing elit.";
+            $location = "Pittsburgh";
+            $id = 1;
+            $new_user = new User($username, $password, $name, $bio,  $location, $id);
             $new_user->save();
 
             $name = "Honeymoon";
@@ -297,14 +348,18 @@
             $all_trips = $new_user->getTrips();
             $result = $new_user->getPendingTrips($all_trips);
 
-            $this->assertEquals([$new_trip, $new_trip2], $result);
+            $this->assertEquals([$new_trip2, $new_trip], $result);
         }
 
         function test_getPastTrips()
         {
-            $username = "Honeymoon";
-            $password = "Otgg354";
-            $new_user = new User($username, $password);
+            $username = "OttisG7778";
+            $password = "afdewr3233";
+            $name = "Ottis Grand";
+            $bio = "Lorem ipsum dolor sit amet, consectetur adipisicing elit.";
+            $location = "Pittsburgh";
+            $id = 1;
+            $new_user = new User($username, $password, $name, $bio,  $location, $id);
             $new_user->save();
 
             $name = "Honeymoon";
@@ -331,7 +386,7 @@
             $all_trips = $new_user->getTrips();
             $result = $new_user->getPastTrips($all_trips);
 
-            $this->assertEquals([$new_trip, $new_trip3], $result);
+            $this->assertEquals([$new_trip3, $new_trip], $result);
         }
 
 
