@@ -95,8 +95,9 @@
                         <form method='post' action='/trip/city/{{ trip.getId }}'>
                             <h3>Add a city to this trip</h3>
                             <select name='city_id' class='form-control'>
+                                <option active>Select a City</option>
                                 {% for city in all_cities %}
-                                    <option value='{{ city.getId }}'>{{ city.getName }}</option>
+                                    <option value='{{ city.getId }}'>{{ city.getName }}, {{ city.getState }}</option>
                                 {% endfor %}
                             </select>
                             <button class='btn btn-info' type='submit'>Add</button>

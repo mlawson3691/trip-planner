@@ -2,17 +2,16 @@
 {%  include 'inc/navbar.html.twig' %}
 <html>
 <body>
-    <div class="well">
-        <div class="container">
-            {% if trips is not empty %}
-                {% for trip in trips %}
-                    <div class="col-md-3 col-md-3-offset-1">
-                        <h4><a href="/trip/{{ trip.getId }}">{{ trip.getName }}</a></h4>
-                        <p>{{ trip.getDescription }}</p>
-                    </div>
-                {% endfor %}
-            {% endif %}
-        </div>
+    <div class="container">
+        <h2>Pending Trips</h2>
+        {% if trips is not empty %}
+            {% for trip in trips %}
+                <div class="well">
+                    <h4><a href="/trip/{{ trip.getId }}">{{ trip.getName }}</a></h4>
+                    <p>{{ trip.getDescription }}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
     </div>
     {% include 'inc/footer.html' %}
 </body>
