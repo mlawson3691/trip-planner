@@ -237,6 +237,8 @@
         $rating = $_POST['rating'];
         $new_review = new Review($title, $description, $rating, $trip_id);
         $new_review->save();
+        $trip = Trip::findById($id);
+        $trip->completeTrip();
         return $app->redirect('/trip/' . $id);
     });
 
