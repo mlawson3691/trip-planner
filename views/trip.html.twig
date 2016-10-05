@@ -1,3 +1,4 @@
+
 {%  include 'inc/navbar.html.twig' %}
 <html>
 <body>
@@ -70,7 +71,7 @@
                 </form>
             {% endif %}
             </div>
-            <div class='col-md-6'>
+            <div class='col-md-6 cities'>
                 <h3>Cities</h3>
                 {% if trip_cities is not empty %}
                     <ul>
@@ -193,7 +194,7 @@
                             <h5>{{ review.getTitle }} - <span>{{ review.getRating }} stars</span></h5>
                             <p>{{ review.getDescription }}</p>
                         </div>
-                        <div class='hidden-form'>
+                        <div class='hidden-form edit-review'>
                             <hr>
                             <form action='/trip/{{ trip.getId }}' method='post'>
                                 <input type='hidden' name='_method' value='patch'>
