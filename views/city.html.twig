@@ -2,16 +2,23 @@
 <html>
 <body>
     <div class='container'>
-        <h1>{{ city.getName }}</h1>
-        <h4>{{ city.getState }}</h4>
-
-        <h2>Reviews for {{ city.getName }}</h2>
-        {% if city.getReviews is not empty %}
-            {% for review in city.getReviews %}
-                <h4><a href="/trip/{{ review.getTripId }}">{{ review.getTitle }}</a></h4>
-                <p>{{ review.getDescription }}</p>
-            {% endfor %}
-        {% endif %}
+        <div class='row'>
+            <div class='col-sm-3'>
+                <h1>{{ city.getName }}</h1>
+                <h4>{{ city.getState }}</h4>
+            </div>
+            <div class='col-sm-9'>
+                <h3>Reviews for {{ city.getName }}</h3>
+                {% if city.getReviews is not empty %}
+                    {% for review in city.getReviews %}
+                    <div class='well'>
+                        <h4><a href="/trip/{{ review.getTripId }}">{{ review.getTitle }}</a></h4>
+                        <p>{{ review.getDescription }}</p>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
     </div>
 </body>
 </html>

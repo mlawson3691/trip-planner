@@ -19,7 +19,7 @@
 
     $app['debug'] = true;
 
-    $server = 'mysql:host=localhost:8889    ;dbname=trip_planner';
+    $server = 'mysql:host=localhost;dbname=trip_planner';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
@@ -120,7 +120,15 @@
 // search results
     $app->post('/search_results', function() use ($app) {
         $search_results = City::search($_POST['search_input']);
-        return $app['twig']->render('search_results.html.twig', array('results' => $search_results, 'current_user' => $_SESSION['current_user']));
+        $states = City::getStates();
+        return $app['twig']->render('search_results.html.twig', array('states' => $states, 'results' => $search_results, 'current_user' => $_SESSION['current_user']));
+    });
+
+// show cities of a state
+    $app->get('/search_results/{state}', function($state) use ($app) {
+        $states = City::getStates();
+        $cities = City::citiesInState($state);
+        return $app['twig']->render('search_results.html.twig', array('states' => $states, 'results' => $cities, 'current_user' => $_SESSION['current_user']));
     });
 
 // signup page
