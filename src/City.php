@@ -79,11 +79,7 @@ Class City
         foreach ($cities as $city) {
             $city_state = $city->getState();
             if ($city_state == $state) {
-                $name = $city['name'];
-                $state = $city['state'];
-                $id = $city['id'];
-                $new_city = new City($name, $state, $id);
-                array_push($cities_in_state, $new_city);
+                array_push($cities_in_state, $city);
             }
         }
         return $cities_in_state;
