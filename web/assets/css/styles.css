@@ -7,12 +7,12 @@ html {
 	margin:0;
 }
 
-/*img {
+img {
 	width:100%;
 	/* We want the width to be 100% of the element its inside */
-	/*margin: 0 auto;*/
+	margin: 0 auto;
 	/*We set margin 0 auto on it, to always center it*/
-/*}*/
+}
 
 /* ---- introduction animated page -- */
 .hidden-homepage {
@@ -22,8 +22,8 @@ html {
 #wrapper {
     width: 100%;
     height: 800px;
-    background: url('/../assets/img/climb2.jpeg') center center no-repeat;
-    background-size: cover;
+    /*background: url('/../assets/img/climb2.jpeg') center center no-repeat;*/
+    /*background-size: cover;*/
  }
 
 .background_image {
@@ -48,6 +48,7 @@ html {
     opacity: 0.4 ;
     z-index: 1;
     display: none;
+
 }
 
 .intro {
@@ -61,15 +62,15 @@ html {
 
 #pop-up {
     display: flex;
-    z-index: 5;
-    margin-left: 500px;
+    margin: 20% auto;
     background-color: #FFFFFF;
     height: 1px;
     width: 450px;
     display: none;
-    bottom: 300px;
-    position: absolute;
     z-index: 10;
+    border-bottom: 2px solid #d9d9d9;
+    border-top: 2px solid #d9d9d9;
+
 
 }
 
@@ -184,6 +185,7 @@ html {
     text-align: center;
     text-shadow: 2px 2px 5px black;
     color: white;
+    margin-top: -20px;
 }
 
 .navbar-brand {
@@ -242,7 +244,9 @@ html {
     border-bottom: 2px solid #d9d9d9;
     padding-top: 5%;
 }
-
+.ads:last-child {
+    border-bottom: none;
+}
 .ads h1 {
     font-family: 'Montserrat', sans-serif;
     padding-bottom: 40px;

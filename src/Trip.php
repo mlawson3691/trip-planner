@@ -125,8 +125,8 @@
         function delete()
         {
             $GLOBALS['DB']->exec("DELETE FROM trips WHERE id = {$this->getId()};");
-            $GLOBALS['DB']->exec("DELETE FROM cities_trips WHERE id = {$this->getId()};");
-
+            $GLOBALS['DB']->exec("DELETE FROM cities_trips WHERE trip_id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM activities WHERE trip_id = {$this->getId()}");
         }
 
         function save()

@@ -260,6 +260,32 @@
             $this->assertEquals([$new_trip2], $result);
         }
 
+        function test_delete_activities()
+        {
+            //Arrange
+            $name = "Honeymoon";
+            $user_id = 2;
+            $complete = 0;
+            $description = "Our honeymoon trip";
+            $id = 1;
+            $new_trip = new Trip($name, $user_id, $complete, $description, $id);
+            $new_trip->save();
+
+            $name = "Mall";
+            $date = "10/02/2016";
+            $trip_id = $new_trip->getId();
+            $descrition = "Shopping spree";
+            $new_activity = new Activity($name, $date, $trip_id, $descrition);
+            $new_activity->save();
+
+            //Act
+            $new_trip->delete();
+            $result = Activity::getAll();
+
+            //Assert
+            $this->assertEquals([], $result);
+        }
+
         function test_getCities()
         {
             $name = "Honeymoon";
