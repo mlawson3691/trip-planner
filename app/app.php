@@ -34,22 +34,100 @@
         return $app['twig']->render('index.html.twig', array('alert' => null, 'current_user' => $_SESSION['current_user']));
     });
 
-// leads to individual city page
-    $app->get('/city/{id}', function($id) use ($app) {
-        $city = City::findById($id);
-        return $app['twig']->render('city.html.twig', array('city' => $city, 'current_user' => $_SESSION['current_user']));
-    });
-
 // leads to browse (by state) page
     $app->get('/browse', function() use ($app) {
         $states = City::getStates();
         return $app['twig']->render('browse.html.twig', array('states' => $states, 'cities' => null, 'current_user' => $_SESSION['current_user']));
     });
 
+// show cities of a state
+    $app->get('/search_results/{state}', function($state) use ($app) {
+        $states = City::getStates();
+        $cities = City::citiesInState($state);
+        return $app['twig']->render('search_results.html.twig', array('states' => $states, 'results' => $cities, 'current_user' => $_SESSION['current_user']));
+    });
+
+// search results
+    $app->post('/search_results', function() use ($app) {
+        $search_results = City::search($_POST['search_input']);
+        $states = City::getStates();
+        return $app['twig']->render('search_results.html.twig', array('states' => $states, 'results' => $search_results, 'current_user' => $_SESSION['current_user']));
+    });
+
 // appends all cities to right column when state is clicked
     $app->get('/citiesByState/{state}', function($state) use ($app) {
         $cities = City::citiesInState($state);
         return $app['twig']->render('browse.html.twig', array('states' => $states, 'cities' => $cities, 'current_user' => $_SESSION['current_user']));
+    });
+
+// leads to individual city page
+    $app->get('/city/{id}', function($id) use ($app) {
+        $city = City::findById($id);
+        return $app['twig']->render('city.html.twig', array('city' => $city, 'current_user' => $_SESSION['current_user']));
+    });
+
+// signup page
+    $app->get('/sign_up', function() use ($app) {
+        return $app['twig']->render('sign_up.html.twig', array('alert' => null, 'current_user' => $_SESSION['current_user']));
+    });
+
+// submit sign up form
+    $app->post('/sign_up', function() use ($app) {
+        $username = $_POST['username'];
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $new_user = new User($username, $password);
+        $valid = $new_user->save();
+        if ($valid == true) {
+            $_SESSION['current_user'] = $new_user;
+            return $app['twig']->render('user_dashboard.html.twig', array('user' => $new_user, 'alert' => 'login-success', 'current_user' => $_SESSION['current_user']));
+        } else {
+            return $app['twig']->render('sign_up.html.twig', array('alert' => 'signup', 'current_user' => $_SESSION['current_user']));
+        }
+    });
+
+// login page
+    $app->get('/log_in', function() use ($app) {
+        return $app['twig']->render('log_in.html.twig', array('alert' => null, 'current_user' => $_SESSION['current_user']));
+    });
+
+// submit login form
+    $app->post('/login', function() use ($app) {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $valid = User::verifyLogin($username, $password);
+        if ($valid == false) {
+            return $app['twig']->render('log_in.html.twig', array('alert' => 'login', 'current_user' => $_SESSION['current_user']));
+        }
+        return $app['twig']->render('user_dashboard.html.twig', array('current_user' => $_SESSION['current_user'], 'alert' => 'login-success'));
+    });
+
+// log out
+    $app->get('/logout', function() use ($app) {
+        $_SESSION['current_user'] = null;
+        return $app['twig']->render('index.html.twig', array('alert' => 'logout', 'current_user' => $_SESSION['current_user']));
+    });
+
+
+// ---------------------- USER DASHBOARD INTERFACE -------------------------
+
+// to dashboard
+    $app->get('/dashboard/{id}', function($id) use ($app) {
+        $user = User::findById($id);
+        return $app['twig']->render('user_dashboard.html.twig', array('user' => $user, 'current_user' => $_SESSION['current_user']));
+    });
+
+// past trips in dashboard
+    $app->get('/past_trips/{id}', function($id) use ($app) {
+        $user = User::findById($id);
+        $trips = $user->getPastTrips($user->getTrips());
+        return $app['twig']->render('past_trips.html.twig', array('user' => $user, 'trips' => $trips, 'current_user' => $_SESSION['current_user']));
+    });
+
+// pending user trips
+    $app->get('/pending_trips/{id}', function($id) use ($app) {
+        $user = User::findById($id);
+        $trips = $user->getPendingTrips($user->getTrips());
+        return $app['twig']->render('pending_trips.html.twig', array('user' => $user, 'trips' => $trips, 'current_user' => $_SESSION['current_user']));
     });
 
 // view trip page
@@ -62,7 +140,14 @@
         return $app['twig']->render('trip.html.twig', array('trip' => $trip, 'review' => $review, 'user' => $user, 'activities' => $activities, 'trip_cities' => $cities, 'alert' => null, 'current_user' => $_SESSION['current_user'], 'all_cities' => City::getAll()));
     });
 
-// delete trip
+// delete trip 
+    $app->delete('/trip/delete/{id}', function($id) use ($app) {
+        $found_trip = Trip::findById($id);
+        $user_id = $found_trip->getUserId();
+        $found_trip->delete();
+
+        return $app->redirect('/pending_trips/' . $user_id);
+    });
 
 
 // add activity to trip
@@ -120,66 +205,7 @@
         return $app->redirect('/trip/' . $id);
     });
 
-// search results
-    $app->post('/search_results', function() use ($app) {
-        $search_results = City::search($_POST['search_input']);
-        $states = City::getStates();
-        return $app['twig']->render('search_results.html.twig', array('states' => $states, 'results' => $search_results, 'current_user' => $_SESSION['current_user']));
-    });
 
-// show cities of a state
-    $app->get('/search_results/{state}', function($state) use ($app) {
-        $states = City::getStates();
-        $cities = City::citiesInState($state);
-        return $app['twig']->render('search_results.html.twig', array('states' => $states, 'results' => $cities, 'current_user' => $_SESSION['current_user']));
-    });
-
-// signup page
-    $app->get('/sign_up', function() use ($app) {
-        return $app['twig']->render('sign_up.html.twig', array('alert' => null, 'current_user' => $_SESSION['current_user']));
-    });
-
-// submit sign up form
-    $app->post('/sign_up', function() use ($app) {
-        $username = $_POST['username'];
-        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        $new_user = new User($username, $password);
-        $valid = $new_user->save();
-        if ($valid == true) {
-            $_SESSION['current_user'] = $new_user;
-            return $app['twig']->render('user_dashboard.html.twig', array('user' => $new_user, 'alert' => 'login-success', 'current_user' => $_SESSION['current_user']));
-        } else {
-            return $app['twig']->render('sign_up.html.twig', array('alert' => 'signup', 'current_user' => $_SESSION['current_user']));
-        }
-    });
-
-// to dashboard
-    $app->get('/dashboard/{id}', function($id) use ($app) {
-        $user = User::findById($id);
-        return $app['twig']->render('user_dashboard.html.twig', array('user' => $user, 'current_user' => $_SESSION['current_user']));
-    });
-
-// login page
-    $app->get('/log_in', function() use ($app) {
-        return $app['twig']->render('log_in.html.twig', array('alert' => null, 'current_user' => $_SESSION['current_user']));
-    });
-
-// submit login form
-    $app->post('/login', function() use ($app) {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $valid = User::verifyLogin($username, $password);
-        if ($valid == false) {
-            return $app['twig']->render('log_in.html.twig', array('alert' => 'login', 'current_user' => $_SESSION['current_user']));
-        }
-        return $app['twig']->render('user_dashboard.html.twig', array('current_user' => $_SESSION['current_user'], 'alert' => 'login-success'));
-    });
-
-// log out
-    $app->get('/logout', function() use ($app) {
-        $_SESSION['current_user'] = null;
-        return $app['twig']->render('index.html.twig', array('alert' => 'logout', 'current_user' => $_SESSION['current_user']));
-    });
 
 // to city page
     $app->get('/city/{id}', function($id) use ($app) {
@@ -187,19 +213,6 @@
         return $app['twig']->render('city.html.twig', array('city' => $city));
     });
 
-// past trips in dashboard
-    $app->get('/past_trips/{id}', function($id) use ($app) {
-        $user = User::findById($id);
-        $trips = $user->getPastTrips($user->getTrips());
-        return $app['twig']->render('past_trips.html.twig', array('user' => $user, 'trips' => $trips, 'current_user' => $_SESSION['current_user']));
-    });
-
-// pending user trips
-    $app->get('/pending_trips/{id}', function($id) use ($app) {
-        $user = User::findById($id);
-        $trips = $user->getPendingTrips($user->getTrips());
-        return $app['twig']->render('pending_trips.html.twig', array('user' => $user, 'trips' => $trips, 'current_user' => $_SESSION['current_user']));
-    });
 
 // new trip page
     $app->get('/new_trip/{id}', function($id) use ($app) {
