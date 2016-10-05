@@ -94,14 +94,18 @@ img {
 /* ---------- ads -------------- */
 .grid {
 	margin-top:0px;
-	display:;
 }
 
+.grid h1 {
+    font-style: italic;
+    padding-top: 50px;
+    padding-bottom: 40px;
+}
 
 .cover-image{
 	margin-top:0px;
-	width:50%;
-	height:35vh;
+	width:33.33%;
+	height:30vh;
 	position: ;
 	display:flex;
 	background:rgba(0, 0, 0, 0.4);
@@ -129,20 +133,17 @@ img {
 	z-index:-1;
 }
 
-.cover_image h3 {
+.cover-image h3 {
     font-family: 'Playfair Display', serif;
 	font-weight: 900;
 	color: #ecf0f1;
 	font-size: 35px;
+    position: absolute;
+    z-index: 4;
+    margin-top: 23vh;
+    padding-left: 20px;
 }
-/*.cover-image h3 {
-	margin-left: 0;
-	position:absolute;
-	font-family: 'Playfair Display', serif;
-	font-weight: 900;
-	color:#ecf0f1;
-	font-size:45px;
-	margin-top:22%;
-	margin-left:25px;
 
-}*/
+.ads {
+    padding-bottom: 70px;
+}
