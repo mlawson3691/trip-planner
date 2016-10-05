@@ -18,6 +18,7 @@ $(function() {
         $('.edit__past').addClass('show');
         $('.a-tag').toggle();
         $('.add_activity').toggle('slide');
+        $('.add_city').toggle('slide');
     });
 
     $('.a-tag').click(function() {

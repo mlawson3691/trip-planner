@@ -288,6 +288,32 @@
         return $app->redirect('/past_trips/' . $user_id);
     });
 
+    // add city to past trip
+        $app->post('/past_trip/city/{id}', function($id) use ($app) {
+            $trip = Trip::findById($id);
+            $trip->addCity($_POST['city_id']);
+            return $app->redirect('/past_trip/' . $id);
+        });
+
+    // create and add city to past trip
+        $app->post('/past_trip/new_city/{id}', function($id) use ($app) {
+            $name = $_POST['name'];
+            $state = $_POST['state'];
+            $new_city = new City($name, $state);
+            $new_city->save();
+            $trip = Trip::findById($id);
+            $trip->addCity($new_city->getId());
+            return $app->redirect('/past_trip/' . $id);
+        });
+
+    // delete city from past trip
+        $app->delete('/past_trip/remove_city/{id}', function($id) use ($app) {
+            $trip = Trip::findById($id);
+            $trip->removeCity($_POST['city_id']);
+            return $app->redirect('/past_trip/' . $id);
+        });
+
+
     return $app;
 
 ?>

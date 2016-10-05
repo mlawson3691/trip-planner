@@ -17,7 +17,7 @@
                 {% if trips is not empty %}
                     {% for trip in trips %}
                             <div class="well">
-                                <h4><a href="/trip/{{ trip.getId }}">{{ trip.getName }}</a></h4>
+                                <h4><a href="/past_trip/{{ trip.getId }}">{{ trip.getName }}</a></h4>
                                 <p>{{ trip.getDescription }}</p>
                             </div>
                     {% endfor %}
