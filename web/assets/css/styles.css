@@ -7,12 +7,12 @@ html {
 	margin:0;
 }
 
-img {
+/*img {
 	width:100%;
 	/* We want the width to be 100% of the element its inside */
-	margin: 0 auto;
+	/*margin: 0 auto;*/
 	/*We set margin 0 auto on it, to always center it*/
-}
+/*}*/
 
 /* ---- introduction animated page -- */
 .hidden-homepage {
@@ -174,10 +174,15 @@ img {
 }
 
 /* --------main topbar with image and navigation--------- */
-.hero_dashboard img {
-    object-fit: cover;
+
+.hero_dashboard {
+    height: 400px;
     width: 100%;
-    height: 48%;
+    background: url('/../assets/img/pic.jpeg') center center no-repeat;
+    background-size: cover;
+    text-align: center;
+    text-shadow: 2px 2px 5px black;
+    color: white;
 }
 
 .navbar-brand {
