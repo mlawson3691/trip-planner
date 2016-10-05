@@ -40,12 +40,6 @@
         return $app['twig']->render('city.html.twig', array('city' => $city, 'current_user' => $_SESSION['current_user']));
     });
 
-// leads to browse (by state) page
-    $app->get('/browse', function() use ($app) {
-        $states = City::getStates();
-        return $app['twig']->render('browse.html.twig', array('states' => $states, 'cities' => null, 'current_user' => $_SESSION['current_user']));
-    });
-
 // appends all cities to right column when state is clicked
     $app->get('/citiesByState/{state}', function($state) use ($app) {
         $cities = City::citiesInState($state);
@@ -118,6 +112,12 @@
         $trip = Trip::findById($id);
         $trip->removeCity($_POST['city_id']);
         return $app->redirect('/trip/' . $id);
+    });
+
+// to search results
+    $app->get('/search_results', function() use ($app) {
+        $states = City::getStates();
+        return $app['twig']->render('search_results.html.twig', array('states' => $states, 'results' => null, 'current_user' => $_SESSION['current_user']));
     });
 
 // search results
