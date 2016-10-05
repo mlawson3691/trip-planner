@@ -402,6 +402,75 @@ img {
 .fa-twitter:hover {
     color: #595959;
 }
+
+/* ---- past itinerary --- */
+.past-trip-page {
+    color: black;
+}
+
+.past-trip-page .well {
+    opacity: 0.8;
+}
+.past_itinerary {
+    padding: 0 30px 20 30px;
+}
+
+.past_activities {
+    padding-left: 10px;
+}
+
+.past_activities p {
+    padding-left: 20px;
+}
+
+.trip_title {
+    border-bottom: 2px solid #cccccc;
+}
+
+.past_itinerary .trip_title span {
+    font-size: 16px;
+    font-style: italic;
+    margin-left: 5px;
+}
+
+.past_itinerary form {
+    float: right;
+}
+
+.past_itinerary form a{
+    color: red;
+}
+
+.past_reviews p {
+    font-style: italic;
+    padding-left: 25px;
+}
+
+.past_activities a {
+    display: none;
+}
+
+.past_reviews h4 {
+    font-style: italic;
+    border-bottom: solid 1px #cccccc;
+    width: 90%;
+    padding-bottom: 3px;
+    margin-left: 2%;
+}
+
+.past_reviews h5 {
+    padding-left: 20px;
+    padding-top: 5px;
+}
+
+.edit_past_form, .edit__past {
+    display: none;
+}
+
+.edit-past-activity {
+    display: none;
+}
+
 /* -------add/show classese ---------- */
 
 .show {

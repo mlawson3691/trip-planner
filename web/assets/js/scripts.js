@@ -14,6 +14,16 @@ $(function() {
         $('.show-review-form').addClass('show');
     });
 
+    $('.edit_past').click(function() {
+        $('.edit__past').addClass('show');
+        $('.past_activities a').toggle('shpw');
+        $('.edit_past_form').toggle('slide');
+    });
+
+    $('.past_activities a').click(function() {
+        $('.edit-past-activity').addClass('show');
+    });
+
 /* ------- Introduction page -------- */
 
   $(".background_image").fadeIn(3000);

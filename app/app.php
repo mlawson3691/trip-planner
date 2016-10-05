@@ -116,7 +116,7 @@
         return $app['twig']->render('user_dashboard.html.twig', array('user' => $user, 'current_user' => $_SESSION['current_user']));
     });
 
-// past trips in dashboard
+// list of past trips
     $app->get('/past_trips/{id}', function($id) use ($app) {
         $user = User::findById($id);
         $trips = $user->getPastTrips($user->getTrips());
@@ -246,6 +246,17 @@
     $app->get('/city/{id}', function($id) use ($app) {
         $city = City::findById($id);
         return $app['twig']->render('city.html.twig', array('city' => $city, 'current_user' => $_SESSION['current_user']));
+    });
+
+// route to individual past trip page ( NOT DONT YET )
+    $app->get('/past_trip/{id}', function($id) use ($app) {
+        $trip = Trip::findById($id);
+        $review = $trip->getReview();
+        $user = User::findById($trip->getUserId());
+        $activities = $trip->getActivities();
+        $cities = $trip->getCities();
+
+        return $app['twig']->render('past_trip.html.twig', array('trip' => $trip, 'review' => $review, 'user' => $user, 'activities' => $activities, 'trip_cities' => $cities, 'alert' => null, 'current_user' => $_SESSION['current_user'], 'all_cities' => City::getAll()));
     });
 
 
