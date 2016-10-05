@@ -3,15 +3,27 @@
 <html>
 <body>
     <div class="container">
-        <h2>Pending Trips</h2>
-        {% if trips is not empty %}
-            {% for trip in trips %}
-                <div class="well">
-                    <h4><a href="/trip/{{ trip.getId }}">{{ trip.getName }}</a></h4>
-                    <p>{{ trip.getDescription }}</p>
-                </div>
-            {% endfor %}
-        {% endif %}
+        <div class="row">
+            <div class="col-sm-2">
+                <ul class="nav nav-pills nav-stacked">
+                    <li role="presentation"><a href="/dashboard/{{ user.getId }}"><span class='sidebar'>Home</span></a></li>
+                    <li role="presentation"><a href="/pending_trips/{{ user.getId }}"><span class="sidebar-active">Pending Trips</span></a></li>
+                    <li role="presentation"><a href="/past_trips/{{ user.getId }}"><span class='sidebar'>Past Trips</span></a></li>
+                    <li role="presentation"><a href="/new_trip/{{ user.getId }}"><span class='sidebar'>New Trip</span></a></li>
+                </ul>
+            </div>
+            <div class="col-sm-10">
+                <h3>Pending Trips</h3>
+                {% if trips is not empty %}
+                    {% for trip in trips %}
+                        <div class="well">
+                            <h4><a href="/trip/{{ trip.getId }}">{{ trip.getName }}</a></h4>
+                            <p>{{ trip.getDescription }}</p>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
     </div>
     {% include 'inc/footer.html' %}
 </body>

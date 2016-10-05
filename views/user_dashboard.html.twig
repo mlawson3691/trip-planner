@@ -2,6 +2,35 @@
 {%  include 'inc/navbar.html.twig' %}
 <html>
 <body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-2">
+                <ul class="nav nav-pills nav-stacked">
+                    <li role="presentation"><a href="/dashboard/{{ user.getId }}"><span class='sidebar-active'>Home</span></a></li>
+                    <li role="presentation"><a href="/pending_trips/{{ user.getId }}"><span class="sidebar">Pending Trips</span></a></li>
+                    <li role="presentation"><a href="/past_trips/{{ user.getId }}"><span class='sidebar'>Past Trips</span></a></li>
+                    <li role="presentation"><a href="/new_trip/{{ user.getId }}"><span class='sidebar'>New Trip</span></a></li>
+                </ul>
+            </div>
+            <div class="col-sm-10">
+                <h3>My Account</h3>
+                <br>
+                <div class="row">
+                    <div class="col-sm-3 text-center">
+                        <img class="user-pic" src="/assets/img/user.svg">
+                        <h5 class=>Username: {{ user.getUsername }}</h5>
+                    </div>
+                    <div class="col-sm-7">
+                        <h5>Name: Mark Hansen</h5>
+                        <h5>Location: Portland, OR</h5>
+                        <h5>Bio:</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% include 'inc/footer.html' %}
 </body>
 </html>

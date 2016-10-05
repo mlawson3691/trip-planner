@@ -227,6 +227,28 @@ img {
     margin-top: -5px;
 }
 
+    /* --------------- DASHBOARD ---------------*/
+.sidebar-active, .sidebar:hover {
+    border-bottom: 2px solid #428bca;
+    padding-bottom: 5px;
+}
+
+.nav-pills {
+    margin-top: 50px;
+    border-right: 1px solid #d9d9d9;
+}
+
+.nav-pills li a:hover {
+    background: transparent;
+}
+
+.user-pic {
+    width: 150px;
+    border: 2px solid #000;
+    padding: 10px 0;
+    border-radius: 5px;
+}
+
 /* ---- index.html.twig initial links (plan a trip, browse)  */
 .index-links {
     width: 100%;
