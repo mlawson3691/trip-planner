@@ -11,6 +11,7 @@ $(function() {
 
     $('.fa-times').click(function() {
         $('.review_form').slideUp();
+        $('.show-review-form').addClass('show');
     });
 
 /* ------- Introduction page -------- */
@@ -25,13 +26,11 @@ $(function() {
   },700);
   },900);
 
-
   setTimeout(function(){
    $(".intro").fadeIn("slow");
  },1800);
 
   setTimeout(function(){
-    console.log(20);
     $(".title").fadeOut("200");
     $( ".subtitle" ).slideUp("slow");
     },3600)
@@ -66,5 +65,5 @@ $(function() {
   //       x[index-1].style.display="block";
   //     setTimeout(mySlideshow,5000)
   //
-  //   },6100);    
+  //   },6100);
 });
