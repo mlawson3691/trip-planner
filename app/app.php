@@ -259,6 +259,34 @@
         return $app['twig']->render('past_trip.html.twig', array('trip' => $trip, 'review' => $review, 'user' => $user, 'activities' => $activities, 'trip_cities' => $cities, 'alert' => null, 'current_user' => $_SESSION['current_user'], 'all_cities' => City::getAll()));
     });
 
+    $app->post('/past_trip/{id}', function($id) use ($app) {
+        $trip = Trip::findById($id);
+        $name = $_POST['name'];
+        $date = $_POST['date'];
+        $description = $_POST['description'];
+        $trip_id = $trip->getId();
+        $new_activity = new Activity($name, $date, $trip_id, $description);
+        $new_activity->save();
+        return $app->redirect('/past_trip/' . $id);
+    });
+
+    $app->patch('/past_trip/{id}/{activity_id}', function($id, $activity_id) use ($app) {
+        $name = $_POST['name'];
+        $date = $_POST['date'];
+        $description = $_POST['description'];
+        $trip_id = $id;
+        $new_activity = Activity::findById($activity_id);
+        $new_activity->update($name, $date, $description);
+        return $app->redirect('/past_trip/' . $id);
+    });
+
+    $app->delete('/past_trip/delete/{id}', function($id) use ($app) {
+        $found_trip = Trip::findById($id);
+        $user_id = $found_trip->getUserId();
+        $found_trip->delete();
+
+        return $app->redirect('/past_trips/' . $user_id);
+    });
 
     return $app;
 

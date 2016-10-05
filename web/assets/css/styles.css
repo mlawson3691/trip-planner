@@ -414,14 +414,14 @@ img {
 .past_itinerary {
     padding: 0 30px 20 30px;
 }
-
+/*
 .past_activities {
     padding-left: 10px;
-}
+}*/
 
-.past_activities p {
+/*.past_activities p {
     padding-left: 20px;
-}
+}*/
 
 .trip_title {
     border-bottom: 2px solid #cccccc;
@@ -433,7 +433,7 @@ img {
     margin-left: 5px;
 }
 
-.past_itinerary form {
+.past_itinerary form.delete{
     float: right;
 }
 
@@ -446,7 +446,8 @@ img {
     padding-left: 25px;
 }
 
-.past_activities a {
+.a-tag {
+    cursor:pointer;
     display: none;
 }
 
@@ -463,14 +464,23 @@ img {
     padding-top: 5px;
 }
 
-.edit_past_form, .edit__past {
+.add_activity {
     display: none;
 }
 
 .edit-past-activity {
+    margin-top: 20px;
     display: none;
+    border-bottom: solid 1px #cccccc;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
 }
 
+.past-delete-button {
+    border: none;
+    background: transparent;
+    color: red;
+}
 /* -------add/show classese ---------- */
 
 .show {
@@ -503,3 +513,7 @@ img {
     object-fit: cover;
 }
 */
+
+.red {
+    color: red;
+}

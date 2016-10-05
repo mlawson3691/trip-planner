@@ -16,13 +16,18 @@ $(function() {
 
     $('.edit_past').click(function() {
         $('.edit__past').addClass('show');
-        $('.past_activities a').toggle('shpw');
-        $('.edit_past_form').toggle('slide');
+        $('.a-tag').toggle();
+        $('.add_activity').toggle('slide');
     });
 
-    $('.past_activities a').click(function() {
-        $('.edit-past-activity').addClass('show');
+    $('.a-tag').click(function() {
+        // $(this).next().show();
+        // $(this).addClass('hidden-form');
+        $(this).parent().next().next().next().toggle();
+        // $('.a-tag').hide();
     });
+
+
 
 /* ------- Introduction page -------- */
 
@@ -43,7 +48,7 @@ $(function() {
   setTimeout(function(){
     $(".title").fadeOut("200");
     $( ".subtitle" ).slideUp("slow");
-    },3600)
+  },3600);
 
   setTimeout(function(){
     $("#pop-up").animate({
