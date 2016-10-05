@@ -7,7 +7,7 @@
             {% if trips is not empty %}
                 {% for trip in trips %}
                     <div class="col-md-3 col-md-3-offset-1">
-                        <h4><a href="/trip/{{ trip.getId }}">{{ trip.getName }}</a></h4>
+                        <h4><a href="/past_trip/{{ trip.getId }}">{{ trip.getName }}</a></h4>
                         <p>{{ trip.getDescription }}</p>
                     </div>
                 {% endfor %}

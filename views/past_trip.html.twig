@@ -1,0 +1,72 @@
+<!-- NOT DONT YET!! -->
+
+{%  include 'inc/head-tag.html.twig' %}
+{%  include 'inc/navbar_nopic.html.twig' %}
+<html>
+<body class='past-trip-page'>
+    <div class='container'>
+        <h1>Past Trip Itinerary:</h1>
+        <div class="row">
+            <div class="well past_itinerary col-sm-7">
+                <div class="trip_title col-sm-12">
+                    <h3>{{ trip.getName }}<span>{{ trip.getDescription }}</span></h3>
+                </div>
+                {% if activities is not empty %}
+                    <!-- <h4>Activities:</h4> -->
+                    {% for activity in activities %}
+                        <div class="past_activities">
+                            <h5 class='col-sm-12'>{{ activity.getName }}<a href=""> (edit)</a>:</h5>
+                            <p class='col-sm-4'>{{ activity.getDate }}</p>
+                            <p class='col-sm-8'>{{ activity.getDescription }}</p>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <form action='/trip/delete/{{trip.getId}}' method='post'>
+                    <input type="hidden" name="_method" value="delete">
+                    <a type="submit">Delete this Trip</a>
+                </form>
+            </div>
+            <div class="well past_reviews col-sm-4 col-sm-offset-1">
+                <h4>Your review:</h4>
+                <h5>{{ review.getTitle }} - <span>{{ review.getRating }} stars</span></h5>
+                <p>{{ review.getDescription }}</p>
+            </div>
+            <button class="col-sm-4 col-sm-offset-1 btn btn-default edit_past">Edit this trip</button>
+        </div>
+        <div class="edit_past_form">
+            <div class="edit__past">
+                {% if activities is not empty %}
+        <!-- ============== Add an activity ================ -->
+                    <form method='post' action='/past_trip/{{ trip.getId }}'>
+                        <h3>Add an activity to this trip</h3>
+                        <label for='name'>Activity Name</label>
+                        <input type='text' name='name' class='form-control'>
+                        <label for='date'>Date</label>
+                        <input type='datetime-local' name='date' class='form-control' value='2016-01-01T12:00'>
+                        <label for='description'>Description</label>
+                        <textarea name='description' class='form-control'></textarea>
+                        <button class='btn btn-info' type='submit'>Add</button>
+                    </form>
+
+                    {% for activity in activities %}
+        <!-- ============== edit an activity ================ -->
+                    <form action='/trip/{{ trip.getId }}/{{activity.getId}}' method='post' class="edit-past-activity">
+                        <input type='hidden' name='_method' value='patch'>
+                        <h3>Edit this activity</h3>
+                        <label for='name'>Activity Name</label>
+                        <input type='text' name='name' class='form-control' value='{{ activity.getName }}'>
+                        <label for='date'>Date</label>
+                        <input type='datetime-local' name='date' class='form-control' value='{{ activity.getDate }}'>
+                        <label for='description'>Description</label>
+                        <textarea name='description' class='form-control'>{{ activity.getDescription }}</textarea>
+                        <button class='btn btn-info' type='submit'>Edit</button>
+                    </form>
+                    {% endfor %}
+                {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include 'inc/footer.html' %}
+</body>
+</html>
