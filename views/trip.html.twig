@@ -3,23 +3,6 @@
 <html>
 <body>
     <div class="container">
-        {% if alert == 'add_activity' %}
-            <div class="alert alert-success">
-                <strong>Success!</strong> Your activity has been added.
-            </div>
-        {% elseif alert == 'update_activity' %}
-            <div class="alert alert-success">
-                <strong>Success!</strong> Your activity has been updated.
-            </div>
-        {% elseif alert == 'delete_activity' %}
-            <div class="alert alert-success">
-                <strong>Success!</strong> Your activity has been deleted.
-            </div>
-        {% elseif alert == 'add_city' %}
-            <div class="alert alert-success">
-                <strong>Success!</strong> Your city has been added.
-            </div>
-        {% endif %}
         <div class='row'>
             <div class="col-sm-2">
                 <ul class="nav nav-pills nav-stacked">
@@ -50,12 +33,15 @@
                                     <form action='/trip/{{ trip.getId }}/{{activity.getId}}' method='post'>
                                         <input type='hidden' name='_method' value='patch'>
                                         <h3>Edit this activity</h3>
-                                        <label for='name'>Activity Name</label>
-                                        <input type='text' name='name' class='form-control' value='{{ activity.getName }}'>
-                                        <label for='date'>Date</label>
-                                        <input type='datetime-local' name='date' class='form-control' value='{{ activity.getDate }}'>
-                                        <label for='description'>Description</label>
-                                        <textarea name='description' class='form-control'>{{ activity.getDescription }}</textarea>
+                                        <div class='form-group'>
+                                            <input type='text' name='name' class='form-control' value='{{ activity.getName }}' placeholder='Name'>
+                                        </div>
+                                        <div class='form-group'>
+                                            <input type='datetime-local' name='date' class='form-control' value='{{ activity.getDate }}'>
+                                        </div>
+                                        <div class='form-group'>
+                                            <textarea name='description' class='form-control' placeholder='Description'>{{ activity.getDescription }}</textarea>
+                                        </div>
                                         <button class='btn btn-info' type='submit'>Edit</button>
                                     </form>
                                     <form action='/trip/{{ trip.getId }}' method='post'>
@@ -74,12 +60,15 @@
                     {% if current_user == user  %}
                         <form method='post' action='/trip/{{ trip.getId }}'>
                             <h3>Add an activity to this trip</h3>
-                            <label for='name'>Activity Name</label>
-                            <input type='text' name='name' class='form-control'>
-                            <label for='date'>Date</label>
-                            <input type='datetime-local' name='date' class='form-control' value='2016-01-01T12:00'>
-                            <label for='description'>Description</label>
-                            <textarea name='description' class='form-control'></textarea>
+                            <div class='form-group'>
+                                <input type='text' name='name' class='form-control' placeholder='Name'>
+                            </div>
+                            <div class='form-group'>
+                                <input type='datetime-local' name='date' class='form-control' value='2016-01-01T12:00'>
+                            </div>
+                            <div class='form-group'>
+                                <textarea name='description' class='form-control' placeholder='Description'></textarea>
+                            </div>
                             <button class='btn btn-info center-block' type='submit'>Add</button>
                         </form>
                     {% endif %}
@@ -126,7 +115,7 @@
                 <a class='add_new_form_button show-form'><p>Can't find your city? Add a new one!</p></a>
                 <div class='hidden-form hidden_city'>
                     <form method='post' action='/trip/new_city/{{ trip.getId }}'>
-                        <input name='name' type='text' class='form-control' placeholder="City">
+                        <input name='name' type='text' class='form-control' placeholder="City Name">
                         <br>
                         <select class='form-control' name="state">
                             <option value="State" active>State</option>
@@ -195,30 +184,28 @@
                 {% endif %}
                 <br>
                 {% if current_user == user %}
+                    <div class="well review_form">
+                        <form action='/review_form/{{ trip.getId }}' method='post'>
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                            <h3>Review your experience:</h3>
+                            <input type='text' name='title' class='form-control' placeholder='Title' required>
+                            <div class='form-group rate-review'>
+                                <label class='rating-label' for='title'>Overall rating:</label>
+                                <label class="radio-inline rating-form-label"><input class='rating-radio' type="radio" name="rating" value='1'><img id='star-one' class="star-rating" src="/assets/img/star-empty.svg"></label>
+                                <label class="radio-inline rating-form-label"><input class='rating-radio' type="radio" name="rating" value='2'><img id='star-two' class="star-rating" src="/assets/img/star-empty.svg"></label>
+                                <label class="radio-inline rating-form-label"><input class='rating-radio' type="radio" name="rating" value='3'><img id='star-three' class="star-rating" src="/assets/img/star-empty.svg"></label>
+                                <label class="radio-inline rating-form-label"><input class='rating-radio' type="radio" name="rating" value='4'><img id='star-four' class="star-rating" src="/assets/img/star-empty.svg"></label>
+                                <label class="radio-inline rating-form-label"><input class='rating-radio' type="radio" name="rating" value='5'><img id='star-five' class="star-rating" src="/assets/img/star-empty.svg"></label>
+                            </div>
+                            <textarea name='description' class='form-control' placeholder='Description' required></textarea>
+                            <button class='btn btn-info' type='submit'>Submit</button>
+                        </form>
+                    </div>
                     <form action='/trip/delete/{{trip.getId}}' method='post'>
                         <input type="hidden" name="_method" value="delete">
                         <button type='submit' class='trash centered'>Delete this Trip</button>
                     </form>
                 {% endif %}
-                <div class="well review_form">
-                    <form action='/review_form/{{ trip.getId }}' method='post'>
-                        <i class="fa fa-times" aria-hidden="true"></i>
-                        <h3>Review your experience:</h3>
-                        <label for='title'>Title:</label>
-                        <input type='text' name='title' class='form-control' required>
-                        <div class='form-group rate-review'>
-                            <label class='rating-label' for='title'>Overall rating:</label>
-                            <label class="radio-inline rating-form-label"><input class='rating-radio' type="radio" name="rating" value='1'><img id='star-one' class="star-rating" src="/assets/img/star-empty.svg"></label>
-                            <label class="radio-inline rating-form-label"><input class='rating-radio' type="radio" name="rating" value='2'><img id='star-two' class="star-rating" src="/assets/img/star-empty.svg"></label>
-                            <label class="radio-inline rating-form-label"><input class='rating-radio' type="radio" name="rating" value='3'><img id='star-three' class="star-rating" src="/assets/img/star-empty.svg"></label>
-                            <label class="radio-inline rating-form-label"><input class='rating-radio' type="radio" name="rating" value='4'><img id='star-four' class="star-rating" src="/assets/img/star-empty.svg"></label>
-                            <label class="radio-inline rating-form-label"><input class='rating-radio' type="radio" name="rating" value='5'><img id='star-five' class="star-rating" src="/assets/img/star-empty.svg"></label>
-                        </div>
-                        <label for='description'>Description:</label>
-                        <textarea name='description' class='form-control' required></textarea>
-                        <button class='btn btn-info' type='submit'>Submit</button>
-                    </form>
-                </div>
                     <!-- end of add a review form -->
                     <!-- start of show/edit reviews -->
                 {% if review is not empty %}
