@@ -24,8 +24,8 @@
             <div class="col-sm-2">
                 <ul class="nav nav-pills nav-stacked">
                     <li role="presentation"><a href="/dashboard/{{ user.getId }}"><span class='sidebar'>Home</span></a></li>
-                    <li role="presentation"><a href="/pending_trips/{{ user.getId }}"><span class="sidebar">Pending Trips</span></a></li>
-                    <li role="presentation"><a href="/past_trips/{{ user.getId }}"><span class='sidebar-active'>Past Trips</span></a></li>
+                    <li role="presentation"><a href="/pending_trips/{{ user.getId }}"><span class="sidebar-active">Pending Trips</span></a></li>
+                    <li role="presentation"><a href="/past_trips/{{ user.getId }}"><span class='sidebar'>Past Trips</span></a></li>
                     <li role="presentation"><a href="/new_trip/{{ user.getId }}"><span class='sidebar'>New Trip</span></a></li>
                 </ul>
             </div>
@@ -192,18 +192,25 @@
                         <form action='/review_form/{{ trip.getId }}' method='post'>
                             <i class="fa fa-times" aria-hidden="true"></i>
                             <h3>Review your experience:</h3>
-                            <label for='title'>Title</label>
+                            <label for='title'>Title:</label>
                             <input type='text' name='title' class='form-control' required>
-                            <label for='title'>Overall rating</label>
-                            <input type='number' min="1" max="5" name='rating' class='form-control' placeholder="1-5" required>
-                            <label for='description'>Description</label>
+                            <div class='form-group rate-review'>
+                                <label class='rating-label' for='title'>Overall rating:</label>
+                                <label class="radio-inline rating-form-label"><input class='rating-radio' type="radio" name="rating" value='1'><img id='star-one' class="star-rating" src="/assets/img/star-empty.svg"></label>
+                                <label class="radio-inline rating-form-label"><input class='rating-radio' type="radio" name="rating" value='2'><img id='star-two' class="star-rating" src="/assets/img/star-empty.svg"></label>
+                                <label class="radio-inline rating-form-label"><input class='rating-radio' type="radio" name="rating" value='3'><img id='star-three' class="star-rating" src="/assets/img/star-empty.svg"></label>
+                                <label class="radio-inline rating-form-label"><input class='rating-radio' type="radio" name="rating" value='4'><img id='star-four' class="star-rating" src="/assets/img/star-empty.svg"></label>
+                                <label class="radio-inline rating-form-label"><input class='rating-radio' type="radio" name="rating" value='5'><img id='star-five' class="star-rating" src="/assets/img/star-empty.svg"></label>
+                            </div>
+                            <!-- <input type='number' min="1" max="5" name='rating' class='form-control' placeholder="1-5" required> -->
+                            <label for='description'>Description:</label>
                             <textarea name='description' class='form-control' required></textarea>
                             <button class='btn btn-info' type='submit'>Submit</button>
                         </form>
                     </div>
                     <!-- end of add a review form -->
                     <!-- start of show/edit reviews -->
-                    {% if review  is not empty %}
+                    {% if review is not empty %}
                         {% if current_user == user  %}
                             <div class="well reviews">
                                 <h4>Your review:</h4>
