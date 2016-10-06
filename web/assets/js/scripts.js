@@ -14,20 +14,22 @@ $(function() {
         $('.show-review-form').addClass('show');
     });
 
+    $('.add_new_form_button').click(function() {
+        $('.hidden-city').slideDown();
+        $('.add_city').slideUp();
+        $(this).hide();
+    });
+
     $('.edit_past').click(function() {
-        $('.edit__past').addClass('show');
+        $('.edit__trip').toggle('show');
         $('.a-tag').toggle();
-        $('.add_activity').toggle('slide');
-        $('.add_city').toggle('slide');
     });
 
     $('.a-tag').click(function() {
-        // $(this).next().show();
-        // $(this).addClass('hidden-form');
         $(this).parent().next().next().next().toggle();
-        // $('.a-tag').hide();
     });
-    
+
+
 /* ------ slideshow ----- */
   // var index=0;
   // setTimeout(function mySlideshow(event){

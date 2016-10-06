@@ -80,98 +80,107 @@
             </div>
         </div>
 
-        <!-- add activity form -->
-        <div class="row">
+        <!-- Edit trip starts here. Hidden-->
+        <br>
+        <div class="row edit__trip">
             <div class="add_activity col-sm-5 col-sm-offset-2">
                 <form method='post' action='/past_trip/{{ trip.getId }}'>
-                    <h3>Add an activity to this trip</h3>
-                    <label for='name'>Activity Name</label>
-                    <input type='text' name='name' class='form-control'>
-                    <label for='date'>Date</label>
-                    <input type='datetime-local' name='date' class='form-control' value='2016-01-01T12:00'>
-                    <label for='description'>Description</label>
-                    <textarea name='description' class='form-control'></textarea>
-                    <button class='btn btn-info' type='submit'>Add</button>
+                    <h3>Add an activity</h3>
+                    <div class="form-group">
+                        <label for='name'>Activity Name</label>
+                        <input type='text' name='name' class='form-control'>
+                    </div>
+                    <div class="form-group">
+                        <label for='date'>Date</label>
+                        <input type='datetime-local' name='date' class='form-control' value='2016-01-01T12:00'>
+                    </div>
+                    <div class="form-group">
+                        <label for='description'>Description</label>
+                        <textarea name='description' class='form-control'></textarea>
+                    </div>
+                    <button class='btn btn-default center-block' type='submit'>Add</button>
                 </form>
             </div>
-
-            <div class="add_city col-sm-5">
-                {% if all_cities is not empty %}
-                    <form method='post' action='/past_trip/city/{{ trip.getId }}'>
-                        <h3>Add a city to this trip</h3>
-                        <select name='city_id' class='form-control'>
-                            <option active>Select a City</option>
-                            {% for city in all_cities %}
-                                <option value='{{ city.getId }}'>{{ city.getName }}, {{ city.getState }}</option>
-                            {% endfor %}
-                        </select>
-                        <button class='btn btn-info' type='submit'>Add</button>
-                    </form>
-                {% endif %}
-            </div>
-            <div class="col-sm-5">
-                <button class='btn btn-info show-form'>Add a New City</button>
-                <div class='hidden-form'>
-                    <form method='post' action='/past_trip/new_city/{{ trip.getId }}'>
-                        <h3>Add a new city</h3>
-                        <label for ='name'>City</label>
-                        <input name='name' type='text' class='form-control'>
-                        <label for ='state'>State</label>
-                        <select class='form-control' name="state">
-                            <option value="Alabama">Alabama</option>
-                            <option value="Alaska">Alaska</option>
-                            <option value="Arizona">Arizona</option>
-                            <option value="Arkansas">Arkansas</option>
-                            <option value="California">California</option>
-                            <option value="Colorado">Colorado</option>
-                            <option value="Connecticut">Connecticut</option>
-                            <option value="Delaware">Delaware</option>
-                            <option value="District of Columbia">District of Columbia</option>
-                            <option value="Florida">Florida</option>
-                            <option value="Georgia">Georgia</option>
-                            <option value="Hawaii">Hawaii</option>
-                            <option value="Idaho">Idaho</option>
-                            <option value="Illinois">Illinois</option>
-                            <option value="Indiana">Indiana</option>
-                            <option value="Iowa">Iowa</option>
-                            <option value="Kansas">Kansas</option>
-                            <option value="Kentucky">Kentucky</option>
-                            <option value="Louisiana">Louisiana</option>
-                            <option value="Maine">Maine</option>
-                            <option value="Maryland">Maryland</option>
-                            <option value="Massachusetts">Massachusetts</option>
-                            <option value="Michigan">Michigan</option>
-                            <option value="Minnesota">Minnesota</option>
-                            <option value="Mississippi">Mississippi</option>
-                            <option value="Missouri">Missouri</option>
-                            <option value="Montana">Montana</option>
-                            <option value="Nebraska">Nebraska</option>
-                            <option value="Nevada">Nevada</option>
-                            <option value="New Hampshire">New Hampshire</option>
-                            <option value="New Jersey">New Jersey</option>
-                            <option value="New Mexico">New Mexico</option>
-                            <option value="New York">New York</option>
-                            <option value="North Carolina">North Carolina</option>
-                            <option value="North Dakota">North Dakota</option>
-                            <option value="Ohio">Ohio</option>
-                            <option value="Oklahoma">Oklahoma</option>
-                            <option value="Oregon">Oregon</option>
-                            <option value="Pennsylvania">Pennsylvania</option>
-                            <option value="Rhode Island">Rhode Island</option>
-                            <option value="South Carolina">South Carolina</option>
-                            <option value="South Dakota">South Dakota</option>
-                            <option value="Tennessee">Tennessee</option>
-                            <option value="Texas">Texas</option>
-                            <option value="Utah">Utah</option>
-                            <option value="Vermont">Vermont</option>
-                            <option value="Virginia">Virginia</option>
-                            <option value="Washington">Washington</option>
-                            <option value="West Virginia">West Virginia</option>
-                            <option value="Wisconsin">Wisconsin</option>
-                            <option value="Wyoming">Wyoming</option>
-                            <option value="Other">Other</option>
-                        </select>
-                        <button class='btn btn-info' type='submit'>Add</button>
+            <div class="col-sm-4 col-sm-offset-1">
+                <h3>Add a city</h3>
+                <div class="row add_city ">
+                    {% if all_cities is not empty %}
+                        <form method='post' action='/past_trip/city/{{ trip.getId }}'>
+                            <select name='city_id' class='form-control'>
+                                <option active>Select a City</option>
+                                {% for city in all_cities %}
+                                    <option value='{{ city.getId }}'>{{ city.getName }}, {{ city.getState }}</option>
+                                {% endfor %}
+                            </select>
+                            <button class='btn btn-info center-block' type='submit'>Add</button>
+                        </form>
+                    {% endif %}
+                </div>
+                <div class="row add-new-city">
+                    <a class='add_new_form_button'><p>Can't find your city? Add a new one!</p></a>
+                    <form method='post' action='/past_trip/new_city/{{ trip.getId }}' class="hidden-city">
+                        <div class="form=group">
+                            <input name='name' type='text' class='form-control' placeholder="City">
+                            <br>
+                        </div>
+                        <div class="form-group">
+                            <select class='form-control' name="state">
+                                <option value="State" active >State</option>
+                                <option value="Alabama">Alabama</option>
+                                <option value="Alaska">Alaska</option>
+                                <option value="Arizona">Arizona</option>
+                                <option value="Arkansas">Arkansas</option>
+                                <option value="California">California</option>
+                                <option value="Colorado">Colorado</option>
+                                <option value="Connecticut">Connecticut</option>
+                                <option value="Delaware">Delaware</option>
+                                <option value="District of Columbia">District of Columbia</option>
+                                <option value="Florida">Florida</option>
+                                <option value="Georgia">Georgia</option>
+                                <option value="Hawaii">Hawaii</option>
+                                <option value="Idaho">Idaho</option>
+                                <option value="Illinois">Illinois</option>
+                                <option value="Indiana">Indiana</option>
+                                <option value="Iowa">Iowa</option>
+                                <option value="Kansas">Kansas</option>
+                                <option value="Kentucky">Kentucky</option>
+                                <option value="Louisiana">Louisiana</option>
+                                <option value="Maine">Maine</option>
+                                <option value="Maryland">Maryland</option>
+                                <option value="Massachusetts">Massachusetts</option>
+                                <option value="Michigan">Michigan</option>
+                                <option value="Minnesota">Minnesota</option>
+                                <option value="Mississippi">Mississippi</option>
+                                <option value="Missouri">Missouri</option>
+                                <option value="Montana">Montana</option>
+                                <option value="Nebraska">Nebraska</option>
+                                <option value="Nevada">Nevada</option>
+                                <option value="New Hampshire">New Hampshire</option>
+                                <option value="New Jersey">New Jersey</option>
+                                <option value="New Mexico">New Mexico</option>
+                                <option value="New York">New York</option>
+                                <option value="North Carolina">North Carolina</option>
+                                <option value="North Dakota">North Dakota</option>
+                                <option value="Ohio">Ohio</option>
+                                <option value="Oklahoma">Oklahoma</option>
+                                <option value="Oregon">Oregon</option>
+                                <option value="Pennsylvania">Pennsylvania</option>
+                                <option value="Rhode Island">Rhode Island</option>
+                                <option value="South Carolina">South Carolina</option>
+                                <option value="South Dakota">South Dakota</option>
+                                <option value="Tennessee">Tennessee</option>
+                                <option value="Texas">Texas</option>
+                                <option value="Utah">Utah</option>
+                                <option value="Vermont">Vermont</option>
+                                <option value="Virginia">Virginia</option>
+                                <option value="Washington">Washington</option>
+                                <option value="West Virginia">West Virginia</option>
+                                <option value="Wisconsin">Wisconsin</option>
+                                <option value="Wyoming">Wyoming</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <button class='btn btn-info center-block' type='submit'>Add</button>
                     </form>
                 </div>
             </div>
