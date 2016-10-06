@@ -11,7 +11,7 @@ $(function() {
 
     $('.fa-times').click(function() {
         $('.review_form').slideUp();
-        $('.show-review-form').addClass('show');
+        $('.show-review-form').show();
     });
 
     $('.add_new_form_button').click(function() {
