@@ -4,8 +4,7 @@ $(function() {
     interval: 3000}); 
 
     $('.show-form').click(function() {
-        $(this).next().slideDown();
-        $(this).addClass('hidden-form');
+        $(this).next().slideToggle();
     });
 
     $('.show-review-form').click(function() {
@@ -30,7 +29,7 @@ $(function() {
     });
 
     $('.a-tag').click(function() {
-        $(this).parent().next().next().next().slideToggle();
+        $(this).parent().next().next().next().next().slideToggle();
     });
 
     $('.add_activity_button').click(function() {

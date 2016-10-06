@@ -20,10 +20,10 @@
                         <h5>{{ current_user.getUsername }}</h5>
                     </div>
                     <div class="col-sm-8 user-info-to-hide">
-                        <h5>Name: {{ current_user.getName }}</h5>
-                        <h5>Location: {{ current_user.getLocation }}</h5>
-                        <h5>Bio:</h5>
-                        <p>{{ current_user.getBio }}</p>
+                        <h4>Name: {{ current_user.getName }}</h4>
+                        <h4>Location: {{ current_user.getLocation }}</h4>
+                        <h4>Bio:</h4>
+                        <h4>{{ current_user.getBio }}</h4>
                     </div>
                     <div class='col-sm-8 hidden-form'>
                         <form action="/dashboard/{{ current_user.getId }}" method="post">
