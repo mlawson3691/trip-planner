@@ -14,30 +14,38 @@ img {
 	/*We set margin 0 auto on it, to always center it*/
 }
 
-.intro-paragraph {
+.paragraph {
     height: 250px;
     border-bottom: 2px solid #d9d9d9;
 }
 
-.intro-paragraph p {
+.paragraph p {
     padding-top: 5%;
     font-family: 'Arapey', serif;
-    font-size: 20px;
+    font-size: 22px;
     font-style: italic;
     font-weight: 400;
     color: #484848;
+    padding-left: 5%;
+    text-align: center;
+    padding-right: 5%;
 }
 /* --------main topbar with image and navigation--------- */
 
 .hero_dashboard {
-    height: 400px;
+    height: 450px;
     width: 100%;
-    background: url('/../assets/img/pic.jpeg') center center no-repeat;
-    background-size: cover;
-    text-align: center;
-    text-shadow: 2px 2px 5px black;
-    color: white;
+/*    background: url('/../assets/img/man.jpeg') center center no-repeat;
+*/    background-size: cover;
     margin-top: -20px;
+}
+
+.hero_dashboard h1 {
+    text-align: center;
+    color: white;
+    font-family: 'Arapey', serif;
+    font-size: 30px;
+    font-style: italic;
 }
 
 .navbar-brand {
@@ -450,6 +458,43 @@ span.star-rating {
     margin-left: 20px;
 }
 
+/* -------- video header ------- */
+
+.carousel {
+  width: 100%;
+  height: 500px;
+}
+
+.carousel-inner {
+  background-color: #bfbfbf;
+}
+
+.carousel .item {
+  height: 500px;
+}
+
+.carousel .item1 {
+    background: url('/../assets/img/man.jpeg') center center no-repeat;
+    background-size: cover;
+}
+
+.carousel .item2 {
+    background: url('/../assets/img/canada.jpeg') center center no-repeat;
+    background-size: cover;
+}
+
+.carousel .item3 {
+    background: url('/../assets/img/istanbul.jpg') center center no-repeat;
+    background-size: cover;
+}
+
+.carousel .item img {
+  right: 0;
+  min-height: 500px;
+  top: 0;
+  object-fit: cover;
+}
+
 /* -------add/show classese ---------- */
 
 .show {
@@ -464,25 +509,3 @@ span.star-rating {
     display: none;
 }
 
-/* ------------ slideshow -------- */
-/*.intro_slides{
-    display:none;
-    overflow:hidden;
-}
-
-.intro_slides .my_slides {
-    object-fit:cover;
-    height: 45%;
-    z-index:-1;
-}
-
-.intro_slides img {
-    width:100%;
-    height:45%;
-    object-fit: cover;
-}
-*/
-
-.red {
-    color: red;
-}

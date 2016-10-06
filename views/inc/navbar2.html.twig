@@ -1,0 +1,83 @@
+<html>
+<body>
+    <div class="background">
+        <video {# width="100%" height="400" #} autoplay="autoplay" loop="loop" preload>
+          <source src="http://www.eclarify.com/videos/background.mp4" type="video/mp4" >
+            <source src="http://www.eclarify.com/videos/background.ogg" type="http://leongaban.com/video/ogg" >
+            <source src="http://www.eclarify.com/videos/background.webm" type="video/webm" >
+            <object data="http://www.eclarify.com/videos/background.mp4" width="1920" height="1080">
+                <param name="wmode" value="transparent">
+                <param name="autoplay" value="true" >
+                <param name="loop" value="true" >
+                <embed src="http://www.eclarify.com/videos/background.swf" width="1920" height="1080" wmode="transparent" >
+            </object>
+        </video> 
+    </div>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    {% if current_user == null %}
+                        <a class="navbar-brand" href="/">Trip Planner</a>
+                    {% else %}
+                        <a class="navbar-brand" href="/dashboard/{{ current_user.getId }}">Trip Planner</a>
+                    {% endif %}
+                </div>
+                <div class="collapse navbar-collapse" id="nav">
+        <!-- ================== Search Form ============== -->
+                    <ul class='nav navbar-nav navbar-left'>
+                        <li><form action="/search_results" class="navbar-form navbar-left search" method="post">
+                            <div class='form-group magnifying'>
+                                <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control search-bar" name="search_input" placeholder="Search cities">
+                            </div>
+                       </form></li>
+                    </ul>
+        <!-- ================== login/logout/signup Form ============== -->
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if current_user == null %}
+                            <li><a href='/sign_up'>Sign Up</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <form class="form-inline navbar-form" action='/login' method='post'>
+                                            <div class="form-group">
+                                                <label>Username:</label>
+                                                <input type="text" class="form-control" placeholder="Username" name='username'>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Password:</label>
+                                                <input type="password" class="form-control" placeholder="Password" name='password'>
+                                            </div>
+                                            <button type="submit" class="btn btn-default">Go</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        {% else %}
+                            <li><a href="/new_trip/{{current_user.getId}}"><img id='nav-plus' src='/assets/img/plus.svg'> New Trip</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span class="caret"></span></a>
+                                <ul class="dropdown-menu account-menu">
+                                    <li><a href="/dashboard/{{ current_user.getId }}">Profile</a></li>
+                                    <li><a href="/pending_trips/{{ current_user.getId }}">Pending Trips</a></li>
+                                    <li><a href="/past_trips/{{ current_user.getId }}">Past Trips</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href='/logout'>Log Out</a></li>
+                                </ul>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+</body>
+</html>
