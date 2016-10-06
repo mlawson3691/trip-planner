@@ -34,6 +34,11 @@ $(function() {
         $(this).hide();
     });
 
+    $('.fa').click(function() {
+        $('.add_activity_form').slideUp();
+        $('.add_activity_button').slideDown();
+    });
+
 
 /* ------ slideshow ----- */
   // var index=0;

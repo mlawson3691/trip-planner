@@ -43,7 +43,8 @@
                             <p class='pull-right'>{{ activity.getDate|date('m/d/Y @ h:m A') }}</p>
                             <p>{{ activity.getDescription }}</p>
                             {% if current_user == user  %}
-                                <button type='button' class='btn btn-info show-form'>Edit this Activity</button>
+                                <a class='show-form edit'>(Edit this activity)</p></a>
+                                <!-- <button type='button' class='btn btn-info show-form'>Edit this Activity</button> -->
                                 <div class='hidden-form'>
                                     <hr>
                                     <form action='/trip/{{ trip.getId }}/{{activity.getId}}' method='post'>
@@ -60,15 +61,16 @@
                                     <form action='/trip/{{ trip.getId }}' method='post'>
                                         <input type="hidden" name="_method" value="delete">
                                         <input type='hidden' name='activity_id' value='{{ activity.getId }}'>
-                                        <button type='submit' class='btn btn-danger pull-right'>Delete this Activity</button>
+                                        <button type='submit' class='trash pull-right'><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                                     </form>
                                 </div>
                             {% endif %}
                         </div>
                     {% endfor %}
                 {% endif %}
-                <a class='add_activity_button'><p>Add an activity</p></a>
+                <a class='center-block add_activity_button'><p>Add an activity</p></a>
                 <div class='add_activity_form add_activity'>
+                    <i class="fa fa-times" aria-hidden="true"></i>
                     {% if current_user == user  %}
                         <form method='post' action='/trip/{{ trip.getId }}'>
                             <h3>Add an activity to this trip</h3>
@@ -189,7 +191,14 @@
                 <hr>
                     <!-- Add a review form -->
                 {% if current_user == user and trip.getComplete == 0 %}
-                    <button class='btn btn-info show-review-form center-block'>Review this trip</button>
+                    <button class='btn-review btn btn-info show-review-form center-block'>Review this trip</button>
+                {% endif %}
+                <br>
+                {% if current_user == user %}
+                    <form action='/trip/delete/{{trip.getId}}' method='post'>
+                        <input type="hidden" name="_method" value="delete">
+                        <button type='submit' class='trash centered'>Delete this Trip</button>
+                    </form>
                 {% endif %}
                 <div class="well review_form">
                     <form action='/review_form/{{ trip.getId }}' method='post'>
@@ -238,13 +247,6 @@
                                 <p>{{ review.getDescription }}</p>
                             </div>
                     {% endif %}
-                {% endif %}
-
-                {% if current_user == user %}
-                    <form action='/trip/delete/{{trip.getId}}' method='post'>
-                        <input type="hidden" name="_method" value="delete">
-                        <button type='submit' class='btn btn-danger center-block'>Delete this Trip</button>
-                    </form>
                 {% endif %}
             </div>
         </div>

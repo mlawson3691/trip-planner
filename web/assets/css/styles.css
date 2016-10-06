@@ -163,6 +163,10 @@ img {
     padding-left: 0;
 }
 
+.fa-times:hover {
+    font-size: 18px;
+}
+
 /* ---- index.html.twig initial links (plan a trip, browse)  */
 .index-links {
     width: 100%;
@@ -264,16 +268,27 @@ span.star-rating {
 /* ------ Browse destination block ------- */
 
 /* ------- Delete city buttons (cities class)------ */
-.trash {
+.trash, .centered {
     border: none;
     background: transparent;
     margin-left: 5px;
     font-size: 16px;
 }
 
+.centered {
+    margin-left: 35%;
+}
+
 .trash:hover {
     color: red;
 }
+
+/*.trash-center {
+    border: none;
+    background: transparent;
+    text-align: center;;
+    font-size: 16px;
+}*/
 
 .spaced-list {
     margin-bottom: 10px;
@@ -324,6 +339,11 @@ span.star-rating {
 .reviews p {
     font-style: italic;
     padding-left: 20px;
+}
+.btn-review {
+    padding: 10px;
+    width: 80%;
+    font-size: 18px;
 }
 
 /* --------- edit review form (edit-review class) ---------------- */
@@ -395,7 +415,7 @@ span.star-rating {
     border-bottom: 2px solid #cccccc;
 }
 
-.past_itinerary .trip_title span {
+.edit, .past_itinerary .trip_title span {
     font-size: 14px;
     font-style: italic;
     margin-left: 5px;
@@ -464,6 +484,7 @@ span.star-rating {
 
 .add_activity_button {
     cursor: pointer;
+    text-align: center;
 }
 
 .add-new-city {
