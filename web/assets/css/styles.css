@@ -302,6 +302,7 @@ img {
     padding-left: 20px;
 }*/
 
+
 .trip_title {
     border-bottom: 2px solid #cccccc;
 }
@@ -350,13 +351,15 @@ img {
     padding-top: 5px;
 }
 
-.add_activity {
+.edit__trip,
+.hidden-city {
     display: none;
 }
 
-.add_city {
-    display: none;
-}
+/*.edit__trip h3 {
+    padding: 8px;
+    border-bottom: solid 1px #cccccc;
+}*/
 
 .edit-past-activity {
     margin-top: 20px;
@@ -366,11 +369,41 @@ img {
     margin-bottom: 20px;
 }
 
+.add_activity {
+    box-shadow: 3px 3px 6px #d9d9d9;
+    padding: 35px;
+}
+
+.add-new-city {
+    padding-top: 20px;
+}
+
+.add_activity button,
+.add_city button,
+.add-new-city button {
+    width: 30%;
+    background-color: #79a6d2;
+}
+
 .past-delete-button {
     border: none;
     background: transparent;
     color: red;
 }
+
+.add_new_form_button{
+    border: none;
+    background: transparent;
+    color: black inherit;
+    cursor: pointer;
+    text-align: center;
+}
+
+.add_new_form_button p {
+    font-style: italic;
+    margin-left: 20px;
+}
+
 /* -------add/show classese ---------- */
 
 .show {

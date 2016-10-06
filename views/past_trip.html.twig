@@ -6,9 +6,19 @@
 <body class='past-trip-page'>
     <div class='container'>
         <!-- Past trip full itinerary. No edit functionality -->
-        <h1>Past Trip Itinerary:</h1>
         <div class="row">
-            <div class="well past_itinerary col-sm-7">
+            <div class="col-sm-2">
+                <ul class="nav nav-pills nav-stacked">
+                    <li role="presentation"><a href="/dashboard/{{ user.getId }}"><span class='sidebar'>Home</span></a></li>
+                    <li role="presentation"><a href="/pending_trips/{{ user.getId }}"><span class="sidebar">Pending Trips</span></a></li>
+                    <li role="presentation"><a href="/past_trips/{{ user.getId }}"><span class='sidebar'>Past Trips</span></a></li>
+                    <li role="presentation"><a href="/new_trip/{{ user.getId }}"><span class='sidebar'>New Trip</span></a></li>
+                </ul>
+            </div>
+            <br>
+            <h1>Past Trip Itinerary:</h1>
+            <br>
+            <div class="well past_itinerary col-sm-6">
                 <div class="trip_title col-sm-8">
                     <h3>{{ trip.getName }}<span class="edit_past">(Edit this trip)</span></h3>
                         <p>{{ trip.getDescription }}</p>
@@ -41,71 +51,81 @@
                 </form>
             </div>
         <!-- review of past trip -->
-            <div class="well past_reviews col-sm-4 col-sm-offset-1">
-                <h4>Your review</h4>
-                <h5>{{ review.getTitle }} - <span>{{ review.getRating }} stars</span></h5>
-                <p>{{ review.getDescription }}</p>
+            <div class="past_reviews col-sm-3 col-sm-offset-1">
+                <div class="row well">
+                    <h4>Your review</h4>
+                    <h5>{{ review.getTitle }} - <span>{{ review.getRating }} stars</span></h5>
+                    <p>{{ review.getDescription }}</p>
+                </div>
+                <div class="row well past_cities">
+                    <!-- shows past trip cities -->
+                    <h4>Cities</h4>
+                    {% if trip_cities is not empty %}
+                        <ul>
+                        {% for city in trip_cities %}
+                            <li class='spaced-list'>
+                                {{ city.getName }}, {{ city.getState }}
+                                {% if current_user == user %}
+                                    <form class='inline' action='/past_trip/remove_city/{{ trip.getId }}' method='post'>
+                                        <input type="hidden" name="_method" value="delete">
+                                        <input type="hidden" name="city_id" value="{{ city.getId }}">
+                                        <button class='trash' type='submit'><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                    </form>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
             </div>
-
-        <!-- shows past trip cities -->
-            <div class="well past_cities col-sm-4 col-sm-offset-1">
-                <h4>Cities</h4>
-                {% if trip_cities is not empty %}
-                    <ul>
-                    {% for city in trip_cities %}
-                        <li class='spaced-list'>
-                            {{ city.getName }}, {{ city.getState }}
-                            {% if current_user == user %}
-                                <form class='inline' action='/past_trip/remove_city/{{ trip.getId }}' method='post'>
-                                    <input type="hidden" name="_method" value="delete">
-                                    <input type="hidden" name="city_id" value="{{ city.getId }}">
-                                    <button class='trash' type='submit'><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                </form>
-                            {% endif %}
-                        </li>
-                    {% endfor %}
-                    </ul>
-                {% endif %}
-            </div>
-
         </div>
-        <!-- add activity form -->
-            <div class="row">
-                <div class="add_activity col-sm-7">
-                    <form method='post' action='/past_trip/{{ trip.getId }}'>
-                        <h3>Add an activity to this trip</h3>
+
+        <!-- Edit trip starts here. Hidden-->
+        <br>
+        <div class="row edit__trip">
+            <div class="add_activity col-sm-5 col-sm-offset-2">
+                <form method='post' action='/past_trip/{{ trip.getId }}'>
+                    <h3>Add an activity</h3>
+                    <div class="form-group">
                         <label for='name'>Activity Name</label>
                         <input type='text' name='name' class='form-control'>
+                    </div>
+                    <div class="form-group">
                         <label for='date'>Date</label>
                         <input type='datetime-local' name='date' class='form-control' value='2016-01-01T12:00'>
+                    </div>
+                    <div class="form-group">
                         <label for='description'>Description</label>
                         <textarea name='description' class='form-control'></textarea>
-                        <button class='btn btn-info' type='submit'>Add</button>
-                    </form>
-                </div>
-
-                <div class="add_city col-sm-5">
+                    </div>
+                    <button class='btn btn-default center-block' type='submit'>Add</button>
+                </form>
+            </div>
+            <div class="col-sm-4 col-sm-offset-1">
+                <h3>Add a city</h3>
+                <div class="row add_city ">
                     {% if all_cities is not empty %}
                         <form method='post' action='/past_trip/city/{{ trip.getId }}'>
-                            <h3>Add a city to this trip</h3>
                             <select name='city_id' class='form-control'>
                                 <option active>Select a City</option>
                                 {% for city in all_cities %}
                                     <option value='{{ city.getId }}'>{{ city.getName }}, {{ city.getState }}</option>
                                 {% endfor %}
                             </select>
-                            <button class='btn btn-info' type='submit'>Add</button>
+                            <button class='btn btn-info center-block' type='submit'>Add</button>
                         </form>
                     {% endif %}
-
-                    <button class='btn btn-info show-form'>Add a New City</button>
-                    <div class='hidden-form'>
-                        <form method='post' action='/past_trip/new_city/{{ trip.getId }}'>
-                            <h3>Add a new city</h3>
-                            <label for ='name'>City</label>
-                            <input name='name' type='text' class='form-control'>
-                            <label for ='state'>State</label>
+                </div>
+                <div class="row add-new-city">
+                    <a class='add_new_form_button'><p>Can't find your city? Add a new one!</p></a>
+                    <form method='post' action='/past_trip/new_city/{{ trip.getId }}' class="hidden-city">
+                        <div class="form=group">
+                            <input name='name' type='text' class='form-control' placeholder="City">
+                            <br>
+                        </div>
+                        <div class="form-group">
                             <select class='form-control' name="state">
+                                <option value="State" active >State</option>
                                 <option value="Alabama">Alabama</option>
                                 <option value="Alaska">Alaska</option>
                                 <option value="Arizona">Arizona</option>
@@ -159,9 +179,9 @@
                                 <option value="Wyoming">Wyoming</option>
                                 <option value="Other">Other</option>
                             </select>
-                            <button class='btn btn-info' type='submit'>Add</button>
-                        </form>
-                    </div>
+                        </div>
+                        <button class='btn btn-info center-block' type='submit'>Add</button>
+                    </form>
                 </div>
             </div>
         </div>
