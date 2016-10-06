@@ -20,13 +20,10 @@ img {
 
 .well {
     background: white;
-}
-
-.form-control {
     border-radius: 0;
 }
 
-.btn {
+.form-control, .btn {
     border-radius: 0;
 }
 
@@ -147,6 +144,10 @@ img {
     margin-top: -5px;
 }
 
+.user-edit-button:hover {
+    color: #194066;
+}
+
 .rate-review {
     margin-top: 15px;
 }
@@ -265,7 +266,26 @@ span.star-rating {
     padding-left: 20px;
 }
 
-/* ------ Browse destination block ------- */
+/* ------ search results ------- */
+
+.main-search {
+    padding: 10px 0;
+    background: #595959;
+    margin-top: -20px;
+}
+.search-bar-main {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    color: white;
+}
+
+.magnifying-main {
+    border: none;
+    background: transparent;
+    font-size: 25px;
+    color: #777;
+}
 
 /* ------- Delete city buttons (cities class)------ */
 .trash, .centered {
@@ -347,9 +367,18 @@ span.star-rating {
 }
 
 /* --------- edit review form (edit-review class) ---------------- */
-/*.hidden-form {
-    display: none;
-}*/
+
+.edit_review {
+    font-size: 14px;
+    font-style: italic;
+    margin-left: 5px;
+    cursor: pointer;
+    color:  #3973ac;
+}
+
+.edit-review input, .edit-review textarea {
+    margin-bottom: 5px;
+}
 
 /* ----------- Footer ------------ */
 .footer {
@@ -558,7 +587,12 @@ span.star-rating {
     color: red;
 }
 
- .sign-up-form {
+.sign-up-form {
     width: 50%;
     margin: 0 auto;
- }
+}
+
+.alert {
+    width: 60%;
+    margin: 0 auto;
+}

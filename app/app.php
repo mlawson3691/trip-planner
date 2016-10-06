@@ -253,6 +253,14 @@
         return $app->redirect('/past_trip/' . $id);
     });
 
+// update review
+    $app->patch('/past_trip/{id}', function($id) use ($app) {
+        $trip = Trip::findById($id);
+        $review = $trip->getReview();
+        $review->update($_POST['title'], $_POST['description'], $_POST['rating']);
+        return $app->redirect('/past_trip/' . $id);
+    });
+
 // to city page
     $app->get('/city/{id}', function($id) use ($app) {
         $city = City::findById($id);

@@ -13,12 +13,12 @@
                 </ul>
             </div>
             <div class="col-sm-10">
-                <h2>Begin a New Journey!</h2>
-                <form action="/new_trip/{{user.getId}}" method="post">
+                <form class='sign-up-form' action="/new_trip/{{user.getId}}" method="post">
+                    <h2 class='text-center'>Begin a New Journey!</h2>
                     <br>
                     <input class="form-control" name="purpose" placeholder="What is this trip for?" type="text" required>
                     <br>
-                    <input class="form-control" name="description" placeholder="Trip description" type="text">
+                    <textarea class="form-control" name="description" placeholder="Trip description" type="text"></textarea>
                     <br>
                     <button type="submit" class="btn btn-info center-block">Add Trip</button>
                 </form>

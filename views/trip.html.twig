@@ -236,7 +236,7 @@
                                 <label for='title'>Review Title</label>
                                 <input type='text' name='title' class='form-control' value='{{ review.getTitle }}'>
                                 <label for='description'>Description</label>
-                                <textarea name='description' class='form-control' value='{{ review.getDescription }}'></textarea>
+                                <textarea name='description' class='form-control'>{{ review.getDescription }}</textarea>
                                 <button class='btn btn-info' type='submit'>Edit</button>
                             </form>
                         </div>

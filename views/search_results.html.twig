@@ -2,6 +2,14 @@
 {%  include 'inc/navbar.html.twig' %}
 <html>
 <body>
+    <div class='row main-search'>
+        <div class='container'>
+            <form class='form-inline' action="/search_results" method="post">
+                <button class='magnifying-main' type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                <input type="text" class="form-control input-lg search-bar-main" name="search_input" placeholder="Search cities">
+           </form>
+        </div>
+    </div>
     <div class='container'>
         <div class='row'>
             <div class='col-sm-3'>
@@ -22,6 +30,9 @@
                             <li><a href="/city/{{result.getId}}">{{ result.getName }}, {{ result.getState }}</a></li>
                         {% endfor %}
                     </ul>
+                {% else %}
+                    <br><br>
+                    <h4>There are no cities matching your search.</h4>
                 {% endif %}
             </div>
         </div>

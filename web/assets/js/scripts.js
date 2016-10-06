@@ -26,7 +26,7 @@ $(function() {
     });
 
     $('.a-tag').click(function() {
-        $(this).parent().next().next().next().toggle();
+        $(this).parent().next().next().next().slideToggle();
     });
 
     $('.add_activity_button').click(function() {
@@ -55,9 +55,106 @@ $(function() {
   //
   //   },6100);
 
+  /* ------- show review form ----------- */
+  $('.edit_review').click(function() {
+      $('.edit-review').slideToggle();
+  });
+
   /* ------- user dashboard ------- */
   $('.user-edit-button').click(function(){
       $('.user-info-to-hide').toggle();
       $('.hidden-form').toggle();
   });
+
+  // handle star clicks
+  $('#star-one').click(function() {
+      $('#star-one').attr('src', '/assets/img/star-gold.svg');
+      $('#star-two').attr('src', '/assets/img/star-empty.svg');
+      $('#star-three').attr('src', '/assets/img/star-empty.svg');
+      $('#star-four').attr('src', '/assets/img/star-empty.svg');
+      $('#star-five').attr('src', '/assets/img/star-empty.svg');
+  });
+
+  $('#star-two').click(function() {
+      $('#star-one').attr('src', '/assets/img/star-gold.svg');
+      $('#star-two').attr('src', '/assets/img/star-gold.svg');
+      $('#star-three').attr('src', '/assets/img/star-empty.svg');
+      $('#star-four').attr('src', '/assets/img/star-empty.svg');
+      $('#star-five').attr('src', '/assets/img/star-empty.svg');
+  });
+
+  $('#star-three').click(function() {
+      $('#star-one').attr('src', '/assets/img/star-gold.svg');
+      $('#star-two').attr('src', '/assets/img/star-gold.svg');
+      $('#star-three').attr('src', '/assets/img/star-gold.svg');
+      $('#star-four').attr('src', '/assets/img/star-empty.svg');
+      $('#star-five').attr('src', '/assets/img/star-empty.svg');
+  });
+
+  $('#star-four').click(function() {
+      $('#star-one').attr('src', '/assets/img/star-gold.svg');
+      $('#star-two').attr('src', '/assets/img/star-gold.svg');
+      $('#star-three').attr('src', '/assets/img/star-gold.svg');
+      $('#star-four').attr('src', '/assets/img/star-gold.svg');
+      $('#star-five').attr('src', '/assets/img/star-empty.svg');
+  });
+
+  $('#star-five').click(function() {
+      $('#star-one').attr('src', '/assets/img/star-gold.svg');
+      $('#star-two').attr('src', '/assets/img/star-gold.svg');
+      $('#star-three').attr('src', '/assets/img/star-gold.svg');
+      $('#star-four').attr('src', '/assets/img/star-gold.svg');
+      $('#star-five').attr('src', '/assets/img/star-gold.svg');
+  });
+
+  // // handle star hovers
+  // $('#star-one').hover(function() {
+  //     $('#star-one').attr('src', '/assets/img/star-gold.svg');
+  // }, function() {
+  //     $('#star-one').attr('src', '/assets/img/star-empty.svg');
+  // });
+  //
+  // $('#star-two').hover(function() {
+  //     $('#star-one').attr('src', '/assets/img/star-gold.svg');
+  //     $('#star-two').attr('src', '/assets/img/star-gold.svg');
+  // }, function() {
+  //     $('#star-one').attr('src', '/assets/img/star-empty.svg');
+  //     $('#star-two').attr('src', '/assets/img/star-empty.svg');
+  // });
+  //
+  // $('#star-three').hover(function() {
+  //     $('#star-one').attr('src', '/assets/img/star-gold.svg');
+  //     $('#star-two').attr('src', '/assets/img/star-gold.svg');
+  //     $('#star-three').attr('src', '/assets/img/star-gold.svg');
+  // }, function() {
+  //     $('#star-one').attr('src', '/assets/img/star-empty.svg');
+  //     $('#star-two').attr('src', '/assets/img/star-empty.svg');
+  //     $('#star-three').attr('src', '/assets/img/star-empty.svg');
+  // });
+  //
+  // $('#star-four').hover(function() {
+  //     $('#star-one').attr('src', '/assets/img/star-gold.svg');
+  //     $('#star-two').attr('src', '/assets/img/star-gold.svg');
+  //     $('#star-three').attr('src', '/assets/img/star-gold.svg');
+  //     $('#star-four').attr('src', '/assets/img/star-gold.svg');
+  // }, function() {
+  //     $('#star-one').attr('src', '/assets/img/star-empty.svg');
+  //     $('#star-two').attr('src', '/assets/img/star-empty.svg');
+  //     $('#star-three').attr('src', '/assets/img/star-empty.svg');
+  //     $('#star-four').attr('src', '/assets/img/star-empty.svg');
+  // });
+  //
+  // $('#star-five').hover(function() {
+  //     $('#star-one').attr('src', '/assets/img/star-gold.svg');
+  //     $('#star-two').attr('src', '/assets/img/star-gold.svg');
+  //     $('#star-three').attr('src', '/assets/img/star-gold.svg');
+  //     $('#star-four').attr('src', '/assets/img/star-gold.svg');
+  //     $('#star-five').attr('src', '/assets/img/star-gold.svg');
+  // }, function() {
+  //     $('#star-one').attr('src', '/assets/img/star-empty.svg');
+  //     $('#star-two').attr('src', '/assets/img/star-empty.svg');
+  //     $('#star-three').attr('src', '/assets/img/star-empty.svg');
+  //     $('#star-four').attr('src', '/assets/img/star-empty.svg');
+  //     $('#star-five').attr('src', '/assets/img/star-empty.svg');
+  // });
 });
