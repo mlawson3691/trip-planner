@@ -3,24 +3,23 @@
 <html>
 <body>
     <div class='container'>
-        <h1>Log in now!</h1>
         {% if alert == 'login' %}
             <div class="alert alert-danger text-center">
                 <p><strong>Error!</strong> That username and/or password is not correct. Please try again.</p>
             </div>
         {% endif %}
-        <form action="/login" method="post">
+        <form class='sign-up-form' action="/login" method="post">
+            <h1>Log in now!</h1>
             <div class="form-group">
-                <label for username="username">Username</label>
-                <input type="text" class="form-control" placeholder="username" name="username">
+                <input type="text" class="form-control" placeholder="Username" name="username">
             </div>
             <div class="form-group">
-                <label for password="password">Password</label>
-                <input type="password" class="form-control" placeholder="password" name="password">
+                <input type="password" class="form-control" placeholder="Password" name="password">
             </div>
             <button type="submit" class="btn btn-primary">Log in</button>
+            <br><br>
+            <p>Not a Member? <a href='/sign_up'>Sign Up!</a></p>
         </form>
-        <p>Not a Member? <a href='/sign_up'>Sign Up!</a></p>
     </div>
     {% include 'inc/footer.html' %}
 </body>

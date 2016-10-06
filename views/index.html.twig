@@ -4,15 +4,6 @@
     <div class="hidden-homepage">
         {%  include 'inc/navbar.html.twig' %}
         <div class='container'>
-            {% if alert == 'login' %}
-                <div class="alert alert-danger text-center">
-                    <p><strong>Error!</strong> That username and/or password is not correct. Please try again.</p>
-                </div>
-            {% elseif alert == 'logout' %}
-                <div class="alert alert-success text-center">
-                    <p><strong>Success!</strong> You have logged out.</p>
-                </div>
-            {% endif %}
             <div class='row text-center'>
                 <div class="col-sm-12 intro-paragraph">
                     <p>Donec tincidunt mollis pretium. Donec dictum justo vitae auctor volutpat. Maecenas eget ullamcorper dui, pharetra imperdiet neque. Donec sit amet lorem nec lectus condimentum faucibus eu rhoncus mauris. Duis mattis ex ut iaculis ultricies. Aenean eleifend vel nunc blandit finibus. Phasellus vel est sem. Vestibulum lacinia ex quam, euismod suscipit est venenatis nec.</p>
