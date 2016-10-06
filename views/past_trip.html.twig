@@ -45,12 +45,9 @@
                         <!-- form for edit-->
                             <form action='/past_trip/{{ trip.getId }}/{{activity.getId}}' method='post' class="edit-past-activity col-sm-12">
                                 <input type='hidden' name='_method' value='patch'>
-                                <!-- <label for='name'>Activity Name</label> -->
                                 <input type='text' name='name' class='form-control' value='{{ activity.getName }}' placeholder='Name'>
-                                <!-- <label for='date'>Date</label> -->
                                 <br>
                                 <input type='datetime-local' name='date' class='form-control' value='{{ activity.getDate }}'>
-                                <!-- <label for='description'>Description</label> -->
                                 <br>
                                 <textarea name='description' class='form-control' placeholder='Details'>{{ activity.getDescription }}</textarea>
                                 <button class='btn btn-info' type='submit'>Edit</button>
@@ -74,7 +71,7 @@
             {% endif %}
                 <div class="row well">
                     {% if current_user == user %}
-                        <h4>Your review</h4>
+                        <h4>Your review <span class="edit_review">(Edit)</span></h4>
                     {% else %}
                         <h4>{{ review.getUsername }}'s review</h4>
                     {% endif %}
@@ -91,6 +88,23 @@
                         <span class="star-rating">{{ review.getRating }}</span>
                     </p>
                     <p>{{ review.getDescription }}</p>
+                    <div class='hidden-form edit-review'>
+                        <hr>
+                        <form action='/past_trip/{{ trip.getId }}' method='post'>
+                            <input type='hidden' name='_method' value='patch'>
+                            <h3>Edit your review</h3>
+                            <input type='text' name='title' class='form-control' value='{{ review.getTitle }}' placeholder='Title'>
+                            <div class='form-group rate-review text-center'>
+                                <label class="radio-inline rating-form-label"><input class='rating-radio' type="radio" name="rating" value='1' required><img id='star-one' class="star-rating" src="/assets/img/star-empty.svg"></label>
+                                <label class="radio-inline rating-form-label"><input class='rating-radio' type="radio" name="rating" value='2'><img id='star-two' class="star-rating" src="/assets/img/star-empty.svg"></label>
+                                <label class="radio-inline rating-form-label"><input class='rating-radio' type="radio" name="rating" value='3'><img id='star-three' class="star-rating" src="/assets/img/star-empty.svg"></label>
+                                <label class="radio-inline rating-form-label"><input class='rating-radio' type="radio" name="rating" value='4'><img id='star-four' class="star-rating" src="/assets/img/star-empty.svg"></label>
+                                <label class="radio-inline rating-form-label"><input class='rating-radio' type="radio" name="rating" value='5'><img id='star-five' class="star-rating" src="/assets/img/star-empty.svg"></label>
+                            </div>
+                            <textarea name='description' class='form-control' placeholder='Description'>{{ review.getDescription }}</textarea>
+                            <button class='btn btn-info' type='submit'>Edit</button>
+                        </form>
+                    </div>
                 </div>
                 <div class="row well past_cities">
                     <!-- shows past trip cities -->
