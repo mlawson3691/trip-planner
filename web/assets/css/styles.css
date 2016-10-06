@@ -246,7 +246,7 @@ span.star-rating {
 .cover-image {
     margin-top: 0px;
     width: 33.33%;
-    height: 25vh;
+    height: 270px;
     display: flex;
     background: rgba(0, 0, 0, 0.3);
     cursor: pointer;
@@ -287,9 +287,10 @@ span.star-rating {
 /* ------ search results ------- */
 
 .main-search {
-    padding: 10px 0;
-    background: #595959;
+    padding: 5px 0;
+    background: #ccc;
     margin-top: -20px;
+    color: #777;
 }
 .search-bar-main {
     background: transparent;
@@ -302,7 +303,6 @@ span.star-rating {
     border: none;
     background: transparent;
     font-size: 25px;
-    color: #777;
 }
 
 /* ------- Delete city buttons (cities class)------ */
@@ -405,7 +405,7 @@ span.star-rating {
 /* ----------- Footer ------------ */
 .footer {
     height: 120px;
-    border-top: 2px solid #f2f2f2;
+    border-top: 2px solid #cccccc;
     margin-top: 80px;
     width: 90%;
     margin-left: 5%;
