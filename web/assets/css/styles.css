@@ -251,7 +251,8 @@ span.star-rating {
 }
 
 /* --------- review form and see reviews (trip.html.twig) ----------- */
-.review_form {
+.review_form,
+.add_activity_form {
     display: none;
 }
 
@@ -418,6 +419,10 @@ span.star-rating {
 .add_activity {
     box-shadow: 3px 3px 6px #d9d9d9;
     padding: 35px;
+}
+
+.add_activity_button {
+    cursor: pointer;
 }
 
 .add-new-city {
