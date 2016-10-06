@@ -22,12 +22,11 @@
                 {% if activities is not empty %}
                     {% for activity in activities %}
                         <div class='well'>
-                            <h4>{{ activity.getName }}</h4>
+                            <h3 class='new-h3-size'>{{ activity.getName }}</h3>
                             <p class='pull-right'>{{ activity.getDate|date('m/d/Y @ h:m A') }}</p>
                             <p>{{ activity.getDescription }}</p>
                             {% if current_user == user  %}
-                                <a class='show-form edit'>(Edit this activity)</p></a>
-                                <!-- <button type='button' class='btn btn-info show-form'>Edit this Activity</button> -->
+                                <a class='show-form edit'>(Edit this activity)</a>
                                 <div class='hidden-form'>
                                     <hr>
                                     <form action='/trip/{{ trip.getId }}/{{activity.getId}}' method='post'>

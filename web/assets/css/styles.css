@@ -367,6 +367,10 @@ span.star-rating {
     font-size: 18px;
 }
 
+.new-h3-size {
+    font-size: 22px;
+}
+
 /* --------- edit review form (edit-review class) ---------------- */
 
 .edit_review {
@@ -448,6 +452,7 @@ span.star-rating {
 
 .trip_title {
     border-bottom: 2px solid #cccccc;
+    margin-bottom: 15px;
 }
 
 .edit, .past_itinerary .trip_title span {
@@ -479,6 +484,8 @@ span.star-rating {
 .a-tag {
     cursor:pointer;
     display: none;
+    font-size: 14px;
+    font-style: italic;
 }
 
 .past_reviews h4, .past_cities h4 {

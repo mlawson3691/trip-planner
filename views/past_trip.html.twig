@@ -37,11 +37,11 @@
                 </div>
                 {% if activities is not empty %}
                     {% for activity in activities %}
-                        <div class="past_activities row">
-                            <h5 class='col-sm-12'>{{ activity.getName }}: <a class="a-tag"> (edit)</a></h5>
-                            <p class='col-sm-4'>{{ activity.getDate }}</p>
-                            <p class='col-sm-8'>{{ activity.getDescription }}</p>
-
+                        <div class="past_activities">
+                            <h3 class='new-h3-size'>{{ activity.getName }}: <a class="a-tag"> (edit)</a></h3>
+                            <p class='pull-right'>{{ activity.getDate|date('m/d/Y @ h:m A') }}</p>
+                            <p>{{ activity.getDescription }}</p>
+                            <hr>
                         <!-- form for edit-->
                             <form action='/past_trip/{{ trip.getId }}/{{activity.getId}}' method='post' class="edit-past-activity col-sm-12">
                                 <input type='hidden' name='_method' value='patch'>
@@ -52,7 +52,6 @@
                                 <textarea name='description' class='form-control' placeholder='Details'>{{ activity.getDescription }}</textarea>
                                 <button class='btn btn-info' type='submit'>Edit</button>
                             </form>
-
                         </div>
                     {% endfor %}
                 {% endif %}
@@ -75,7 +74,7 @@
                     {% else %}
                         <h4>{{ review.getUsername }}'s review</h4>
                     {% endif %}
-                    <h5>{{ review.getTitle }}</h5>
+                    <h3 class='new-h3-size'>{{ review.getTitle }}</h3>
                     <p>
                         {% for i in 1..review.getRating %}
                             <img class="star-rating" src="/assets/img/star-gold.svg">
