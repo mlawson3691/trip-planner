@@ -220,20 +220,21 @@ span.star-rating {
     border-bottom: none;
 }
 .ads h1 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Cormorant Garamond', serif;
     padding-bottom: 40px;
     text-align: center;
     text-transform: uppercase;
-    font-size: 25px;
+    font-size: 30px;
 }
 
 .cover-image {
     margin-top: 0px;
     width: 33.33%;
-    height: 30vh;
+    height: 25vh;
     display: flex;
     background: rgba(0, 0, 0, 0.3);
     cursor: pointer;
+    border: 5px solid #f2f2f2;
 }
 
 .cover-image:hover {
@@ -263,7 +264,7 @@ span.star-rating {
     font-size: 30px;
     position: absolute;
     z-index: 4;
-    margin-top: 23vh;
+    margin-top: 20vh;
     padding-left: 20px;
 }
 
