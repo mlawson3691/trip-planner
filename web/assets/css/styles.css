@@ -9,6 +9,8 @@ html {
 
 body {
     background: #f2f2f2;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
 }
 
 img {
@@ -66,7 +68,6 @@ img {
     text-align: center;
     text-shadow: 2px 2px 5px black;
     color: white;
-    margin-top: -20px;
 }
 
 .navbar-brand {
@@ -392,16 +393,21 @@ span.star-rating {
 .footer p {
     font-family: 'Arapey', serif;
     font-style: italic;
-    font-size: 20px;
+    font-size: 18px;
     color: #595959;
     text-align: center;
+}
+
+.footer img {
+    width: 15px;
+    margin-bottom: 4px;
 }
 
 .footer .social_icons {
     padding-top: 15px;
     display: inline-flex;
     width: 20%;
-    margin-left: 45%;;
+    margin-left: 46%;;
 }
 
 .fa-facebook-square,
