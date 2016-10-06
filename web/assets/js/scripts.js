@@ -1,4 +1,8 @@
 $(function() {
+
+    $("#mycarousel").carousel({
+    interval: 3000}); 
+
     $('.show-form').click(function() {
         $(this).next().slideDown();
         $(this).addClass('hidden-form');
@@ -39,21 +43,6 @@ $(function() {
         $('.add_activity_button').slideDown();
     });
 
-
-/* ------ slideshow ----- */
-  // var index=0;
-  // setTimeout(function mySlideshow(event){
-  //   var i;
-  //   var x=document.getElementsByClassName("my_slides");
-  //   for (i=0 ; i < x.length; i++){
-  //     x[i].style.display="none";
-  //   }
-  //   index++;
-  //     if (index > x.length) {index=1}
-  //       x[index-1].style.display="block";
-  //     setTimeout(mySlideshow,5000)
-  //
-  //   },6100);
 
   /* ------- show review form ----------- */
   $('.edit_review').click(function() {
