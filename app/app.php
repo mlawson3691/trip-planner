@@ -250,7 +250,7 @@
         $new_review->save();
         $trip = Trip::findById($id);
         $trip->completeTrip();
-        return $app->redirect('/trip/' . $id);
+        return $app->redirect('/past_trip/' . $id);
     });
 
 // to city page

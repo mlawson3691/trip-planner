@@ -16,18 +16,18 @@
                     <div class='well row review-well'>
                         <div class='col-xs-2 text-center'>
                             <img class="user-pic-small" src="/assets/img/user.svg">
-                            <h5>{{ current_user.getUsername }}</h5>
+                            <h5>{{ review.getUsername }}</h5>
                         </div>
                         <div class='col-xs-10'>
-                            <h4><a href="/trip/{{ review.getTripId }}">{{ review.getTitle }}</a></h4>
+                            <h4><a href="/past_trip/{{ review.getTripId }}">{{ review.getTitle }}</a></h4>
                             <p>
                                 {% for i in 1..review.getRating %}
                                     <img class="star-rating" src="/assets/img/star-gold.svg">
                                 {% endfor %}
                                 {% if review.getRating < 5 %}
-                                {% for i in 1..5-review.getRating %}
-                                    <img class="star-rating" src="/assets/img/star-empty.svg">
-                                {% endfor %}
+                                    {% for i in 1..5-review.getRating %}
+                                        <img class="star-rating" src="/assets/img/star-empty.svg">
+                                    {% endfor %}
                                 {% endif %}
                                 <span class="star-rating">{{ review.getRating }}</span>
                             </p>

@@ -7,21 +7,33 @@
     <div class='container'>
         <!-- Past trip full itinerary. No edit functionality -->
         <div class="row">
-            <div class="col-sm-2">
-                <ul class="nav nav-pills nav-stacked">
-                    <li role="presentation"><a href="/dashboard/{{ user.getId }}"><span class='sidebar'>Home</span></a></li>
-                    <li role="presentation"><a href="/pending_trips/{{ user.getId }}"><span class="sidebar">Pending Trips</span></a></li>
-                    <li role="presentation"><a href="/past_trips/{{ user.getId }}"><span class='sidebar'>Past Trips</span></a></li>
-                    <li role="presentation"><a href="/new_trip/{{ user.getId }}"><span class='sidebar'>New Trip</span></a></li>
-                </ul>
-            </div>
+            {% if current_user == user %}
+                <div class="col-sm-2">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li role="presentation"><a href="/dashboard/{{ user.getId }}"><span class='sidebar'>Home</span></a></li>
+                        <li role="presentation"><a href="/pending_trips/{{ user.getId }}"><span class="sidebar">Pending Trips</span></a></li>
+                        <li role="presentation"><a href="/past_trips/{{ user.getId }}"><span class='sidebar'>Past Trips</span></a></li>
+                        <li role="presentation"><a href="/new_trip/{{ user.getId }}"><span class='sidebar'>New Trip</span></a></li>
+                    </ul>
+                </div>
+            {% else %}
+            <a class='back-link' onclick="history.go(-1);"><< Back</a>
+            {% endif %}
             <br>
             <h1>Past Trip Itinerary:</h1>
             <br>
-            <div class="well past_itinerary col-sm-6">
-                <div class="trip_title col-sm-8">
-                    <h3>{{ trip.getName }}<span class="edit_past">(Edit this trip)</span></h3>
-                        <p>{{ trip.getDescription }}</p>
+            {% if current_user == user %}
+                <div class="well past_itinerary col-sm-6">
+            {% else %}
+                <div class="well past_itinerary col-sm-7">
+            {% endif %}
+                <div class="trip_title col-sm-12">
+                    <h3>{{ trip.getName }}
+                        {% if current_user == user %}
+                            <span class="edit_past">(Edit this trip)</span>
+                        {% endif %}
+                    </h3>
+                    <p>{{ trip.getDescription }}</p>
                 </div>
                 {% if activities is not empty %}
                     {% for activity in activities %}
@@ -33,28 +45,51 @@
                         <!-- form for edit-->
                             <form action='/past_trip/{{ trip.getId }}/{{activity.getId}}' method='post' class="edit-past-activity col-sm-12">
                                 <input type='hidden' name='_method' value='patch'>
-                                <label for='name'>Activity Name</label>
-                                <input type='text' name='name' class='form-control' value='{{ activity.getName }}'>
-                                <label for='date'>Date</label>
+                                <!-- <label for='name'>Activity Name</label> -->
+                                <input type='text' name='name' class='form-control' value='{{ activity.getName }}' placeholder='Name'>
+                                <!-- <label for='date'>Date</label> -->
+                                <br>
                                 <input type='datetime-local' name='date' class='form-control' value='{{ activity.getDate }}'>
-                                <label for='description'>Description</label>
-                                <textarea name='description' class='form-control'>{{ activity.getDescription }}</textarea>
+                                <!-- <label for='description'>Description</label> -->
+                                <br>
+                                <textarea name='description' class='form-control' placeholder='Details'>{{ activity.getDescription }}</textarea>
                                 <button class='btn btn-info' type='submit'>Edit</button>
                             </form>
 
                         </div>
                     {% endfor %}
                 {% endif %}
-                <form action='/past_trip/delete/{{trip.getId}}' method='post' class='delete'>
-                    <input type="hidden" name="_method" value="delete">
-                    <button type="submit" class="trash">Delete this Trip</button>
-                </form>
+                {% if current_user == user %}
+                    <form action='/past_trip/delete/{{trip.getId}}' method='post' class='delete'>
+                        <input type="hidden" name="_method" value="delete">
+                        <button type="submit" class="trash">Delete this Trip</button>
+                    </form>
+                {% endif %}
             </div>
         <!-- review of past trip -->
-            <div class="past_reviews col-sm-3 col-sm-offset-1">
+            {% if current_user == user %}
+                <div class="past_reviews col-sm-3 col-sm-offset-1">
+            {% else %}
+                <div class="past_reviews col-sm-4 col-sm-offset-1">
+            {% endif %}
                 <div class="row well">
-                    <h4>Your review</h4>
-                    <h5>{{ review.getTitle }} - <span>{{ review.getRating }} stars</span></h5>
+                    {% if current_user == user %}
+                        <h4>Your review</h4>
+                    {% else %}
+                        <h4>{{ review.getUsername }}'s review</h4>
+                    {% endif %}
+                    <h5>{{ review.getTitle }}</h5>
+                    <p>
+                        {% for i in 1..review.getRating %}
+                            <img class="star-rating" src="/assets/img/star-gold.svg">
+                        {% endfor %}
+                        {% if review.getRating < 5 %}
+                            {% for i in 1..5-review.getRating %}
+                                <img class="star-rating" src="/assets/img/star-empty.svg">
+                            {% endfor %}
+                        {% endif %}
+                        <span class="star-rating">{{ review.getRating }}</span>
+                    </p>
                     <p>{{ review.getDescription }}</p>
                 </div>
                 <div class="row well past_cities">
@@ -87,23 +122,20 @@
                 <form method='post' action='/past_trip/{{ trip.getId }}'>
                     <h3>Add an activity</h3>
                     <div class="form-group">
-                        <label for='name'>Activity Name</label>
-                        <input type='text' name='name' class='form-control'>
+                        <input type='text' name='name' class='form-control' placeholder='Name' required>
                     </div>
                     <div class="form-group">
-                        <label for='date'>Date</label>
-                        <input type='datetime-local' name='date' class='form-control' value='2016-01-01T12:00'>
+                        <input type='datetime-local' name='date' class='form-control' value='2016-01-01T12:00' required>
                     </div>
                     <div class="form-group">
-                        <label for='description'>Description</label>
-                        <textarea name='description' class='form-control'></textarea>
+                        <textarea name='description' class='form-control' placeholder='Details'></textarea>
                     </div>
-                    <button class='btn btn-default center-block' type='submit'>Add</button>
+                    <button class='btn btn-info center-block' type='submit'>Add</button>
                 </form>
             </div>
             <div class="col-sm-4 col-sm-offset-1">
                 <h3>Add a city</h3>
-                <div class="row add_city ">
+                <div class="row add_city">
                     {% if all_cities is not empty %}
                         <form method='post' action='/past_trip/city/{{ trip.getId }}'>
                             <select name='city_id' class='form-control'>
@@ -120,7 +152,7 @@
                     <a class='add_new_form_button'><p>Can't find your city? Add a new one!</p></a>
                     <form method='post' action='/past_trip/new_city/{{ trip.getId }}' class="hidden-city">
                         <div class="form=group">
-                            <input name='name' type='text' class='form-control' placeholder="City">
+                            <input name='name' type='text' class='form-control' placeholder="City name" required>
                             <br>
                         </div>
                         <div class="form-group">

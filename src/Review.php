@@ -36,6 +36,13 @@ class Review
         $GLOBALS['DB']->exec("DELETE FROM reviews WHERE id = {$this->getId()};");
     }
 
+    function getUsername()
+    {
+        $trip = Trip::findById($this->getTripId());
+        $user = User::findById($trip->getUserId());
+        return $user->getUserName();
+    }
+
 // Static Functions
     static function findById($search_id)
     {

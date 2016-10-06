@@ -7,11 +7,39 @@ html {
 	margin:0;
 }
 
+body {
+    background: #f2f2f2;
+}
+
 img {
 	width:100%;
 	/* We want the width to be 100% of the element its inside */
 	margin: 0 auto;
 	/*We set margin 0 auto on it, to always center it*/
+}
+
+.well {
+    background: white;
+}
+
+.form-control {
+    border-radius: 0;
+}
+
+.btn {
+    border-radius: 0;
+}
+
+.btn-info, .btn-info:focus, .btn-info:active, .btn-info.active {
+    background: #194066;
+    color: white;
+    border: none;
+}
+
+.btn-info:hover {
+    background: #1e4d7b;
+    color: white;
+    border: none;
 }
 
 .intro-paragraph {
@@ -28,6 +56,10 @@ img {
     color: #484848;
 }
 /* --------main topbar with image and navigation--------- */
+
+.navbar {
+    background: white;
+}
 
 .hero_dashboard {
     height: 400px;
@@ -72,6 +104,15 @@ img {
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     opacity: 0.9;
+}
+
+.login-btn {
+    width: 100%;
+    margin-top: 5px;
+}
+
+.username-form {
+    margin-bottom: 5px;
 }
 
 #nav-plus {
@@ -424,12 +465,12 @@ span.star-rating {
     padding-top: 20px;
 }
 
-.add_activity button,
+/*.add_activity button,
 .add_city button,
 .add-new-city button {
     width: 30%;
     background-color: #79a6d2;
-}
+}*/
 
 .past-delete-button {
     border: none;
@@ -448,6 +489,10 @@ span.star-rating {
 .add_new_form_button p {
     font-style: italic;
     margin-left: 20px;
+}
+
+.back-link {
+    cursor: pointer;
 }
 
 /* -------add/show classese ---------- */
@@ -486,3 +531,8 @@ span.star-rating {
 .red {
     color: red;
 }
+
+ .sign-up-form {
+    width: 50%;
+    margin: 0 auto;
+ }

@@ -14,19 +14,18 @@
             </div>
             <div class="col-sm-10">
                 <h3>My Account <a href='#'><img class='user-edit-button' src='/assets/img/edit.svg'></a></h3>
-                <br>
-                <div class="row">
+                <div class="well">
                     <div class="col-sm-3 text-center">
                         <img class="user-pic" src="/assets/img/user.svg">
                         <h5>{{ current_user.getUsername }}</h5>
                     </div>
-                    <div class="col-sm-7 user-info-to-hide">
+                    <div class="col-sm-8 user-info-to-hide">
                         <h5>Name: {{ current_user.getName }}</h5>
                         <h5>Location: {{ current_user.getLocation }}</h5>
                         <h5>Bio:</h5>
                         <p>{{ current_user.getBio }}</p>
                     </div>
-                    <div class='col-sm-7 hidden-form'>
+                    <div class='col-sm-8 hidden-form'>
                         <form action="/dashboard/{{ current_user.getId }}" method="post">
                             <input type="hidden" name="_method" value="patch">
                             <div class="form-group">
