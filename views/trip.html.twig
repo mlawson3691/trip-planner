@@ -54,8 +54,7 @@
                     {% endfor %}
                 {% endif %}
                 <!-- <a class='center-block add_activity_button'><p>Add an activity</p></a> -->
-                <div class='add_activity_form add_activity'>
-                    <i class="fa fa-times" aria-hidden="true"></i>
+                <div class='add_activity'>
                     {% if current_user == user  %}
                         <form method='post' action='/trip/{{ trip.getId }}'>
                             <h3>Add an activity to this trip</h3>
