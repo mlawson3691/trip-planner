@@ -2,7 +2,16 @@
 {%  include 'inc/navbar.html.twig' %}
 <html>
 <body>
+    <div class='row main-search'>
+        <div class='container'>
+            <form class='form-inline' action="/search_results" method="post">
+                <button class='magnifying-main' type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                <input type="text" class="form-control input-lg search-bar-main" name="search_input" placeholder="Search cities">
+           </form>
+        </div>
+    </div>
     <div class='container'>
+        <div class='search-back'><a href='/search_results/back'><< Back</a></div>
         <div class='row'>
             <div class='col-sm-3'>
                 <img class='city-pic' src='/assets/img/cityscape.svg'>
