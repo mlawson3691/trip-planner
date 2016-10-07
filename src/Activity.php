@@ -25,9 +25,9 @@ class Activity
     function update($new_name, $new_date, $new_description)
     {
         $GLOBALS['DB']->exec("UPDATE activities SET name = '{$new_name}', date = '{$new_date}', description = '{$new_description}' WHERE id = {$this->getId()};");
-        $this->setName($new_name);
-        $this->setDate($new_date);
-        $this->setDescription($new_description);
+        $this->setName(Activity::cleanUp($new_name));
+        $this->setDate(Activity::cleanUp($new_date));
+        $this->setDescription(Activity::cleanUp($new_description));
     }
 
     function delete()
@@ -72,6 +72,12 @@ class Activity
         $GLOBALS['DB']->exec("DELETE FROM activities;");
     }
 
+    static function cleanUp($text) 
+    {
+        $unwanted = array("'"); 
+        return str_ireplace($unwanted, '', $text);
+    }
+
 // Setters and getters
     function getName()
     {
@@ -112,5 +118,6 @@ class Activity
     {
         return $this->id;
     }
+
 }
 ?>

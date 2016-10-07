@@ -118,8 +118,8 @@
         {
             $GLOBALS['DB']->exec("UPDATE SET name = '{$new_name}' WHERE id = {$this->getId()};");
             $GLOBALS['DB']->exec("UPDATE SET description = '{$new_description}' WHERE id = {$this->getId()};");
-            $this->setName($new_name);
-            $this->setDescription($new_description);
+            $this->setName(Trip::cleanUp($new_name));
+            $this->setDescription(Trip::cleanUp($new_description));
         }
 
         function delete()
@@ -168,6 +168,12 @@
             }
             return $trip;
         }
+
+        static function cleanUp($text) 
+    {
+        $unwanted = array("'"); 
+        return str_ireplace($unwanted, '', $text);
+    }
 
     }
 
