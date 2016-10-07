@@ -281,7 +281,7 @@ span.star-rating {
     font-size: 30px;
     position: absolute;
     z-index: 4;
-    margin-top: 20vh;
+    margin-top: 200px;
     padding-left: 20px;
 }
 
@@ -346,10 +346,13 @@ span.star-rating {
 }
 
 /* --------- review form and see reviews (trip.html.twig) ----------- */
-.review_form,
-.add_activity_form {
+.review_form {
     display: none;
 }
+
+/*.add_activity_form {
+    display: none;
+}*/
 
 .fa-times {
     font-size: 15px;

@@ -94,11 +94,11 @@
                             <h3>Edit your review</h3>
                             <input type='text' name='title' class='form-control' value='{{ review.getTitle }}' placeholder='Title'>
                             <div class='form-group rate-review text-center'>
-                                <label class="radio-inline rating-form-label"><input class='rating-radio' type="radio" name="rating" value='1' required><img id='star-one' class="star-rating" src="/assets/img/star-empty.svg"></label>
-                                <label class="radio-inline rating-form-label"><input class='rating-radio' type="radio" name="rating" value='2'><img id='star-two' class="star-rating" src="/assets/img/star-empty.svg"></label>
-                                <label class="radio-inline rating-form-label"><input class='rating-radio' type="radio" name="rating" value='3'><img id='star-three' class="star-rating" src="/assets/img/star-empty.svg"></label>
-                                <label class="radio-inline rating-form-label"><input class='rating-radio' type="radio" name="rating" value='4'><img id='star-four' class="star-rating" src="/assets/img/star-empty.svg"></label>
-                                <label class="radio-inline rating-form-label"><input class='rating-radio' type="radio" name="rating" value='5'><img id='star-five' class="star-rating" src="/assets/img/star-empty.svg"></label>
+                                <label class="radio-inline rating-form-label"><input {% if review.getRating == 1 %}checked{% endif %} class='rating-radio' type="radio" name="rating" value='1'><img id='star-one' class="star-rating" src="/assets/img/star-{% if review.getRating >= 1 %}gold{% else %}empty{% endif %}.svg"></label>
+                                <label class="radio-inline rating-form-label"><input {% if review.getRating == 2 %}checked{% endif %} class='rating-radio' type="radio" name="rating" value='2'><img id='star-two' class="star-rating" src="/assets/img/star-{% if review.getRating >= 2 %}gold{% else %}empty{% endif %}.svg"></label>
+                                <label class="radio-inline rating-form-label"><input {% if review.getRating == 3 %}checked{% endif %} class='rating-radio' type="radio" name="rating" value='3'><img id='star-three' class="star-rating" src="/assets/img/star-{% if review.getRating >= 3 %}gold{% else %}empty{% endif %}.svg"></label>
+                                <label class="radio-inline rating-form-label"><input {% if review.getRating == 4 %}checked{% endif %} class='rating-radio' type="radio" name="rating" value='4'><img id='star-four' class="star-rating" src="/assets/img/star-{% if review.getRating >= 4 %}gold{% else %}empty{% endif %}.svg"></label>
+                                <label class="radio-inline rating-form-label"><input {% if review.getRating == 5 %}checked{% endif %} class='rating-radio' type="radio" name="rating" value='5'><img id='star-five' class="star-rating" src="/assets/img/star-{% if review.getRating >= 5 %}gold{% else %}empty{% endif %}.svg"></label>
                             </div>
                             <textarea name='description' class='form-control' placeholder='Description'>{{ review.getDescription }}</textarea>
                             <button class='btn btn-info' type='submit'>Edit</button>
