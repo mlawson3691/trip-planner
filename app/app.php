@@ -19,7 +19,7 @@
 
     $app['debug'] = true;
 
-    $server = 'mysql:host=localhost;dbname=trip_planner';
+    $server = 'mysql:host=localhost:8889;dbname=trip_planner';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
