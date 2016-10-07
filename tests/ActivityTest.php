@@ -7,7 +7,7 @@
     require_once 'src/Activity.php';
     require_once 'src/Trip.php';
 
-    $server = 'mysql:host=localhost;dbname=trip_planner_test';
+    $server = 'mysql:host=localhost:8889;dbname=trip_planner_test';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
@@ -126,6 +126,21 @@
             $new_activity->update($new_name, $date, $descrition);
 
             $this->assertEquals('Pioneer Mall', $new_activity->getName());
+        }
+
+        function test_cleanUp()
+        {
+            $name = "Biggy's Mall";
+            $date = "10/02/2016";
+            $trip_id = 1;
+            $descrition = "Shopping spree";
+            $new_activity = new Activity($name, $date, $trip_id, $descrition);
+            $new_activity->save();
+
+            $new_activity->setName(Activity::cleanUp($name));
+            $output = $new_activity->getName(); 
+
+            $this->assertEquals('Biggys Mall', $output);
         }
     }
 

@@ -117,10 +117,10 @@
         {
             $GLOBALS['DB']->exec("UPDATE users SET name = '{$new_name}' WHERE id = {$this->getId()};");
             $GLOBALS['DB']->exec("UPDATE users SET location = '{$new_location}' WHERE id = {$this->getId()};");
-            $GLOBALS['DB']->exec("UPDATE users SET bio = '{$new_bio}' WHERE id = {$this->getId()};");
-            $this->setName($new_name);
-            $this->setLocation($new_location);
-            $this->setBio($new_bio);
+            $GLOBALS['DB']->exec("UPDATE users SET) bio = '{$new_bio}' WHERE id = {$this->getId()};");
+            $this->setName(User::cleanUp($new_name));
+            $this->setLocation(User::cleanUp($new_location));
+            $this->setBio(User::cleanUp($new_bio));
         }
 
         // function updatePassword ($old_password, $new_password)
@@ -206,6 +206,12 @@
                 }
             }
             return $user;
+        }
+
+        static function cleanUp($text) 
+        {
+            $unwanted = array("'"); 
+            return str_ireplace($unwanted, '', $text);
         }
     }
 
