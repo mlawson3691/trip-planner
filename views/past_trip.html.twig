@@ -40,7 +40,11 @@
                         <div class="past_activities">
                             <h3 class='new-h3-size'>{{ activity.getName }}: <a class="a-tag"> (edit)</a></h3>
                             <p class='pull-right'>{{ activity.getDate|date('m/d/Y @ h:m A') }}</p>
-                            <p>{{ activity.getDescription }}</p>
+                            {% if activity.getDescription is not empty %}
+                                <p>{{ activity.getDescription }}</p>
+                            {% else %}
+                                <br>
+                            {% endif %}
                             <hr>
                         <!-- form for edit-->
                             <form action='/past_trip/{{ trip.getId }}/{{activity.getId}}' method='post' class="edit-past-activity col-sm-12">
