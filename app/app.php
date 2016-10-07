@@ -14,6 +14,9 @@
     if (empty($_SESSION['current_user'])) {
         $_SESSION['current_user'] = null;
     }
+    if (empty($_SESSION['search'])) {
+        $_SESSION['search'] = array();
+    }
 
     $app = new Silex\Application();
 
@@ -38,20 +41,28 @@
     $app->get('/search_results/{state}', function($state) use ($app) {
         $states = City::getStates();
         $cities = City::citiesInState($state);
+        $_SESSION['search'] = $cities;
         return $app['twig']->render('search_results.html.twig', array('states' => $states, 'results' => $cities, 'current_user' => $_SESSION['current_user']));
     });
 
 // to search results
     $app->get('/search_results', function() use ($app) {
         $states = City::getStates();
-        return $app['twig']->render('search_results.html.twig', array('states' => $states, 'results' => null, 'current_user' => $_SESSION['current_user']));
+        return $app['twig']->render('search_results.html.twig', array('states' => $states, 'results' => $_SESSION['search'], 'current_user' => $_SESSION['current_user']));
+    });
+
+// back to search results from city
+    $app->get('/search_results/back', function() use ($app) {
+        $states = City::getStates();
+        return $app['twig']->render('search_results.html.twig', array('states' => $states, 'results' => $_SESSION['search'], 'current_user' => $_SESSION['current_user']));
     });
 
 // search results
     $app->post('/search_results', function() use ($app) {
         $search_results = City::search($_POST['search_input']);
+        $_SESSION['search'] = $search_results;
         $states = City::getStates();
-        return $app['twig']->render('search_results.html.twig', array('states' => $states, 'results' => $search_results, 'current_user' => $_SESSION['current_user']));
+        return $app['twig']->render('search_results.html.twig', array('states' => $states, 'results' => $_SESSION['search'], 'current_user' => $_SESSION['current_user']));
     });
 
 // appends all cities to right column when state is clicked
