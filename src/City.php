@@ -36,8 +36,8 @@ Class City
     function update($new_name, $new_state)
     {
         $GLOBALS['DB']->exec("UPDATE cities SET name = '{$new_name}', state = '{$new_state}' WHERE id = {$this->getId()};");
-        $this->setName($new_name);
-        $this->setState($new_state);
+        $this->setName(City::cleanUp($new_name));
+        $this->setState(City::cleanUp($new_state));
     }
 
     function save()
@@ -86,6 +86,7 @@ Class City
         sort($cities_in_state);
         return $cities_in_state;
     }
+
     static function getAll()
     {
         $returned_cities = $GLOBALS['DB']->query("SELECT * FROM cities ORDER BY name ASC;");
@@ -129,6 +130,12 @@ Class City
         }
         sort($search_results);
         return $search_results;
+    }
+
+    static function cleanUp($text) 
+    {
+        $unwanted = array("'"); 
+        return str_ireplace($unwanted, '', $text);
     }
 
 // getters and Setters

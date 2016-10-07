@@ -18,8 +18,8 @@
             <!-- <div class='col-md-10'> -->
             <!-- <div class="row"> -->
             <div class="col-sm-5">
-                <h3>Trip Itinerary</h3>
                 {% if activities is not empty %}
+                    <h3>Trip Itinerary</h3>
                     {% for activity in activities %}
                         <div class='well'>
                             <h3 class='new-h3-size'>{{ activity.getName }}</h3>
@@ -53,9 +53,8 @@
                         </div>
                     {% endfor %}
                 {% endif %}
-                <a class='center-block add_activity_button'><p>Add an activity</p></a>
-                <div class='add_activity_form add_activity'>
-                    <i class="fa fa-times" aria-hidden="true"></i>
+                <!-- <a class='center-block add_activity_button'><p>Add an activity</p></a> -->
+                <div class='add_activity'>
                     {% if current_user == user  %}
                         <form method='post' action='/trip/{{ trip.getId }}'>
                             <h3>Add an activity to this trip</h3>
@@ -75,8 +74,8 @@
             </div>
             <!-- </div> -->
             <div class='col-md-4 col-sm-offset-1 cities '>
-                <h3>Cities</h3>
                 {% if trip_cities is not empty %}
+                    <h3>Cities</h3>
                     <div class="well past_cities">
                         <ul>
                         {% for city in trip_cities %}
@@ -178,7 +177,7 @@
                     <!-- beginning of trip review section- still needs more work in routing -->
                 <hr>
                     <!-- Add a review form -->
-                {% if current_user == user and trip.getComplete == 0 %}
+                {% if current_user == user and trip.getComplete == 0 and trip_cities is not empty and activities is not empty %}
                     <button class='btn-review btn btn-info show-review-form center-block'>Review this trip</button>
                 {% endif %}
                 <br>

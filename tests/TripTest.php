@@ -7,7 +7,7 @@
     require_once "src/City.php";
     require_once "src/Review.php";
 
-    $server = 'mysql:host=localhost;dbname=trip_planner_test';
+    $server = 'mysql:host=localhost:8889;dbname=trip_planner_test';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);

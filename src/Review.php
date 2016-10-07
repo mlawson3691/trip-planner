@@ -26,9 +26,9 @@ class Review
     function update($new_title, $new_description, $new_rating)
     {
         $GLOBALS['DB']->exec("UPDATE reviews SET title = '{$new_title}', description = '{$new_description}', rating = {$new_rating} WHERE id = {$this->getId()};");
-        $this->setTitle($new_title);
-        $this->setDescription($new_description);
-        $this->setRating($new_rating);
+        $this->setTitle(Review::cleanUp($new_title));
+        $this->setDescription(Review::cleanUp($new_description));
+        $this->setRating(Review::cleanUp($new_rating));
     }
 
     function delete()
@@ -76,6 +76,12 @@ class Review
     static function deleteAll()
     {
         $GLOBALS['DB']->exec("DELETE FROM reviews;");
+    }
+
+    static function cleanUp($text) 
+    {
+        $unwanted = array("'"); 
+        return str_ireplace($unwanted, '', $text);
     }
 
 // Setters and getters

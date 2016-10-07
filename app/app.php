@@ -14,6 +14,9 @@
     if (empty($_SESSION['current_user'])) {
         $_SESSION['current_user'] = null;
     }
+    if (empty($_SESSION['search'])) {
+        $_SESSION['search'] = array();
+    }
 
     $app = new Silex\Application();
 
@@ -38,20 +41,28 @@
     $app->get('/search_results/{state}', function($state) use ($app) {
         $states = City::getStates();
         $cities = City::citiesInState($state);
+        $_SESSION['search'] = $cities;
         return $app['twig']->render('search_results.html.twig', array('states' => $states, 'results' => $cities, 'current_user' => $_SESSION['current_user']));
     });
 
 // to search results
     $app->get('/search_results', function() use ($app) {
         $states = City::getStates();
-        return $app['twig']->render('search_results.html.twig', array('states' => $states, 'results' => null, 'current_user' => $_SESSION['current_user']));
+        return $app['twig']->render('search_results.html.twig', array('states' => $states, 'results' => $_SESSION['search'], 'current_user' => $_SESSION['current_user']));
+    });
+
+// back to search results from city
+    $app->get('/search_results/back', function() use ($app) {
+        $states = City::getStates();
+        return $app['twig']->render('search_results.html.twig', array('states' => $states, 'results' => $_SESSION['search'], 'current_user' => $_SESSION['current_user']));
     });
 
 // search results
     $app->post('/search_results', function() use ($app) {
         $search_results = City::search($_POST['search_input']);
+        $_SESSION['search'] = $search_results;
         $states = City::getStates();
-        return $app['twig']->render('search_results.html.twig', array('states' => $states, 'results' => $search_results, 'current_user' => $_SESSION['current_user']));
+        return $app['twig']->render('search_results.html.twig', array('states' => $states, 'results' => $_SESSION['search'], 'current_user' => $_SESSION['current_user']));
     });
 
 // appends all cities to right column when state is clicked
@@ -79,6 +90,7 @@
         $bio = $_POST['bio'];
         $location = $_POST['location'];
         $new_user = new User($username, $password, $name, $bio, $location);
+        $new_user->update($name, $bio, $location);
         $valid = $new_user->save();
         if ($valid == true) {
             $_SESSION['current_user'] = $new_user;
@@ -169,6 +181,7 @@
         $description = $_POST['description'];
         $trip_id = $trip->getId();
         $new_activity = new Activity($name, $date, $trip_id, $description);
+        $new_activity->update($name, $date, $description);
         $new_activity->save();
         return $app->redirect('/trip/' . $id);
     });
@@ -203,6 +216,7 @@
         $name = $_POST['name'];
         $state = $_POST['state'];
         $new_city = new City($name, $state);
+        $new_city->update($name, $state);
         $new_city->save();
         $trip = Trip::findById($id);
         $trip->addCity($new_city->getId());
@@ -236,6 +250,7 @@
         $user_id = $user->getId();
         $description = $_POST['description'];
         $new_trip = new Trip($name, $user_id, 0, $description);
+        $new_trip->update($name, $description);
         $new_trip->save();
         return $app['twig']->render('trip.html.twig', array('trip' => $new_trip, 'review' => null, 'user' => $user, 'activities' => null, 'trip_cities' => null, 'alert' => null, 'current_user' => $_SESSION['current_user'], 'all_cities' => City::getAll()));
     });
@@ -247,6 +262,7 @@
         $description = $_POST['description'];
         $rating = $_POST['rating'];
         $new_review = new Review($title, $description, $rating, $trip_id);
+        $new_review->update($title, $description, $rating);
         $new_review->save();
         $trip = Trip::findById($id);
         $trip->completeTrip();
@@ -285,6 +301,7 @@
         $description = $_POST['description'];
         $trip_id = $trip->getId();
         $new_activity = new Activity($name, $date, $trip_id, $description);
+        $new_activity->update($name, $date, $description);
         $new_activity->save();
         return $app->redirect('/past_trip/' . $id);
     });
@@ -319,6 +336,7 @@
             $name = $_POST['name'];
             $state = $_POST['state'];
             $new_city = new City($name, $state);
+            $new_city->update($name, $state);
             $new_city->save();
             $trip = Trip::findById($id);
             $trip->addCity($new_city->getId());
