@@ -2,6 +2,11 @@
     "require": {
         "silex/silex": "~1.1",
         "twig/twig": "~1.0",
-        "phpunit/phpunit": "4.5.*"
+        "phpunit/phpunit": "4.5.*",
+        "monolog/monolog": "~1.7",
+        "symfony/twig-bridge": "^2.7"
+    },
+    "require-dev": {
+        "heroku/heroku-buildpack-php": "*"
     }
 }
