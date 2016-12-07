@@ -22,14 +22,16 @@
 
     $app['debug'] = true;
 
+    // db connection information for Heroku
     $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
     $server = $url["host"];
     $username = $url["user"];
     $password = $url["pass"];
     $database = substr($url["path"], 1);
-    $DB = new mysqli($server, $username, $password, $database);
+    $DB = new PDO($server, $username, $password, $database);
 
-    // $server = 'mysql:host=localhost;dbname=trip_planner';
+    // db connection information for local development
+    // $server = 'mysql:host=localhost:3306;dbname=trip_planner';
     // $username = 'root';
     // $password = 'root';
     // $DB = new PDO($server, $username, $password);
