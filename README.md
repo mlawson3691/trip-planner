@@ -8,6 +8,8 @@
 
 This application serves as a tool for users to plan and reflect on their travels. Users can search other users' trips by city for inspiration. Users can also create and edit trip itineraries, as well as leave feedback on their experiences. The application is built with PHP, using the Silex framework, Twig templates, and Bootstrap for styling.
 
+[View the live site here.](https://glacial-lowlands-59035.herokuapp.com/)
+
 ## Setup/Installation Instructions ##
 
 * Clone the repository
