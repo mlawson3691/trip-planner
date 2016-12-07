@@ -22,10 +22,17 @@
 
     $app['debug'] = true;
 
-    $server = 'mysql:host=localhost;dbname=trip_planner';
-    $username = 'root';
-    $password = 'root';
-    $DB = new PDO($server, $username, $password);
+    $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+    $server = $url["host"];
+    $username = $url["user"];
+    $password = $url["pass"];
+    $database = substr($url["path"], 1);
+    $DB = new mysqli($server, $username, $password, $database);
+
+    // $server = 'mysql:host=localhost;dbname=trip_planner';
+    // $username = 'root';
+    // $password = 'root';
+    // $DB = new PDO($server, $username, $password);
 
     $app->register(new Silex\Provider\TwigServiceProvider(), array('twig.path' => __DIR__.'/../views'));
 
