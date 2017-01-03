@@ -76,7 +76,7 @@ This application serves as a tool for users to plan and reflect on their travels
 
 ## Known Bugs ##
 
-There are no known bugs at this time.
+* Images need to be resized. They are too large and take too long to load if they are not already chached.
 
 ## Support and Contact Details ##
 
